@@ -44,14 +44,11 @@ public class ListEmpresasActivity extends AppCompatActivity {
 
     private void eventHandler() {
         addEmpImageView = findViewById(R.id.addEmpImageView);
-        addEmpImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(
-                        ListEmpresasActivity.this, FormNewEmpresaActivity.class);
-                intent.putExtra("TASK", "NEW");
-                activityResultLauncher.launch(intent);
-            }
+        addEmpImageView.setOnClickListener(v -> {
+            Intent intent = new Intent(
+                    ListEmpresasActivity.this, FormNewEmpresaActivity.class);
+            intent.putExtra("TASK", "NEW");
+            activityResultLauncher.launch(intent);
         });
     }
 
@@ -61,7 +58,7 @@ public class ListEmpresasActivity extends AppCompatActivity {
         @Override
         public void onActivityResult(ActivityResult result) {
             if (result != null && result.getResultCode() == RESULT_OK) {
-                if (result.getData().hasExtra("NOMBRE_EMP")) {
+                if (result.getData() != null && result.getData().hasExtra("NOMBRE_EMP")) {
                     Toast.makeText(
                             ListEmpresasActivity.this,
                             "Adicionada: " + result.getData().getStringExtra("NOMBRE_EMP"),
@@ -73,7 +70,7 @@ public class ListEmpresasActivity extends AppCompatActivity {
                         ListEmpresasActivity.this,
                         "Se canceló la adición de una empresa nueva", Toast.LENGTH_SHORT).show();
             } else if (result != null && result.getResultCode() == RESULT_ADD_PROBLEM) {
-                if (result.getData().hasExtra("NOMBRE_EMP")) {
+                if (result.getData() != null && result.getData().hasExtra("NOMBRE_EMP")) {
                     Toast.makeText(
                             ListEmpresasActivity.this,
                             "No se pudo crear: " + result.getData().getStringExtra("NOMBRE_EMP"),
