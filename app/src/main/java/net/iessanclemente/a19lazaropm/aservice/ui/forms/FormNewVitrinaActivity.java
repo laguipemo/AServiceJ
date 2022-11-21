@@ -82,22 +82,14 @@ public class FormNewVitrinaActivity extends AppCompatActivity {
             }
         });
 
-        newVitrinaCancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendResult("", RESULT_CANCELED);
-            }
-        });
+        newVitrinaCancelButton.setOnClickListener(v -> sendResult("", RESULT_CANCELED));
 
-        newVitrinaAcceptButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean isAdded = addNewVitrina();
-                if (isAdded) {
-                    sendResult(newVitrinaFabriNameAutoCompleteTextView.getText().toString(), RESULT_OK);
-                } else {
-                    sendResult("", RESULT_ADD_PROBLEM);
-                }
+        newVitrinaAcceptButton.setOnClickListener(v -> {
+            boolean isAdded = addNewVitrina();
+            if (isAdded) {
+                sendResult(newVitrinaFabriNameAutoCompleteTextView.getText().toString(), RESULT_OK);
+            } else {
+                sendResult("", RESULT_ADD_PROBLEM);
             }
         });
     }
