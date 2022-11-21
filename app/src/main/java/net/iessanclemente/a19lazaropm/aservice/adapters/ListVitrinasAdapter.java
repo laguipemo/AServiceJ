@@ -54,68 +54,59 @@ public class ListVitrinasAdapter extends RecyclerView.Adapter<ListVitrinasAdapte
         holder.bindData(listElementsVitrinas.get(position));
 
         //Manejo del evento onClick sobre el CardView de la Vitrina
-        holder.vitrinaCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int pos = holder.getAdapterPosition();
-                //paso a la actividad de la ficha de la vitrina
-                Intent intent = new Intent(context, FichaVitrinaActivity.class);
-                intent.putExtra("NOMBRE_EMPRESA", listElementsVitrinas.get(pos).getEmpresa());
-                intent.putExtra("ID_VITRINA", listElementsVitrinas.get(pos).getId());
-                context.startActivity(intent);
-            }
+        holder.vitrinaCardView.setOnClickListener(v -> {
+            int pos = holder.getAdapterPosition();
+            //paso a la actividad de la ficha de la vitrina
+            Intent intent = new Intent(context, FichaVitrinaActivity.class);
+            intent.putExtra("NOMBRE_EMPRESA", listElementsVitrinas.get(pos).getEmpresa());
+            intent.putExtra("ID_VITRINA", listElementsVitrinas.get(pos).getId());
+            context.startActivity(intent);
         });
 
-        holder.vitrinaCardView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                PopupMenu popupMenu = new PopupMenu(context, v);
-                UtilsMenu.setForceShowIcon(popupMenu);
-                popupMenu.inflate(R.menu.menu_contextual);
-                popupMenu.show();
+        holder.vitrinaCardView.setOnLongClickListener(v -> {
+            PopupMenu popupMenu = new PopupMenu(context, v);
+            UtilsMenu.setForceShowIcon(popupMenu);
+            popupMenu.inflate(R.menu.menu_contextual);
+            popupMenu.show();
 
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        int pos = holder.getAdapterPosition();
-                        DataBaseOperations datos = DataBaseOperations.getInstance(context);
-                        Vitrina vitrina = datos.selectVitrinaWithId(
-                                listElementsVitrinas.get(pos).getId());
-                        if (vitrina != null) {
-                            int idVitrina = vitrina.getId();
+            popupMenu.setOnMenuItemClickListener(item -> {
+                int pos = holder.getAdapterPosition();
+                DataBaseOperations datos = DataBaseOperations.getInstance(context);
+                Vitrina vitrina = datos.selectVitrinaWithId(
+                        listElementsVitrinas.get(pos).getId());
+                if (vitrina != null) {
+                    int idVitrina = vitrina.getId();
 
-                            switch (item.getItemId()) {
-                                case R.id.menuItemDelete:
-                                    boolean isVitrinaDeleted = datos.deleteVitrina(idVitrina);
-                                    if (isVitrinaDeleted) {
-                                        listElementsVitrinas.remove(pos);
-                                        notifyDataSetChanged();
-                                        Toast.makeText(
-                                                context,
-                                                "Borrada Vitrina",
-                                                Toast.LENGTH_SHORT).show();
-                                    }
-                                    break;
-                                case R.id.menuItemUpdate:
-                                    //paso a la actividad de la ficha para nueva vitrina
-                                    Intent intent = new Intent(
-                                            context, FormNewVitrinaActivity.class);
-                                    intent.putExtra("TASK", "UPDATE");
-                                    intent.putExtra(
-                                            "NOMBRE_EMPRESA",
-                                            listElementsVitrinas.get(pos).getEmpresa());
-                                    intent.putExtra(
-                                            "ID_VITRINA",
-                                            listElementsVitrinas.get(pos).getId());
-                                    activityResultLauncher.launch(intent);
-                                    break;
+                    switch (item.getItemId()) {
+                        case R.id.menuItemDelete:
+                            boolean isVitrinaDeleted = datos.deleteVitrina(idVitrina);
+                            if (isVitrinaDeleted) {
+                                listElementsVitrinas.remove(pos);
+                                notifyDataSetChanged();
+                                Toast.makeText(
+                                        context,
+                                        "Borrada Vitrina",
+                                        Toast.LENGTH_SHORT).show();
                             }
-                        }
-                        return false;
+                            break;
+                        case R.id.menuItemUpdate:
+                            //paso a la actividad de la ficha para nueva vitrina
+                            Intent intent = new Intent(
+                                    context, FormNewVitrinaActivity.class);
+                            intent.putExtra("TASK", "UPDATE");
+                            intent.putExtra(
+                                    "NOMBRE_EMPRESA",
+                                    listElementsVitrinas.get(pos).getEmpresa());
+                            intent.putExtra(
+                                    "ID_VITRINA",
+                                    listElementsVitrinas.get(pos).getId());
+                            activityResultLauncher.launch(intent);
+                            break;
                     }
-                });
-                return true;
-            }
+                }
+                return false;
+            });
+            return true;
         });
     }
 
