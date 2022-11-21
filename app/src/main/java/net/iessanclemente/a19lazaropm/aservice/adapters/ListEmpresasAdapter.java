@@ -90,7 +90,8 @@ public class ListEmpresasAdapter extends RecyclerView.Adapter<ListEmpresasAdapte
                                         boolean isContactDeleted = datos.deleteContacto(idContactoEmp);
                                         if (isContactDeleted) {
                                             listElementsEmpresas.remove(pos);
-                                            notifyDataSetChanged();
+                                            //notifyDataSetChanged();
+                                            notifyItemRemoved(pos);
                                             Toast.makeText(
                                                     context,
                                                     "Borrada Empresa: " +
