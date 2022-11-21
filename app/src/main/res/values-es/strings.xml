@@ -88,5 +88,7 @@
     <string name="email_subject_forgot_password">Olvidé la contraseña</string>
     <string name="email_text_forgot_password">Usuario: %1$s \nNombre: %2$s \nCorreo: %3$s</string>
     <string name="email">Correo</string>
+    <string name="show_pdf_report">Mostrar reporte pdf</string>
+    <string name="send_pdf_report">Enviar reporte pdf</string>
 
 </resources>

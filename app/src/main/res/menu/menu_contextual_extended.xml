@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuItemDelete"
+        android:icon="@drawable/ic_baseline_delete_24"
+        android:iconTint="@android:color/holo_red_dark"
+        android:orderInCategory="10"
+        android:title="@string/delete"
+        android:titleCondensed="@string/del" />
+    <item
+        android:id="@+id/menuItemUpdate"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:iconTint="@color/atlas_romero_dark"
+        android:orderInCategory="10"
+        android:title="@string/update"
+        android:titleCondensed="@string/upd" />
+
+    <item
+        android:id="@+id/menuItemShowReport"
+        android:icon="@drawable/ic_reports_black_24"
+        android:iconTint="@android:color/black"
+        android:orderInCategory="10"
+        android:title="@string/show_pdf_report"
+        android:titleCondensed="Pdf" />
+    <item
+        android:id="@+id/menuItemSendReport"
+        android:icon="@drawable/ic_mail_report_black_24"
+        android:iconTint="@color/atlas_romero_light"
+        android:orderInCategory="10"
+        android:title="@string/send_pdf_report"
+        android:titleCondensed="Send" />
+
+</menu>
