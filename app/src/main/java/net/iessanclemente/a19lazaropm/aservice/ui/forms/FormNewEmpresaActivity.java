@@ -82,24 +82,16 @@ public class FormNewEmpresaActivity extends AppCompatActivity {
     }
 
     private void eventHandler() {
-        newEmpCancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendResult("", RESULT_CANCELED);
-            }
-        });
+        newEmpCancelButton.setOnClickListener(v -> sendResult("", RESULT_CANCELED));
 
-        newEmpAcceptButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean isAdded = addNewEmp();
-                if (isAdded) {
-                    sendResult(newEmpNameEditText.getText().toString(), RESULT_OK);
-                } else {
-                    sendResult("", RESULT_ADD_PROBLEM);
-                }
-
+        newEmpAcceptButton.setOnClickListener(v -> {
+            boolean isAdded = addNewEmp();
+            if (isAdded) {
+                sendResult(newEmpNameEditText.getText().toString(), RESULT_OK);
+            } else {
+                sendResult("", RESULT_ADD_PROBLEM);
             }
+
         });
     }
 
