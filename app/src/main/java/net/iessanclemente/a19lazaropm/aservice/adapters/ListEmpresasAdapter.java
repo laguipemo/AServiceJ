@@ -56,15 +56,12 @@ public class ListEmpresasAdapter extends RecyclerView.Adapter<ListEmpresasAdapte
         holder.bindData(listElementsEmpresas.get(position));
 
         //Manejo del evento onClick sobre el CardView de la empresa
-        holder.empresaCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //paso a la actividad de la ficha de la empresa
-                Intent intent = new Intent(context, FichaEmpresaActivity.class);
-                intent.putExtra(
-                        "NOMBRE_EMPRESA", holder.nombreEmpresaTextView.getText().toString());
-                context.startActivity(intent);
-            }
+        holder.empresaCardView.setOnClickListener(v -> {
+            //paso a la actividad de la ficha de la empresa
+            Intent intent = new Intent(context, FichaEmpresaActivity.class);
+            intent.putExtra(
+                    "NOMBRE_EMPRESA", holder.nombreEmpresaTextView.getText().toString());
+            context.startActivity(intent);
         });
 
         holder.empresaCardView.setOnLongClickListener(new View.OnLongClickListener() {
