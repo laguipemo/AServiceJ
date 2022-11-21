@@ -86,7 +86,7 @@ public class ListEmpresasActivity extends AppCompatActivity {
         DataBaseOperations datos = DataBaseOperations.getInstance(ListEmpresasActivity.this);
         List<Empresa> listEmpresas = datos.selectEmpresas();
 
-        for (Empresa empresa : datos.selectEmpresas()) {
+        for (Empresa empresa : listEmpresas) {
             String nombreEmpresa = empresa.getEmpresaNombre();
             String direccEmpresa = empresa.getEmpresaDirecc();
             String nombreContacto = datos.selectContactoWithId(empresa.getIdContacto()).getContactoNombre();
