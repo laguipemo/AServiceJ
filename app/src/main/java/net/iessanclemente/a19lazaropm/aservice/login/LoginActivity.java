@@ -1,4 +1,4 @@
-package net.iessanclemente.a19lazaropm.aservice;
+package net.iessanclemente.a19lazaropm.aservice.login;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import net.iessanclemente.a19lazaropm.aservice.ListEmpresasActivity;
+import net.iessanclemente.a19lazaropm.aservice.R;
 import net.iessanclemente.a19lazaropm.aservice.security.SecurityCipherWithKey;
 import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseOperations;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Tecnico;

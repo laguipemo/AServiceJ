@@ -14,6 +14,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.iessanclemente.a19lazaropm.aservice.login.LoginActivity;
+
 public class SplashActivity extends AppCompatActivity {
 
     @Override
