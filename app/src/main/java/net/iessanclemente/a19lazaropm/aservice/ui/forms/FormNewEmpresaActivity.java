@@ -20,8 +20,6 @@ public class FormNewEmpresaActivity extends AppCompatActivity {
 
     private static final int RESULT_ADD_PROBLEM = 666;
 
-    private ActionBar actionBar;
-
     private TextView newEmpNameEditText;
     private TextView newEmpDireccEditText;
     private EditText newEmpContactNameEditText;
@@ -41,7 +39,7 @@ public class FormNewEmpresaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_new_empresa);
 
-        actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_ios_24);
             actionBar.setDisplayHomeAsUpEnabled(true);
