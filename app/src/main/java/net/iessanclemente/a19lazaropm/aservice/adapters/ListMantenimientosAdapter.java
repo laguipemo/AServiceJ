@@ -1,4 +1,4 @@
-package net.iessanclemente.a19lazaropm.aservice.modelslists;
+package net.iessanclemente.a19lazaropm.aservice.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.iessanclemente.a19lazaropm.aservice.FichaMantenimientoActivity;
 import net.iessanclemente.a19lazaropm.aservice.FormNewMantenimientoActivity;
-import net.iessanclemente.a19lazaropm.aservice.FormNewVitrinaActivity;
 import net.iessanclemente.a19lazaropm.aservice.R;
 import net.iessanclemente.a19lazaropm.aservice.models.dao.DataBaseOperations;
 import net.iessanclemente.a19lazaropm.aservice.models.dto.Mantenimiento;

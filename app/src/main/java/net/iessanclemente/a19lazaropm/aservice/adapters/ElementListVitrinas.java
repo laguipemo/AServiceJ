@@ -1,4 +1,4 @@
-package net.iessanclemente.a19lazaropm.aservice.modelslists;
+package net.iessanclemente.a19lazaropm.aservice.adapters;
 
 public class ElementListVitrinas {
     private int id;

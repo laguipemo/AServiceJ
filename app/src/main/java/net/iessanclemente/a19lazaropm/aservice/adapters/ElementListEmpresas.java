@@ -1,4 +1,4 @@
-package net.iessanclemente.a19lazaropm.aservice.modelslists;
+package net.iessanclemente.a19lazaropm.aservice.adapters;
 
 public class ElementListEmpresas {
     private String nombreEmpresa;

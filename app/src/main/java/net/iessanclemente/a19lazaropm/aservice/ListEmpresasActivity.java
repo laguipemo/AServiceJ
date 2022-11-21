@@ -4,13 +4,10 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,8 +16,8 @@ import android.widget.Toast;
 
 import net.iessanclemente.a19lazaropm.aservice.models.dao.DataBaseOperations;
 import net.iessanclemente.a19lazaropm.aservice.models.dto.Empresa;
-import net.iessanclemente.a19lazaropm.aservice.modelslists.ElementListEmpresas;
-import net.iessanclemente.a19lazaropm.aservice.modelslists.ListEmpresasAdapter;
+import net.iessanclemente.a19lazaropm.aservice.adapters.ElementListEmpresas;
+import net.iessanclemente.a19lazaropm.aservice.adapters.ListEmpresasAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

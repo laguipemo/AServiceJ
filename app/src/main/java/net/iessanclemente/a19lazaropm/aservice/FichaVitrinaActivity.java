@@ -20,8 +20,8 @@ import net.iessanclemente.a19lazaropm.aservice.models.dao.DataBaseContract;
 import net.iessanclemente.a19lazaropm.aservice.models.dao.DataBaseOperations;
 import net.iessanclemente.a19lazaropm.aservice.models.dto.Mantenimiento;
 import net.iessanclemente.a19lazaropm.aservice.models.dto.Vitrina;
-import net.iessanclemente.a19lazaropm.aservice.modelslists.ElementListMantenimientos;
-import net.iessanclemente.a19lazaropm.aservice.modelslists.ListMantenimientosAdapter;
+import net.iessanclemente.a19lazaropm.aservice.adapters.ElementListMantenimientos;
+import net.iessanclemente.a19lazaropm.aservice.adapters.ListMantenimientosAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

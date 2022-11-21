@@ -23,8 +23,8 @@ import net.iessanclemente.a19lazaropm.aservice.models.dto.Empresa;
 import net.iessanclemente.a19lazaropm.aservice.models.dto.Longitud;
 import net.iessanclemente.a19lazaropm.aservice.models.dto.TipoVitrina;
 import net.iessanclemente.a19lazaropm.aservice.models.dto.Vitrina;
-import net.iessanclemente.a19lazaropm.aservice.modelslists.ElementListVitrinas;
-import net.iessanclemente.a19lazaropm.aservice.modelslists.ListVitrinasAdapter;
+import net.iessanclemente.a19lazaropm.aservice.adapters.ElementListVitrinas;
+import net.iessanclemente.a19lazaropm.aservice.adapters.ListVitrinasAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

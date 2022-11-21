@@ -1,4 +1,4 @@
-package net.iessanclemente.a19lazaropm.aservice.modelslists;
+package net.iessanclemente.a19lazaropm.aservice.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,15 +16,12 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.iessanclemente.a19lazaropm.aservice.FichaVitrinaActivity;
-import net.iessanclemente.a19lazaropm.aservice.FormNewEmpresaActivity;
 import net.iessanclemente.a19lazaropm.aservice.FormNewVitrinaActivity;
 import net.iessanclemente.a19lazaropm.aservice.R;
 import net.iessanclemente.a19lazaropm.aservice.models.dao.DataBaseOperations;
 import net.iessanclemente.a19lazaropm.aservice.models.dto.Vitrina;
 import net.iessanclemente.a19lazaropm.aservice.utils.UtilsMenu;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.List;
 
 public class ListVitrinasAdapter extends RecyclerView.Adapter<ListVitrinasAdapter.ViewHolder> {
