@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1953125" />
+        <entry key="app/src/main/res/drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary.xml" value="0.34479166666666666" />
+        <entry key="app/src/main/res/drawable/ic_add_circle_outline_black_24dp.xml" value="0.2657407407407407" />
+        <entry key="app/src/main/res/drawable/ic_baseline_add_circle_24.xml" value="0.2657407407407407" />
+        <entry key="app/src/main/res/drawable/ic_launcher_atlas_background.xml" value="0.1953125" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.34479166666666666" />
+        <entry key="app/src/main/res/drawable/rectangle_white_corner10_stroke2_no_color.xml" value="0.34479166666666666" />
+        <entry key="app/src/main/res/drawable/rectangle_white_corner10_stroke2_primary.xml" value="0.34479166666666666" />
+        <entry key="app/src/main/res/drawable/shape_transp_corner0_stroke2_primary.xml" value="0.1953125" />
+        <entry key="app/src/main/res/drawable/shape_transp_corner0_stroke2atlas_ultra_light.xml" value="0.34479166666666666" />
+        <entry key="app/src/main/res/drawable/shape_transp_corner10_stroke_primary.xml" value="0.34479166666666666" />
+        <entry key="app/src/main/res/drawable/shape_transparent_rounder_corner_stroke_atlas.xml" value="0.34479166666666666" />
+        <entry key="app/src/main/res/drawable/spinner_shape_transp_corner0_stroke2_color_primary.xml" value="0.34479166666666666" />
+        <entry key="app/src/main/res/drawable/spinner_shape_transp_corner0_stroke2_primary.xml" value="0.34479166666666666" />
+        <entry key="app/src/main/res/layout/activity_ficha_empresa.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_ficha_mantenimiento.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/activity_ficha_vitrina.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/activity_form_new_empresa.xml" value="0.2826086956521739" />
+        <entry key="app/src/main/res/layout/activity_form_new_mantenimiento.xml" value="0.4108072916666667" />
+        <entry key="app/src/main/res/layout/activity_form_new_vitrina.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_list_empresas.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_listado_empresas.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_mediciones_volumen_extraccion.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_prueba_salida.xml" value="0.1398148148148148" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.32472826086956524" />
+        <entry key="app/src/main/res/layout/alert_dialog_forgot_password.xml" value="0.32653985507246375" />
+        <entry key="app/src/main/res/layout/element_list_empresas.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/element_list_mantenimientos.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/element_list_mantenimientos_backup.xml" value="0.32864583333333336" />
+        <entry key="app/src/main/res/layout/element_list_vitrinas.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/list_empresas_element.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/list_vitrinas_element.xml" value="0.32864583333333336" />
+        <entry key="app/src/main/res/menu/menu_contextual.xml" value="0.32864583333333336" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.13796296296296295" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_atlas.xml" value="0.13796296296296295" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_atlas_round.xml" value="0.13796296296296295" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.13796296296296295" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

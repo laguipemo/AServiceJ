@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:minHeight="48dp"
+    tools:context=".FichaEmpresaActivity">
+
+    <TextView
+        android:id="@+id/fichaEmpNombreTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Nombre Empresa" />
+
+    <TextView
+        android:id="@+id/fichaEmpDireccTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/groupContactLinearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/fichaEmpNombreTextView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/fichaEmpNombreTextView"
+        app:layout_constraintTop_toBottomOf="@+id/fichaEmpNombreTextView"
+        tools:text="Direccion de la empresa" />
+
+    <LinearLayout
+        android:id="@+id/groupContactLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/fichaEmpDireccTextView"
+        app:layout_constraintStart_toStartOf="@+id/fichaEmpDireccTextView"
+        app:layout_constraintTop_toBottomOf="@+id/fichaEmpDireccTextView"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:id="@+id/dataContactLinearLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_transp_corner10_stroke_primary"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp">
+
+                <ImageView
+                    android:id="@+id/fichaEmpIconContactImageView"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="@string/icon_contacto_descripcion"
+                    app:srcCompat="@drawable/ic_contacts_black_24dp" />
+
+                <TextView
+                    android:id="@+id/fichaEmpNomContactTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp"
+                    android:textColor="@color/primaryTextColor"
+                    android:textSize="16sp"
+                    tools:ignore="TextContrastCheck"
+                    tools:text="Nombre del Contacto" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp">
+
+                <ImageView
+                    android:id="@+id/fichaEmpIconTelefContactImageView"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="@string/icon_contact_phone_description"
+                    app:srcCompat="@drawable/ic_contact_phone_black_24dp" />
+
+                <TextView
+                    android:id="@+id/fichaEmpTelefContactTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp"
+                    android:textColor="@color/primaryTextColor"
+                    android:textSize="16sp"
+                    tools:text="123456789" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp">
+
+                <ImageView
+                    android:id="@+id/fichaEmpIconCorreoContactImageView"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="@string/icon_contact_mail_description"
+                    app:srcCompat="@drawable/ic_contact_mail_black_24dp" />
+
+                <TextView
+                    android:id="@+id/fichaEmpCorreoContactTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:minHeight="48dp"
+                    android:textColor="@color/primaryTextColor"
+                    tools:ignore="TextContrastCheck"
+                    tools:text="contacto@correo.com" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/fichEmpLabelVitrinasTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/vitrinas"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/groupContactLinearLayout" />
+
+    <ImageView
+        android:id="@+id/addVitrinaImageView"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="32dp"
+        android:clickable="true"
+        android:contentDescription="@string/icon_add_description"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/fichEmpLabelVitrinasTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fichEmpLabelVitrinasTextView"
+        app:srcCompat="@drawable/ic_baseline_add_circle_24"
+        app:tint="@color/primaryColor"
+        tools:ignore="ImageContrastCheck" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listVitrinasRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fichEmpLabelVitrinasTextView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

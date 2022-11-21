@@ -1,0 +1,764 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FormNewMantenimientoActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/newManteniCabeceraConstrainLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/labelManteniNewManteniTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:gravity="center"
+            android:text="@string/mantenimiento"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/labelFechaNewMantenimientoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:labelFor="@id/fechaNewMantenimientoEditText"
+            android:text="@string/label_fecha"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/fechaNewMantenimientoEditText"
+            app:layout_constraintStart_toStartOf="@+id/labelManteniNewManteniTextView"
+            app:layout_constraintTop_toTopOf="@+id/fechaNewMantenimientoEditText" />
+
+        <EditText
+            android:id="@+id/fechaNewMantenimientoEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+            android:clickable="true"
+            android:focusable="false"
+            android:importantForAutofill="no"
+            android:inputType="date"
+            android:maxLines="1"
+            android:minHeight="48dp"
+            android:singleLine="true"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/labelManteniNewManteniTextView"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/labelFechaNewMantenimientoTextView"
+            app:layout_constraintTop_toBottomOf="@+id/labelManteniNewManteniTextView"
+            tools:ignore="DuplicateSpeakableTextCheck"
+            tools:text="12 noviembre 2021" />
+
+        <TextView
+            android:id="@+id/labelTecnicoNewManteniTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@id/tecnicoNombreNewManteniAutoCompleteTextView"
+            android:text="@string/label_tecnico"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tecnicoNombreNewManteniAutoCompleteTextView"
+            app:layout_constraintStart_toStartOf="@+id/labelFechaNewMantenimientoTextView"
+            app:layout_constraintTop_toTopOf="@+id/tecnicoNombreNewManteniAutoCompleteTextView" />
+
+        <AutoCompleteTextView
+            android:id="@+id/tecnicoNombreNewManteniAutoCompleteTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+            android:focusable="true"
+            android:maxLines="1"
+            android:minHeight="48dp"
+            android:singleLine="true"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/fechaNewMantenimientoEditText"
+            app:layout_constraintStart_toEndOf="@+id/labelTecnicoNewManteniTextView"
+            app:layout_constraintTop_toBottomOf="@+id/fechaNewMantenimientoEditText"
+            tools:ignore="DuplicateSpeakableTextCheck"
+            tools:text="Rafael Romero Bello" />
+
+        <CheckBox
+            android:id="@+id/puestaMarchaNewManteniCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:checked="false"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/puesta_marcha"
+            app:layout_constraintStart_toStartOf="@+id/labelTecnicoNewManteniTextView"
+            app:layout_constraintTop_toBottomOf="@+id/tecnicoNombreNewManteniAutoCompleteTextView" />
+
+        <CheckBox
+            android:id="@+id/segunDinNewManteniCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:checked="false"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/segun_din"
+            android:textColor="@color/primaryTextColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/puestaMarchaNewManteniCheckBox"
+            app:layout_constraintTop_toBottomOf="@+id/puestaMarchaNewManteniCheckBox" />
+
+        <CheckBox
+            android:id="@+id/segunEnNewManteniCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:focusable="true"
+            android:text="@string/segun_en"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/segunDinNewManteniCheckBox"
+            app:layout_constraintStart_toEndOf="@+id/segunDinNewManteniCheckBox"
+            app:layout_constraintTop_toTopOf="@+id/segunDinNewManteniCheckBox" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newManteniCabeceraConstrainLayout"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="SpeakableTextPresentCheck">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp">
+
+
+            <TextView
+                android:id="@+id/labelCtrlDigitalNewManteniTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="end"
+                android:text="@string/label_ctrl_digital"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/evaluControlDigitalSpinner"
+                app:layout_constraintEnd_toStartOf="@+id/evaluControlDigitalSpinner"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/evaluControlDigitalSpinner" />
+
+            <Spinner
+                android:id="@+id/evaluControlDigitalSpinner"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/spinner_shape_transp_corner0_stroke2_primary"
+                android:backgroundTint="@color/primaryColor"
+                android:focusable="true"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:nextFocusForward="@id/evaluSistemaExtraccionSpinner"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <TextView
+                android:id="@+id/labelSistemaExtraccionNewManteniTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:gravity="end"
+                android:labelFor="@id/evaluSistemaExtraccionSpinner"
+                android:text="@string/label_sistem_extraccion"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/evaluSistemaExtraccionSpinner"
+                app:layout_constraintEnd_toStartOf="@+id/evaluSistemaExtraccionSpinner"
+                app:layout_constraintStart_toStartOf="@+id/labelCtrlDigitalNewManteniTextView"
+                app:layout_constraintTop_toTopOf="@+id/evaluSistemaExtraccionSpinner" />
+
+            <Spinner
+                android:id="@+id/evaluSistemaExtraccionSpinner"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/spinner_shape_transp_corner0_stroke2_primary"
+                android:backgroundTint="@color/primaryColor"
+                android:focusable="true"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:nextFocusForward="@id/evaluProteccionSuperficieSpinner"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintEnd_toEndOf="@+id/evaluControlDigitalSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/evaluControlDigitalSpinner"
+                tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
+
+            <TextView
+                android:id="@+id/labelProteccionSuperficieNewManteniTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:gravity="end"
+                android:labelFor="@id/evaluProteccionSuperficieSpinner"
+                android:text="@string/label_proteccion_superficie"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/evaluProteccionSuperficieSpinner"
+                app:layout_constraintEnd_toStartOf="@+id/evaluProteccionSuperficieSpinner"
+                app:layout_constraintStart_toStartOf="@+id/labelSistemaExtraccionNewManteniTextView"
+                app:layout_constraintTop_toTopOf="@+id/evaluProteccionSuperficieSpinner" />
+
+            <Spinner
+                android:id="@+id/evaluProteccionSuperficieSpinner"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/spinner_shape_transp_corner0_stroke2_primary"
+                android:backgroundTint="@color/primaryColor"
+                android:focusable="true"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:nextFocusForward="@id/evaluJuntasSpinner"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintEnd_toEndOf="@+id/evaluSistemaExtraccionSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/evaluSistemaExtraccionSpinner"
+                tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
+
+            <TextView
+                android:id="@+id/labelJuntaVitrinaTableroNewManteniTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:gravity="end"
+                android:labelFor="@id/evaluJuntasSpinner"
+                android:text="@string/label_junta_vitrina_tablero"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/evaluJuntasSpinner"
+                app:layout_constraintEnd_toStartOf="@+id/evaluJuntasSpinner"
+                app:layout_constraintStart_toStartOf="@+id/labelProteccionSuperficieNewManteniTextView"
+                app:layout_constraintTop_toTopOf="@+id/evaluJuntasSpinner" />
+
+            <Spinner
+                android:id="@+id/evaluJuntasSpinner"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/spinner_shape_transp_corner0_stroke2_primary"
+                android:backgroundTint="@color/primaryColor"
+                android:focusable="true"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:nextFocusForward="@id/evaluFijacionPiezasRigidasSpinner"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintEnd_toEndOf="@+id/evaluProteccionSuperficieSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/evaluProteccionSuperficieSpinner"
+                tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
+
+            <TextView
+                android:id="@+id/labelFijacionPiezasRigidasNewManteniTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:gravity="end"
+                android:labelFor="@id/evaluFijacionPiezasRigidasSpinner"
+                android:text="@string/label_fijacion_piezas_rigidas"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/evaluFijacionPiezasRigidasSpinner"
+                app:layout_constraintEnd_toStartOf="@+id/evaluFijacionPiezasRigidasSpinner"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/labelJuntaVitrinaTableroNewManteniTextView"
+                app:layout_constraintTop_toTopOf="@+id/evaluFijacionPiezasRigidasSpinner" />
+
+            <Spinner
+                android:id="@+id/evaluFijacionPiezasRigidasSpinner"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/spinner_shape_transp_corner0_stroke2_primary"
+                android:backgroundTint="@color/primaryColor"
+                android:focusable="true"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:nextFocusForward="@id/evaluFuncionamientoGuilloSpinner"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintEnd_toEndOf="@+id/evaluJuntasSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/evaluJuntasSpinner"
+                tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
+
+            <TextView
+                android:id="@+id/labelFuncionamientoGuilloNewManteniTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:gravity="end"
+                android:labelFor="@id/evaluFuncionamientoGuilloSpinner"
+                android:text="@string/label_funcionamiento_guillotina"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/evaluFuncionamientoGuilloSpinner"
+                app:layout_constraintEnd_toStartOf="@+id/evaluFuncionamientoGuilloSpinner"
+                app:layout_constraintStart_toStartOf="@+id/labelFijacionPiezasRigidasNewManteniTextView"
+                app:layout_constraintTop_toTopOf="@+id/evaluFuncionamientoGuilloSpinner" />
+
+            <Spinner
+                android:id="@+id/evaluFuncionamientoGuilloSpinner"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/spinner_shape_transp_corner0_stroke2_primary"
+                android:backgroundTint="@color/primaryColor"
+                android:focusable="true"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:nextFocusForward="@id/evaluEstadoGeneralGuilloSpinner"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintEnd_toEndOf="@+id/evaluFijacionPiezasRigidasSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/evaluFijacionPiezasRigidasSpinner"
+                tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
+
+            <TextView
+                android:id="@+id/labelEstadoGeneralGuilloNewManteniTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:gravity="end"
+                android:labelFor="@id/evaluEstadoGeneralGuilloSpinner"
+                android:text="@string/label_estado_general_guillotina"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/evaluEstadoGeneralGuilloSpinner"
+                app:layout_constraintEnd_toStartOf="@+id/evaluEstadoGeneralGuilloSpinner"
+                app:layout_constraintStart_toStartOf="@+id/labelFuncionamientoGuilloNewManteniTextView"
+                app:layout_constraintTop_toTopOf="@+id/evaluEstadoGeneralGuilloSpinner" />
+
+            <Spinner
+                android:id="@+id/evaluEstadoGeneralGuilloSpinner"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/spinner_shape_transp_corner0_stroke2_primary"
+                android:backgroundTint="@color/primaryColor"
+                android:focusable="true"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:nextFocusForward="@id/evaluControlPresenciaSpinner"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintEnd_toEndOf="@+id/evaluFuncionamientoGuilloSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/evaluFuncionamientoGuilloSpinner" />
+
+            <TextView
+                android:id="@+id/labelFuezaDesplazaGuilloNewManteniTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:gravity="end"
+                android:labelFor="@id/evaluFuerzaDesplazaGuilloSpinner"
+                android:text="@string/label_fuerza_desplaza_guillotina"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/valorFuerzaDesplazaGuilloNewManteniEditText"
+                app:layout_constraintEnd_toStartOf="@+id/valorFuerzaDesplazaGuilloNewManteniEditText"
+                app:layout_constraintStart_toStartOf="@+id/labelEstadoGeneralGuilloNewManteniTextView"
+                app:layout_constraintTop_toTopOf="@+id/valorFuerzaDesplazaGuilloNewManteniEditText" />
+
+            <EditText
+                android:id="@+id/valorFuerzaDesplazaGuilloNewManteniEditText"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:ems="10"
+                android:focusable="true"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal"
+                android:minHeight="48dp"
+                android:singleLine="true"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/unidadFuerzaDesplazaGuilloNewManteniTextView"
+                app:layout_constraintEnd_toStartOf="@+id/unidadFuerzaDesplazaGuilloNewManteniTextView"
+                app:layout_constraintTop_toTopOf="@+id/unidadFuerzaDesplazaGuilloNewManteniTextView" />
+
+            <TextView
+                android:id="@+id/unidadFuerzaDesplazaGuilloNewManteniTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:labelFor="@id/valorFuerzaDesplazaGuilloNewManteniEditText"
+                android:text="@string/label_unidad_newton"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/evaluFuerzaDesplazaGuilloSpinner"
+                app:layout_constraintEnd_toStartOf="@+id/evaluFuerzaDesplazaGuilloSpinner"
+                app:layout_constraintTop_toTopOf="@+id/evaluFuerzaDesplazaGuilloSpinner" />
+
+            <Spinner
+                android:id="@+id/evaluFuerzaDesplazaGuilloSpinner"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/spinner_shape_transp_corner0_stroke2_primary"
+                android:backgroundTint="@color/primaryColor"
+                android:focusable="true"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:nextFocusForward="@id/evaluControlPresenciaSpinner"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintEnd_toEndOf="@+id/evaluEstadoGeneralGuilloSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/evaluEstadoGeneralGuilloSpinner" />
+
+            <TextView
+                android:id="@+id/labelControlPresenciaNewManteniTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:gravity="end"
+                android:labelFor="@id/evaluControlPresenciaSpinner"
+                android:text="@string/label_control_presencia"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/evaluControlPresenciaSpinner"
+                app:layout_constraintEnd_toStartOf="@+id/evaluControlPresenciaSpinner"
+                app:layout_constraintStart_toStartOf="@+id/labelFuezaDesplazaGuilloNewManteniTextView"
+                app:layout_constraintTop_toTopOf="@+id/evaluControlPresenciaSpinner" />
+
+            <Spinner
+                android:id="@+id/evaluControlPresenciaSpinner"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/spinner_shape_transp_corner0_stroke2_primary"
+                android:backgroundTint="@color/primaryColor"
+                android:focusable="true"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:nextFocusForward="@id/evaluAutoproteccionSpinner"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintEnd_toEndOf="@+id/evaluFuerzaDesplazaGuilloSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/evaluFuerzaDesplazaGuilloSpinner" />
+
+            <TextView
+                android:id="@+id/labelAutoproteccionNewManteniTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:gravity="end"
+                android:labelFor="@id/evaluAutoproteccionSpinner"
+                android:text="@string/label_autoproteccion"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/evaluAutoproteccionSpinner"
+                app:layout_constraintEnd_toStartOf="@+id/evaluAutoproteccionSpinner"
+                app:layout_constraintStart_toStartOf="@+id/labelControlPresenciaNewManteniTextView"
+                app:layout_constraintTop_toTopOf="@+id/evaluAutoproteccionSpinner" />
+
+            <Spinner
+                android:id="@+id/evaluAutoproteccionSpinner"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/spinner_shape_transp_corner0_stroke2_primary"
+                android:backgroundTint="@color/primaryColor"
+                android:focusable="true"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:nextFocusForward="@id/evaluFuncGrifosMonoredSpinner"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintEnd_toEndOf="@+id/evaluControlPresenciaSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/evaluControlPresenciaSpinner" />
+
+            <TextView
+                android:id="@+id/labelFuncGrifosMonoredNewManteniTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:gravity="end"
+                android:labelFor="@id/evaluFuncGrifosMonoredSpinner"
+                android:text="@string/label_func_grifos_monored"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/evaluFuncGrifosMonoredSpinner"
+                app:layout_constraintEnd_toStartOf="@+id/evaluFuncGrifosMonoredSpinner"
+                app:layout_constraintStart_toStartOf="@+id/labelAutoproteccionNewManteniTextView"
+                app:layout_constraintTop_toTopOf="@+id/evaluFuncGrifosMonoredSpinner" />
+
+            <Spinner
+                android:id="@+id/evaluFuncGrifosMonoredSpinner"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/spinner_shape_transp_corner0_stroke2_primary"
+                android:backgroundTint="@color/primaryColor"
+                android:focusable="true"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:nextFocusForward="@id/evaluVolumenExtraccionRealSpinner"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintEnd_toEndOf="@+id/evaluAutoproteccionSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/evaluAutoproteccionSpinner" />
+
+            <TextView
+                android:id="@+id/labelVolumExtraccionRealNewManteniTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:gravity="end"
+                android:labelFor="@id/evaluVolumenExtraccionRealSpinner"
+                android:text="@string/label_volumen_extraccion_real"
+                android:textColor="@color/primaryTextColor"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/valorVolumenExtraccionRealNewManteniEditText"
+                app:layout_constraintEnd_toStartOf="@+id/valorVolumenExtraccionRealNewManteniEditText"
+                app:layout_constraintStart_toStartOf="@+id/labelFuncGrifosMonoredNewManteniTextView"
+                app:layout_constraintTop_toTopOf="@+id/valorVolumenExtraccionRealNewManteniEditText" />
+
+            <EditText
+                android:id="@+id/valorVolumenExtraccionRealNewManteniEditText"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:clickable="true"
+                android:focusable="false"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:minHeight="48dp"
+                android:singleLine="true"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/unidadVolumenExtraccionRealNewManteniTextView"
+                app:layout_constraintEnd_toStartOf="@+id/unidadVolumenExtraccionRealNewManteniTextView"
+                app:layout_constraintTop_toTopOf="@+id/unidadVolumenExtraccionRealNewManteniTextView"
+                tools:text="999.99" />
+
+
+            <TextView
+                android:id="@+id/unidadVolumenExtraccionRealNewManteniTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:inputType="numberDecimal"
+                android:text="@string/label_unidad_volumen_extraccion"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintBottom_toBottomOf="@+id/evaluVolumenExtraccionRealSpinner"
+                app:layout_constraintEnd_toStartOf="@+id/evaluVolumenExtraccionRealSpinner"
+                app:layout_constraintTop_toTopOf="@+id/evaluVolumenExtraccionRealSpinner" />
+
+            <Spinner
+                android:id="@+id/evaluVolumenExtraccionRealSpinner"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/spinner_shape_transp_corner0_stroke2_primary"
+                android:backgroundTint="@color/primaryColor"
+                android:focusable="true"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:nextFocusForward="@id/acuerdoNormasReguNewManteniRadioGroup"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintEnd_toEndOf="@+id/evaluFuncGrifosMonoredSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/evaluFuncGrifosMonoredSpinner" />
+
+            <TextView
+                android:id="@+id/labelEvaluacionFinalNewManteniTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/label_evaluacion"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/labelVolumExtraccionRealNewManteniTextView"
+                app:layout_constraintTop_toBottomOf="@+id/valorVolumenExtraccionRealNewManteniEditText" />
+
+            <TextView
+                android:id="@+id/labelAcuerdoNormasReguNewManteniTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="start"
+                android:text="@string/label_acuerdo_normas_regulaciones"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintBottom_toBottomOf="@+id/acuerdoNormasReguNewManteniRadioGroup"
+                app:layout_constraintEnd_toStartOf="@+id/acuerdoNormasReguNewManteniRadioGroup"
+                app:layout_constraintStart_toStartOf="@+id/labelEvaluacionFinalNewManteniTextView"
+                app:layout_constraintTop_toTopOf="@+id/acuerdoNormasReguNewManteniRadioGroup" />
+
+            <RadioGroup
+                android:id="@+id/acuerdoNormasReguNewManteniRadioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:focusable="true"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@+id/evaluFuncGrifosMonoredSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/labelEvaluacionFinalNewManteniTextView">
+
+                <RadioButton
+                    android:id="@+id/acuerdoNormasReguSiNewManteniRadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="@string/si"
+                    android:textColor="@color/primaryTextColor" />
+
+                <RadioButton
+                    android:id="@+id/acuerdoNormasReguNoNewManteniRadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="@string/no"
+                    android:textColor="@color/primaryTextColor" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/labelNecesarioReparacionNewManteniTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="3dp"
+                android:gravity="start"
+                android:text="@string/label_necesario_reparacion"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintBottom_toBottomOf="@+id/necesarioReparcionNewManteniRadioGroup"
+                app:layout_constraintEnd_toStartOf="@+id/necesarioReparcionNewManteniRadioGroup"
+                app:layout_constraintStart_toStartOf="@+id/labelAcuerdoNormasReguNewManteniTextView"
+                app:layout_constraintTop_toTopOf="@+id/necesarioReparcionNewManteniRadioGroup" />
+
+            <RadioGroup
+                android:id="@+id/necesarioReparcionNewManteniRadioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:focusable="true"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@+id/acuerdoNormasReguNewManteniRadioGroup"
+                app:layout_constraintTop_toBottomOf="@+id/acuerdoNormasReguNewManteniRadioGroup">
+
+                <RadioButton
+                    android:id="@+id/necesarioRepaSiNewManteniRadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="@string/si"
+                    android:textColor="@color/primaryTextColor" />
+
+                <RadioButton
+                    android:id="@+id/necesarioRepaNoNewManteniRadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="@string/no"
+                    android:textColor="@color/primaryTextColor" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/labelComentariosNewManteniTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/label_comentarios"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/labelEvaluacionFinalNewManteniTextView"
+                app:layout_constraintTop_toBottomOf="@+id/necesarioReparcionNewManteniRadioGroup" />
+
+            <EditText
+                android:id="@+id/comentarioNewManteniEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:clickable="true"
+                android:focusable="true"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:maxLines="5"
+                android:minLines="3"
+                android:singleLine="false"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintEnd_toEndOf="@+id/necesarioReparcionNewManteniRadioGroup"
+                app:layout_constraintStart_toStartOf="@+id/labelComentariosNewManteniTextView"
+                app:layout_constraintTop_toBottomOf="@+id/labelComentariosNewManteniTextView" />
+
+            <Button
+                android:id="@+id/newMantenimientoCancelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="24dp"
+                android:text="@string/cancel"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/newMantenimientoAcceptButton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/comentarioNewManteniEditText" />
+
+            <Button
+                android:id="@+id/newMantenimientoAcceptButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/accept"
+                app:layout_constraintBottom_toBottomOf="@+id/newMantenimientoCancelButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/newMantenimientoCancelButton"
+                app:layout_constraintTop_toTopOf="@+id/newMantenimientoCancelButton" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

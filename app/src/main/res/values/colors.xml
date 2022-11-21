@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primaryColor">#1de8b5</color>
+    <color name="primaryLightColor">#6dffe7</color>
+    <color name="primaryDarkColor">#00b585</color>
+    <color name="secondaryColor">#a7ffeb</color>
+    <color name="secondaryLightColor">#dbffff</color>
+    <color name="secondaryDarkColor">#75ccb9</color>
+    <color name="primaryTextColor">#000000</color>
+    <color name="secondaryTextColor">#000000</color>
+
+    <color name="atlas_romero_ultra_light">#CFFFF1</color>
+    <color name="atlas_romero_light">#A6FFE5</color>
+    <color name="atlas_romero">#00C189</color>
+    <color name="atlas_romero_dark">#005E43</color>
+</resources>

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FormNewVitrinaActivity">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/newVitrinaLabelVitrinaTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/label_vitrina"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/newVitrinaLabelFabriTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:labelFor="@id/newVitrinaFabriNameAutoCompleteTextView"
+                android:text="@string/label_fabricante"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/newVitrinaLabelVitrinaTextView"
+                app:layout_constraintTop_toBottomOf="@+id/newVitrinaLabelVitrinaTextView" />
+
+            <AutoCompleteTextView
+                android:id="@+id/newVitrinaFabriNameAutoCompleteTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:minHeight="48dp"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/newVitrinaLabelFabriTextView"
+                app:layout_constraintStart_toStartOf="@+id/newVitrinaLabelFabriTextView"
+                app:layout_constraintTop_toBottomOf="@+id/newVitrinaLabelFabriTextView"
+                tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
+
+            <TextView
+                android:id="@+id/newVitrinaLabelTipoTextView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:labelFor="@id/newVitrinaTipoSpinner"
+                android:text="@string/label_tipo"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/newVitrinaFabriNameAutoCompleteTextView"
+                app:layout_constraintStart_toStartOf="@+id/newVitrinaFabriNameAutoCompleteTextView"
+                app:layout_constraintTop_toBottomOf="@+id/newVitrinaFabriNameAutoCompleteTextView" />
+
+            <Spinner
+                android:id="@+id/newVitrinaTipoSpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/spinner_shape_transp_corner0_stroke2_primary"
+                android:backgroundTint="@color/primaryColor"
+                android:minHeight="48dp"
+                app:layout_constraintEnd_toEndOf="@+id/newVitrinaLabelTipoTextView2"
+                app:layout_constraintStart_toStartOf="@+id/newVitrinaLabelTipoTextView2"
+                app:layout_constraintTop_toBottomOf="@+id/newVitrinaLabelTipoTextView2"
+                tools:ignore="DuplicateSpeakableTextCheck" />
+
+            <TextView
+                android:id="@+id/newVitrinalabelRefTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/label_referencia"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/newVitrinaTipoSpinner"
+                app:layout_constraintHorizontal_bias="0.52"
+                app:layout_constraintStart_toStartOf="@+id/newVitrinaTipoSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/newVitrinaTipoSpinner" />
+
+            <EditText
+                android:id="@+id/newVritrinaReferenceEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:ems="10"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/newVitrinalabelRefTextView"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/newVitrinalabelRefTextView"
+                app:layout_constraintTop_toBottomOf="@+id/newVitrinalabelRefTextView"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <TextView
+                android:id="@+id/newVitrinaLabelInveTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/label_inventario"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/newVritrinaReferenceEditText"
+                app:layout_constraintStart_toStartOf="@+id/newVritrinaReferenceEditText"
+                app:layout_constraintTop_toBottomOf="@+id/newVritrinaReferenceEditText" />
+
+            <EditText
+                android:id="@+id/newVitrinaInventaryEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:ems="10"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/newVritrinaReferenceEditText"
+                app:layout_constraintStart_toStartOf="@+id/newVitrinaLabelInveTextView"
+                app:layout_constraintTop_toBottomOf="@+id/newVitrinaLabelInveTextView"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <TextView
+                android:id="@+id/newVitrinaLabelLongTextView"
+                android:layout_width="58dp"
+                android:layout_height="20dp"
+                android:labelFor="@id/newVitrinaLongitudSpinner"
+                android:text="@string/label_longitud"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/newVitrinaLongitudSpinner"
+                app:layout_constraintStart_toStartOf="@+id/newVitrinaInventaryEditText"
+                app:layout_constraintTop_toTopOf="@+id/newVitrinaLongitudSpinner" />
+
+            <Spinner
+                android:id="@+id/newVitrinaLongitudSpinner"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/spinner_shape_transp_corner0_stroke2_primary"
+                android:backgroundTint="@color/primaryColor"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                app:layout_constraintStart_toEndOf="@+id/newVitrinaLabelLongTextView"
+                app:layout_constraintTop_toBottomOf="@+id/newVitrinaInventaryEditText"
+                tools:ignore="DuplicateSpeakableTextCheck" />
+
+            <TextView
+                android:id="@+id/newVitrinaLabelGilloTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:labelFor="@id/newVitrinaGuillotinaTextView"
+                android:text="@string/label_guillotina"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/newVitrinaLongitudSpinner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/newVitrinaLongitudSpinner"
+                app:layout_constraintTop_toTopOf="@+id/newVitrinaLongitudSpinner"
+                app:layout_constraintVertical_bias="0.538" />
+
+            <TextView
+                android:id="@+id/newVitrinaGuillotinaTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/newVitrinaLabelGilloTextView"
+                app:layout_constraintStart_toEndOf="@+id/newVitrinaLabelGilloTextView"
+                app:layout_constraintTop_toTopOf="@+id/newVitrinaLabelGilloTextView"
+                tools:text="0.9" />
+
+            <TextView
+                android:id="@+id/newVitrinaLabelAnhoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_anho"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/newVitrinaAnhoSpinner"
+                app:layout_constraintStart_toStartOf="@+id/newVitrinaLabelLongTextView"
+                app:layout_constraintTop_toTopOf="@+id/newVitrinaAnhoSpinner" />
+
+            <Spinner
+                android:id="@+id/newVitrinaAnhoSpinner"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/spinner_shape_transp_corner0_stroke2_primary"
+                android:backgroundTint="@color/primaryColor"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                app:layout_constraintStart_toEndOf="@+id/newVitrinaLabelAnhoTextView"
+                app:layout_constraintTop_toBottomOf="@+id/newVitrinaLongitudSpinner"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <TextView
+                android:id="@+id/newVitrinaLabelContratoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:labelFor="@id/newVitrinaContratoEditText"
+                android:text="@string/label_contrato"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/newVitrinaAnhoSpinner"
+                app:layout_constraintStart_toEndOf="@+id/newVitrinaAnhoSpinner"
+                app:layout_constraintTop_toTopOf="@+id/newVitrinaAnhoSpinner"
+                app:layout_constraintVertical_bias="0.538" />
+
+            <EditText
+                android:id="@+id/newVitrinaContratoEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:ems="10"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/newVitrinaLabelContratoTextView"
+                app:layout_constraintEnd_toEndOf="@+id/newVitrinaInventaryEditText"
+                app:layout_constraintStart_toEndOf="@+id/newVitrinaLabelContratoTextView"
+                app:layout_constraintTop_toTopOf="@+id/newVitrinaLabelContratoTextView"
+                tools:ignore="DuplicateSpeakableTextCheck"
+                tools:text="No contratado" />
+
+            <Button
+                android:id="@+id/newVitrinaCancelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:text="@string/cancel"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/newVitrinaAcceptButton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/newVitrinaAnhoSpinner"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <Button
+                android:id="@+id/newVitrinaAcceptButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/accept"
+                app:layout_constraintBottom_toBottomOf="@+id/newVitrinaCancelButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/newVitrinaCancelButton"
+                app:layout_constraintTop_toTopOf="@+id/newVitrinaCancelButton" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

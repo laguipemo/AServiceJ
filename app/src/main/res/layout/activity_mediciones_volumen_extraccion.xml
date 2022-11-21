@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MedicionesVolumenExtraccionActivity">
+
+    <TextView
+        android:id="@+id/labelMedicionesMedicionestVolumenextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/label_mediciones"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/labelValor1MedicionesVolumenTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="8dp"
+        android:labelFor="@id/valor1MedicionesVolumenEditTextNumberDecimal"
+        android:text="@string/label_valor1"
+        android:textColor="@color/primaryTextColor"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/valor1MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintEnd_toStartOf="@+id/valor1MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/valor1MedicionesVolumenEditTextNumberDecimal" />
+
+    <EditText
+        android:id="@+id/valor1MedicionesVolumenEditTextNumberDecimal"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        android:imeOptions="actionNext"
+        android:nextFocusForward="@id/valor2MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintStart_toEndOf="@+id/labelValor1MedicionesVolumenTextView"
+        app:layout_constraintTop_toBottomOf="@+id/labelMedicionesMedicionestVolumenextView"
+        tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
+
+    <TextView
+        android:id="@+id/labelValor2MedicionesVolumenTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:labelFor="@id/valor2MedicionesVolumenEditTextNumberDecimal"
+        android:text="@string/label_valor2"
+        android:textColor="@color/primaryTextColor"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/valor2MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintEnd_toStartOf="@+id/valor2MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintTop_toTopOf="@+id/valor2MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintVertical_bias="0.517" />
+
+    <EditText
+        android:id="@+id/valor2MedicionesVolumenEditTextNumberDecimal"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        android:imeOptions="actionNext"
+        android:nextFocusForward="@id/valor3MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelMedicionesMedicionestVolumenextView"
+        tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
+
+    <TextView
+        android:id="@+id/labelValor3MedicionesVolumenTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:labelFor="@id/valor3MedicionesVolumenEditTextNumberDecimal"
+        android:text="@string/label_valor3"
+        android:textColor="@color/primaryTextColor"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/valor3MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintEnd_toStartOf="@+id/valor3MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintStart_toStartOf="@+id/labelValor1MedicionesVolumenTextView"
+        app:layout_constraintTop_toTopOf="@+id/valor3MedicionesVolumenEditTextNumberDecimal" />
+
+    <EditText
+        android:id="@+id/valor3MedicionesVolumenEditTextNumberDecimal"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        android:imeOptions="actionNext"
+        android:nextFocusForward="@id/valor4MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintStart_toEndOf="@+id/labelValor3MedicionesVolumenTextView"
+        app:layout_constraintTop_toBottomOf="@+id/valor1MedicionesVolumenEditTextNumberDecimal"
+        tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
+
+    <TextView
+        android:id="@+id/labelValor4MedicionesVolumenTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:labelFor="@id/valor4MedicionesVolumenEditTextNumberDecimal"
+        android:text="@string/label_valor4"
+        android:textColor="@color/primaryTextColor"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/valor4MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintEnd_toStartOf="@+id/valor4MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintTop_toTopOf="@+id/valor4MedicionesVolumenEditTextNumberDecimal" />
+
+    <EditText
+        android:id="@+id/valor4MedicionesVolumenEditTextNumberDecimal"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        android:imeOptions="actionNext"
+        android:nextFocusForward="@id/valor5MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintEnd_toEndOf="@+id/valor2MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintTop_toBottomOf="@+id/valor2MedicionesVolumenEditTextNumberDecimal"
+        tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
+
+    <TextView
+        android:id="@+id/labelValor5MedicionesVolumenTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:labelFor="@id/valor5MedicionesVolumenEditTextNumberDecimal"
+        android:text="@string/label_valor5"
+        android:textColor="@color/primaryTextColor"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/valor5MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintEnd_toStartOf="@+id/valor5MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintStart_toStartOf="@+id/labelValor3MedicionesVolumenTextView"
+        app:layout_constraintTop_toTopOf="@+id/valor5MedicionesVolumenEditTextNumberDecimal" />
+
+    <EditText
+        android:id="@+id/valor5MedicionesVolumenEditTextNumberDecimal"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        android:imeOptions="actionNext"
+        android:nextFocusForward="@id/valor6MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintStart_toEndOf="@+id/labelValor5MedicionesVolumenTextView"
+        app:layout_constraintTop_toBottomOf="@+id/valor3MedicionesVolumenEditTextNumberDecimal"
+        tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
+
+    <TextView
+        android:id="@+id/labelValor6MedicionesVolumenTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:labelFor="@id/valor6MedicionesVolumenEditTextNumberDecimal"
+        android:text="@string/label_valor6"
+        android:textColor="@color/primaryTextColor"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/valor6MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintEnd_toStartOf="@+id/valor6MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintTop_toTopOf="@+id/valor6MedicionesVolumenEditTextNumberDecimal" />
+
+    <EditText
+        android:id="@+id/valor6MedicionesVolumenEditTextNumberDecimal"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        android:imeOptions="actionNext"
+        android:nextFocusForward="@id/valor7MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintEnd_toEndOf="@+id/valor4MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintTop_toBottomOf="@+id/valor4MedicionesVolumenEditTextNumberDecimal"
+        tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck,DuplicateSpeakableTextCheck" />
+
+    <TextView
+        android:id="@+id/labelValor7MedicionesVolumenTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:labelFor="@id/valor7MedicionesVolumenEditTextNumberDecimal"
+        android:text="@string/label_valor7"
+        android:textColor="@color/primaryTextColor"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/valor7MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintEnd_toStartOf="@+id/valor7MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintStart_toStartOf="@+id/labelValor5MedicionesVolumenTextView"
+        app:layout_constraintTop_toTopOf="@+id/valor7MedicionesVolumenEditTextNumberDecimal" />
+
+    <EditText
+        android:id="@+id/valor7MedicionesVolumenEditTextNumberDecimal"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        android:imeOptions="actionNext"
+        android:nextFocusForward="@id/valor8MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintStart_toEndOf="@+id/labelValor7MedicionesVolumenTextView"
+        app:layout_constraintTop_toBottomOf="@+id/valor5MedicionesVolumenEditTextNumberDecimal"
+        tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
+
+    <TextView
+        android:id="@+id/labelValor8MedicionesVolumenTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:labelFor="@id/valor8MedicionesVolumenEditTextNumberDecimal"
+        android:text="@string/label_valor8"
+        android:textColor="@color/primaryTextColor"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/valor8MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintEnd_toStartOf="@+id/valor8MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintTop_toTopOf="@+id/valor8MedicionesVolumenEditTextNumberDecimal" />
+
+    <EditText
+        android:id="@+id/valor8MedicionesVolumenEditTextNumberDecimal"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        android:imeOptions="actionNext"
+        android:nextFocusForward="@id/valor9MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintEnd_toEndOf="@+id/valor6MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintTop_toBottomOf="@+id/valor6MedicionesVolumenEditTextNumberDecimal"
+        tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
+
+    <TextView
+        android:id="@+id/labelValor9MedicionesVolumenTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:labelFor="@id/valor9MedicionesVolumenEditTextNumberDecimal"
+        android:text="@string/label_valor9"
+        android:textColor="@color/primaryTextColor"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/valor9MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintEnd_toStartOf="@+id/valor9MedicionesVolumenEditTextNumberDecimal"
+        app:layout_constraintStart_toStartOf="@+id/labelValor7MedicionesVolumenTextView"
+        app:layout_constraintTop_toTopOf="@+id/valor9MedicionesVolumenEditTextNumberDecimal" />
+
+    <EditText
+        android:id="@+id/valor9MedicionesVolumenEditTextNumberDecimal"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        app:layout_constraintStart_toEndOf="@+id/labelValor9MedicionesVolumenTextView"
+        app:layout_constraintTop_toBottomOf="@+id/valor7MedicionesVolumenEditTextNumberDecimal"
+        tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
+
+
+    <Button
+        android:id="@+id/medicionesVolumenCancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="@string/cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/medicionesVolumenAcceptButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/valor9MedicionesVolumenEditTextNumberDecimal" />
+
+    <Button
+        android:id="@+id/medicionesVolumenAcceptButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/accept"
+        app:layout_constraintBottom_toBottomOf="@+id/medicionesVolumenCancelButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/medicionesVolumenCancelButton"
+        app:layout_constraintTop_toTopOf="@+id/medicionesVolumenCancelButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

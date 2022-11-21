@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FormNewEmpresaActivity">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/newEmpLabelEmpTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/label_empresa"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/newEmpNameEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="@color/atlas_romero"
+                android:clickable="true"
+                android:ems="10"
+                android:focusable="true"
+                android:hint="@string/company_name"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/newEmpLabelEmpTextView"
+                app:layout_constraintTop_toBottomOf="@+id/newEmpLabelEmpTextView"
+                tools:ignore="TextContrastCheck" />
+
+            <EditText
+                android:id="@+id/newEmpDireccEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/atlas_romero"
+                android:clickable="true"
+                android:ems="10"
+                android:focusable="true"
+                android:hint="@string/company_address"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/newEmpNameEditText"
+                app:layout_constraintStart_toStartOf="@+id/newEmpNameEditText"
+                app:layout_constraintTop_toBottomOf="@+id/newEmpNameEditText"
+                tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/labelNewEmpContactTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/label_contacto"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/newEmpDireccEditText"
+                app:layout_constraintTop_toBottomOf="@+id/newEmpDireccEditText" />
+
+            <EditText
+                android:id="@+id/newEmpContactNameEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="@color/atlas_romero"
+                android:ems="10"
+                android:hint="@string/contact_name"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/labelNewEmpContactTextView"
+                app:layout_constraintTop_toBottomOf="@+id/labelNewEmpContactTextView"
+                tools:ignore="TextContrastCheck" />
+
+            <EditText
+                android:id="@+id/newEmpContactTelefEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/atlas_romero"
+                android:ems="10"
+                android:hint="@string/contact_telef"
+                android:importantForAutofill="no"
+                android:inputType="phone"
+                android:minHeight="48dp"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/newEmpContactNameEditText"
+                app:layout_constraintStart_toStartOf="@+id/newEmpContactNameEditText"
+                app:layout_constraintTop_toBottomOf="@+id/newEmpContactNameEditText"
+                tools:ignore="TextContrastCheck" />
+
+            <EditText
+                android:id="@+id/newEmpContactCorreoEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/atlas_romero"
+                android:ems="10"
+                android:hint="@string/contact_correo"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress"
+                android:minHeight="48dp"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/newEmpContactTelefEditText"
+                app:layout_constraintStart_toStartOf="@+id/newEmpContactTelefEditText"
+                app:layout_constraintTop_toBottomOf="@+id/newEmpContactTelefEditText"
+                tools:ignore="TextContrastCheck" />
+
+            <Button
+                android:id="@+id/newEmpAcceptButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/accept"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/newEmpCancelButton"
+                app:layout_constraintTop_toBottomOf="@+id/newEmpContactCorreoEditText" />
+
+            <Button
+                android:id="@+id/newEmpCancelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:text="@android:string/cancel"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/newEmpAcceptButton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/newEmpContactCorreoEditText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    tools:context=".FichaMantenimientoActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fichaManteniCabeceraConstrainLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/fichaManteniLabelManteniTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:gravity="center"
+            android:text="@string/mantenimiento"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/fichaManteniLabelFechaManteniTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/label_fecha"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/fichaManteniLabelManteniTextView"
+            app:layout_constraintTop_toBottomOf="@+id/fichaManteniLabelManteniTextView" />
+
+        <TextView
+            android:id="@+id/fichaManteniFechaMantenimiTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/fichaManteniLabelFechaManteniTextView"
+            app:layout_constraintEnd_toEndOf="@+id/fichaManteniLabelManteniTextView"
+            app:layout_constraintStart_toEndOf="@+id/fichaManteniLabelFechaManteniTextView"
+            app:layout_constraintTop_toTopOf="@+id/fichaManteniLabelFechaManteniTextView"
+            tools:text="12 noviembre 2021" />
+
+        <TextView
+            android:id="@+id/fichaManteniLabelTecnicoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/label_tecnico"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/fichaManteniLabelFechaManteniTextView"
+            app:layout_constraintTop_toBottomOf="@+id/fichaManteniLabelFechaManteniTextView" />
+
+        <TextView
+            android:id="@+id/fichaManteniTecnicoNombreTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/fichaManteniLabelTecnicoTextView"
+            app:layout_constraintEnd_toEndOf="@+id/fichaManteniFechaMantenimiTextView"
+            app:layout_constraintStart_toEndOf="@+id/fichaManteniLabelTecnicoTextView"
+            app:layout_constraintTop_toTopOf="@+id/fichaManteniLabelTecnicoTextView"
+            tools:text="Rafel Romero Bello" />
+
+        <CheckBox
+            android:id="@+id/fichaManteniPuestaMarchaCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:checked="false"
+            android:clickable="false"
+            android:text="@string/puesta_marcha"
+            app:layout_constraintStart_toStartOf="@+id/fichaManteniLabelTecnicoTextView"
+            app:layout_constraintTop_toBottomOf="@+id/fichaManteniLabelTecnicoTextView" />
+
+        <CheckBox
+            android:id="@+id/fichaManteniSegunDinCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:checked="false"
+            android:clickable="false"
+            android:focusable="false"
+            android:text="@string/segun_din"
+            android:textColor="@color/primaryTextColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/fichaManteniPuestaMarchaCheckBox"
+            app:layout_constraintTop_toBottomOf="@+id/fichaManteniPuestaMarchaCheckBox" />
+
+        <CheckBox
+            android:id="@+id/fichaManteniSegunEnCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="@string/segun_en"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/fichaManteniSegunDinCheckBox"
+            app:layout_constraintStart_toEndOf="@+id/fichaManteniSegunDinCheckBox"
+            app:layout_constraintTop_toTopOf="@+id/fichaManteniSegunDinCheckBox" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fichaManteniCabeceraConstrainLayout"
+        app:layout_constraintVertical_bias="1.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/fichaManteniLabelCtrlDigitalTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="end"
+                android:text="@string/label_ctrl_digital"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/fichaManteniEvaluControlDigitalTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/fichaManteniEvaluControlDigitalTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:gravity="center"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/fichaManteniLabelCtrlDigitalTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/fichaManteniLabelCtrlDigitalTextView"
+                tools:text="O.K." />
+
+            <TextView
+                android:id="@+id/fichaManteniLabelSistemaExtraccionTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="end"
+                android:text="@string/label_sistem_extraccion"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/fichaManteniEvaluSistemaExtraccionTextView"
+                app:layout_constraintStart_toStartOf="@+id/fichaManteniLabelCtrlDigitalTextView"
+                app:layout_constraintTop_toBottomOf="@+id/fichaManteniLabelCtrlDigitalTextView" />
+
+            <TextView
+                android:id="@+id/fichaManteniEvaluSistemaExtraccionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:gravity="center"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/fichaManteniLabelSistemaExtraccionTextView"
+                app:layout_constraintEnd_toEndOf="@+id/fichaManteniEvaluControlDigitalTextView"
+                app:layout_constraintTop_toTopOf="@+id/fichaManteniLabelSistemaExtraccionTextView"
+                tools:text="O.K." />
+
+            <TextView
+                android:id="@+id/fichaManteniLabelProteccionSuperficieTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="end"
+                android:text="@string/label_proteccion_superficie"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/fichaManteniEvaluProteccionSuperficieTextView"
+                app:layout_constraintStart_toStartOf="@+id/fichaManteniLabelSistemaExtraccionTextView"
+                app:layout_constraintTop_toBottomOf="@+id/fichaManteniLabelSistemaExtraccionTextView" />
+
+            <TextView
+                android:id="@+id/fichaManteniEvaluProteccionSuperficieTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:gravity="center"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/fichaManteniLabelProteccionSuperficieTextView"
+                app:layout_constraintEnd_toEndOf="@+id/fichaManteniEvaluSistemaExtraccionTextView"
+                app:layout_constraintTop_toTopOf="@+id/fichaManteniLabelProteccionSuperficieTextView"
+                tools:text="O.K." />
+
+            <TextView
+                android:id="@+id/fichaManteniLabelJuntaVitrinaTableroTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="end"
+                android:text="@string/label_junta_vitrina_tablero"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/fichaManteniEvaluJuntasTextView"
+                app:layout_constraintStart_toStartOf="@+id/fichaManteniLabelProteccionSuperficieTextView"
+                app:layout_constraintTop_toBottomOf="@+id/fichaManteniLabelProteccionSuperficieTextView" />
+
+            <TextView
+                android:id="@+id/fichaManteniEvaluJuntasTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:gravity="center"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/fichaManteniLabelJuntaVitrinaTableroTextView"
+                app:layout_constraintEnd_toEndOf="@+id/fichaManteniEvaluProteccionSuperficieTextView"
+                app:layout_constraintTop_toTopOf="@+id/fichaManteniLabelJuntaVitrinaTableroTextView"
+                tools:text="O.K." />
+
+            <TextView
+                android:id="@+id/fichaManteniLabelFijacionPiezasRigidasTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="end"
+                android:text="@string/label_fijacion_piezas_rigidas"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/fichaManteniEvaluFijacionPiezasRigidasTextView"
+                app:layout_constraintStart_toStartOf="@+id/fichaManteniLabelJuntaVitrinaTableroTextView"
+                app:layout_constraintTop_toBottomOf="@+id/fichaManteniLabelJuntaVitrinaTableroTextView" />
+
+            <TextView
+                android:id="@+id/fichaManteniEvaluFijacionPiezasRigidasTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:gravity="center"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/fichaManteniLabelFijacionPiezasRigidasTextView"
+                app:layout_constraintEnd_toEndOf="@+id/fichaManteniEvaluJuntasTextView"
+                app:layout_constraintTop_toTopOf="@+id/fichaManteniLabelFijacionPiezasRigidasTextView"
+                tools:text="O.K." />
+
+            <TextView
+                android:id="@+id/fichaManteniLabelFuncionamientoGuilloTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="end"
+                android:text="@string/label_funcionamiento_guillotina"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/fichaManteniEvaluFuncionamientoGuilloTextView"
+                app:layout_constraintStart_toStartOf="@+id/fichaManteniLabelFijacionPiezasRigidasTextView"
+                app:layout_constraintTop_toBottomOf="@+id/fichaManteniLabelFijacionPiezasRigidasTextView" />
+
+            <TextView
+                android:id="@+id/fichaManteniEvaluFuncionamientoGuilloTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:gravity="center"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/fichaManteniLabelFuncionamientoGuilloTextView"
+                app:layout_constraintEnd_toEndOf="@+id/fichaManteniEvaluFijacionPiezasRigidasTextView"
+                app:layout_constraintTop_toTopOf="@+id/fichaManteniLabelFuncionamientoGuilloTextView"
+                tools:text="O.K." />
+
+            <TextView
+                android:id="@+id/fichaManteniLabelEstadoGeneralGuilloTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="end"
+                android:text="@string/label_estado_general_guillotina"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/fichaManteniEvaluEstadoGeneralGuilloTextView"
+                app:layout_constraintStart_toStartOf="@+id/fichaManteniLabelFuncionamientoGuilloTextView"
+                app:layout_constraintTop_toBottomOf="@+id/fichaManteniLabelFuncionamientoGuilloTextView" />
+
+            <TextView
+                android:id="@+id/fichaManteniEvaluEstadoGeneralGuilloTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:gravity="center"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/fichaManteniLabelEstadoGeneralGuilloTextView"
+                app:layout_constraintEnd_toEndOf="@+id/fichaManteniEvaluFuncionamientoGuilloTextView"
+                app:layout_constraintTop_toTopOf="@+id/fichaManteniLabelEstadoGeneralGuilloTextView"
+                tools:text="O.K." />
+
+            <TextView
+                android:id="@+id/fichaManteniLabelFuezaDesplazaGuilloTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="end"
+                android:text="@string/label_fuerza_desplaza_guillotina"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/fichaManteniValorFuerzaDesplazaGuilloTextView"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/fichaManteniLabelEstadoGeneralGuilloTextView"
+                app:layout_constraintTop_toBottomOf="@+id/fichaManteniLabelEstadoGeneralGuilloTextView" />
+
+            <TextView
+                android:id="@+id/fichaManteniValorFuerzaDesplazaGuilloTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:gravity="center"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/fichaManteniLabelFuezaDesplazaGuilloTextView"
+                app:layout_constraintEnd_toStartOf="@+id/fichaManteniUnidadFuerzaDesplazaGuilloTextView"
+                app:layout_constraintTop_toTopOf="@+id/fichaManteniLabelFuezaDesplazaGuilloTextView"
+                tools:text="195.50" />
+
+            <TextView
+                android:id="@+id/fichaManteniUnidadFuerzaDesplazaGuilloTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/fichaManteniValorFuerzaDesplazaGuilloTextView"
+                app:layout_constraintEnd_toStartOf="@+id/fichaManteniEvaluFuerzaDesplazaGuilloTextView"
+                app:layout_constraintTop_toTopOf="@+id/fichaManteniValorFuerzaDesplazaGuilloTextView"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="@string/label_unidad_newton" />
+
+            <TextView
+                android:id="@+id/fichaManteniEvaluFuerzaDesplazaGuilloTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:gravity="center"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/fichaManteniUnidadFuerzaDesplazaGuilloTextView"
+                app:layout_constraintEnd_toEndOf="@+id/fichaManteniEvaluEstadoGeneralGuilloTextView"
+                app:layout_constraintTop_toTopOf="@+id/fichaManteniUnidadFuerzaDesplazaGuilloTextView"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="O.K." />
+
+            <TextView
+                android:id="@+id/fichaManteniLabelControlPresenciaTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="end"
+                android:text="@string/label_control_presencia"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/fichaManteniEvaluControlPresenciaTextView"
+                app:layout_constraintStart_toStartOf="@+id/fichaManteniLabelFuezaDesplazaGuilloTextView"
+                app:layout_constraintTop_toBottomOf="@+id/fichaManteniLabelFuezaDesplazaGuilloTextView" />
+
+            <TextView
+                android:id="@+id/fichaManteniEvaluControlPresenciaTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:gravity="center"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/fichaManteniLabelControlPresenciaTextView"
+                app:layout_constraintEnd_toEndOf="@+id/fichaManteniEvaluFuerzaDesplazaGuilloTextView"
+                app:layout_constraintTop_toTopOf="@+id/fichaManteniLabelControlPresenciaTextView"
+                tools:text="O.K." />
+
+            <TextView
+                android:id="@+id/fichaManteniLabelAutoproteccionTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="end"
+                android:text="@string/label_autoproteccion"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/fichaManteniEvaluAutoproteccionTextView"
+                app:layout_constraintStart_toStartOf="@+id/fichaManteniLabelControlPresenciaTextView"
+                app:layout_constraintTop_toBottomOf="@+id/fichaManteniLabelControlPresenciaTextView" />
+
+            <TextView
+                android:id="@+id/fichaManteniEvaluAutoproteccionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:gravity="center"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/fichaManteniLabelAutoproteccionTextView"
+                app:layout_constraintEnd_toEndOf="@+id/fichaManteniEvaluControlPresenciaTextView"
+                app:layout_constraintTop_toTopOf="@+id/fichaManteniLabelAutoproteccionTextView"
+                tools:text="O.K." />
+
+            <TextView
+                android:id="@+id/fichaManteniLabelFuncGrifosMonoredTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="end"
+                android:text="@string/label_func_grifos_monored"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/fichaManteniEvaluFuncGrifosMonoredTextView"
+                app:layout_constraintStart_toStartOf="@+id/fichaManteniLabelAutoproteccionTextView"
+                app:layout_constraintTop_toBottomOf="@+id/fichaManteniLabelAutoproteccionTextView" />
+
+            <TextView
+                android:id="@+id/fichaManteniEvaluFuncGrifosMonoredTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:gravity="center"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/fichaManteniLabelFuncGrifosMonoredTextView"
+                app:layout_constraintEnd_toEndOf="@+id/fichaManteniEvaluAutoproteccionTextView"
+                app:layout_constraintTop_toTopOf="@+id/fichaManteniLabelFuncGrifosMonoredTextView"
+                tools:text="O.K." />
+
+            <TextView
+                android:id="@+id/fichaManteniLabelVolumExtraccionRealTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="end"
+                android:text="@string/label_volumen_extraccion_real"
+                android:textColor="@color/primaryTextColor"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/fichaManteniValorVolumenExtraccionRealTextView"
+                app:layout_constraintStart_toStartOf="@+id/fichaManteniLabelFuncGrifosMonoredTextView"
+                app:layout_constraintTop_toBottomOf="@+id/fichaManteniLabelFuncGrifosMonoredTextView" />
+
+            <TextView
+                android:id="@+id/fichaManteniValorVolumenExtraccionRealTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:gravity="center"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/fichaManteniLabelVolumExtraccionRealTextView"
+                app:layout_constraintEnd_toStartOf="@+id/fichaManteniUnidadVolumenExtraccionRealTextView"
+                app:layout_constraintTop_toTopOf="@+id/fichaManteniLabelVolumExtraccionRealTextView"
+                tools:text="999.99" />
+
+            <TextView
+                android:id="@+id/fichaManteniUnidadVolumenExtraccionRealTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/label_unidad_volumen_extraccion"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintBottom_toBottomOf="@+id/fichaManteniValorVolumenExtraccionRealTextView"
+                app:layout_constraintEnd_toStartOf="@+id/fichaManteniEvaluVolExtraccionTextView"
+                app:layout_constraintTop_toTopOf="@+id/fichaManteniValorVolumenExtraccionRealTextView" />
+
+            <TextView
+                android:id="@+id/fichaManteniEvaluVolExtraccionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:gravity="center"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/fichaManteniUnidadVolumenExtraccionRealTextView"
+                app:layout_constraintEnd_toEndOf="@+id/fichaManteniEvaluFuncGrifosMonoredTextView"
+                app:layout_constraintTop_toTopOf="@+id/fichaManteniUnidadVolumenExtraccionRealTextView"
+                tools:text="O.K." />
+            <TextView
+                android:id="@+id/fichaManteniLabelEvaluacionFinalTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/label_evaluacion"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/fichaManteniLabelVolumExtraccionRealTextView"
+                app:layout_constraintTop_toBottomOf="@+id/fichaManteniLabelVolumExtraccionRealTextView" />
+
+            <TextView
+                android:id="@+id/fichaManteniLabelAcuerdoNormasReguTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="3dp"
+                android:text="@string/label_acuerdo_normas_regulaciones"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintBottom_toBottomOf="@+id/fichaManteniAcuerdoNormasReguRadioGroup"
+                app:layout_constraintEnd_toStartOf="@+id/fichaManteniAcuerdoNormasReguRadioGroup"
+                app:layout_constraintStart_toStartOf="@+id/fichaManteniLabelEvaluacionFinalTextView"
+                app:layout_constraintTop_toTopOf="@+id/fichaManteniAcuerdoNormasReguRadioGroup" />
+
+            <RadioGroup
+                android:id="@+id/fichaManteniAcuerdoNormasReguRadioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fichaManteniLabelEvaluacionFinalTextView">
+
+                <RadioButton
+                    android:id="@+id/fichaManteniAcuerdoNormasReguSiRadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:text="@string/si"
+                    android:textColor="@color/primaryTextColor" />
+
+                <RadioButton
+                    android:id="@+id/fichaManteniAcuerdoNormasReguNoRadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:text="@string/no"
+                    android:textColor="@color/primaryTextColor" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/fichaManteniLabelNecesarioReparacionTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="3dp"
+                android:text="@string/label_necesario_reparacion"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintBottom_toBottomOf="@+id/fichaManteniNecesarioReparcionRadioGroup"
+                app:layout_constraintEnd_toStartOf="@+id/fichaManteniNecesarioReparcionRadioGroup"
+                app:layout_constraintStart_toStartOf="@+id/fichaManteniLabelAcuerdoNormasReguTextView"
+                app:layout_constraintTop_toTopOf="@+id/fichaManteniNecesarioReparcionRadioGroup" />
+
+            <RadioGroup
+                android:id="@+id/fichaManteniNecesarioReparcionRadioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@+id/fichaManteniAcuerdoNormasReguRadioGroup"
+                app:layout_constraintTop_toBottomOf="@+id/fichaManteniAcuerdoNormasReguRadioGroup">
+
+                <RadioButton
+                    android:id="@+id/fichaManteniNecesarioRepaSiRadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:text="@string/si"
+                    android:textColor="@color/primaryTextColor" />
+
+                <RadioButton
+                    android:id="@+id/fichaManteniNecesarioRepaNoRadioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:text="@string/no"
+                    android:textColor="@color/primaryTextColor" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/fichaManteniLabelComentariosTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/label_comentarios"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/fichaManteniLabelEvaluacionFinalTextView"
+                app:layout_constraintTop_toBottomOf="@+id/fichaManteniNecesarioReparcionRadioGroup" />
+
+            <TextView
+                android:id="@+id/fichaManteniComentarioTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:gravity="start"
+                android:maxLines="5"
+                android:minLines="3"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/fichaManteniNecesarioReparcionRadioGroup"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/fichaManteniLabelComentariosTextView"
+                app:layout_constraintTop_toBottomOf="@+id/fichaManteniLabelComentariosTextView"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="Aquí se muestran los comentarios hechos por el técnico que ha realizado el mantenimiento" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

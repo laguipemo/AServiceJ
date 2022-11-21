@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FichaVitrinaActivity">
+
+    <TextView
+        android:id="@+id/fichaVitrinaEmpNombreTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Nombre Empresa" />
+
+    <TextView
+        android:id="@+id/fichaVitrinaLabelVitrinaTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_vitrina"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/fichaVitrinaEmpNombreTextView"
+        app:layout_constraintTop_toBottomOf="@+id/fichaVitrinaEmpNombreTextView" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/fichaVitrinaEmpNombreTextView"
+        app:layout_constraintStart_toStartOf="@+id/fichaVitrinaLabelVitrinaTextView"
+        app:layout_constraintTop_toBottomOf="@+id/fichaVitrinaLabelVitrinaTextView">
+
+        <TextView
+            android:id="@+id/fichaVitrinaLabelFabricanteTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
+            android:labelFor="@id/fichaVitrinaFabricanteTextView"
+            android:text="@string/label_fabricante"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/fichaVitrinaFabricanteTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="4dp"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/fichaVitrinaLabelFabricanteTextView"
+            app:layout_constraintTop_toTopOf="@id/fichaVitrinaLabelFabricanteTextView"
+            tools:text="Nombre del fabricante" />
+
+        <TextView
+            android:id="@+id/fichaVitrinaLabelReferenceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/label_referencia"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/fichaVitrinaLabelFabricanteTextView"
+            app:layout_constraintTop_toBottomOf="@id/fichaVitrinaLabelFabricanteTextView" />
+
+        <TextView
+            android:id="@+id/fichaVitrinaReferenceTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginBottom="1dp"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/fichaVitrinaLabelReferenceTextView"
+            app:layout_constraintEnd_toEndOf="@+id/fichaVitrinaFabricanteTextView"
+            app:layout_constraintStart_toEndOf="@+id/fichaVitrinaLabelReferenceTextView"
+            app:layout_constraintTop_toTopOf="@+id/fichaVitrinaLabelReferenceTextView"
+            tools:text="Referencia de la Vitrina" />
+
+        <TextView
+            android:id="@+id/fichaVitrinaLabelInventarioTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/label_inventario"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/fichaVitrinaLabelReferenceTextView"
+            app:layout_constraintTop_toBottomOf="@+id/fichaVitrinaLabelReferenceTextView" />
+
+        <TextView
+            android:id="@+id/fichaVitrinaInventarioTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/fichaVitrinaLabelInventarioTextView"
+            app:layout_constraintEnd_toEndOf="@+id/fichaVitrinaReferenceTextView"
+            app:layout_constraintStart_toEndOf="@+id/fichaVitrinaLabelInventarioTextView"
+            app:layout_constraintTop_toTopOf="@+id/fichaVitrinaLabelInventarioTextView"
+            tools:text="Inventario de la Vitrina" />
+
+        <TextView
+            android:id="@+id/fichaVitrinaLabelLongitudTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/label_longitud"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/fichaVitrinaLabelInventarioTextView"
+            app:layout_constraintTop_toBottomOf="@+id/fichaVitrinaLabelInventarioTextView" />
+
+        <TextView
+            android:id="@+id/fichaVitrinaLongitudTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/fichaVitrinaLabelLongitudTextView"
+            app:layout_constraintStart_toEndOf="@+id/fichaVitrinaLabelLongitudTextView"
+            app:layout_constraintTop_toTopOf="@+id/fichaVitrinaLabelLongitudTextView"
+            tools:text="1200" />
+
+        <TextView
+            android:id="@+id/fichaVitrinaLabelGuillotinaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_guillotina"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/fichaVitrinaLongitudTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fichaVitrinaLongitudTextView" />
+
+        <TextView
+            android:id="@+id/fichaVitrinaGuillotinaTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/fichaVitrinaLabelGuillotinaTextView"
+            app:layout_constraintEnd_toEndOf="@+id/fichaVitrinaInventarioTextView"
+            app:layout_constraintStart_toEndOf="@+id/fichaVitrinaLabelGuillotinaTextView"
+            app:layout_constraintTop_toTopOf="@+id/fichaVitrinaLabelGuillotinaTextView"
+            tools:text="0.9" />
+
+        <TextView
+            android:id="@+id/fichaVitrinaLabelAnhoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/label_anho"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/fichaVitrinaLabelLongitudTextView"
+            app:layout_constraintTop_toBottomOf="@+id/fichaVitrinaLabelLongitudTextView" />
+
+        <TextView
+            android:id="@+id/fichaVitrinaAnhoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/fichaVitrinaLabelAnhoTextView"
+            app:layout_constraintStart_toEndOf="@+id/fichaVitrinaLabelAnhoTextView"
+            app:layout_constraintTop_toTopOf="@+id/fichaVitrinaLabelAnhoTextView"
+            tools:text="2021" />
+
+
+        <TextView
+            android:id="@+id/fichaVitrinaLabelContratoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_contrato"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/fichaVitrinaAnhoTextView"
+            app:layout_constraintStart_toStartOf="@+id/fichaVitrinaLabelGuillotinaTextView"
+            app:layout_constraintTop_toTopOf="@+id/fichaVitrinaAnhoTextView" />
+
+        <TextView
+            android:id="@+id/fichaVitrinaContratoTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/fichaVitrinaLabelContratoTextView"
+            app:layout_constraintEnd_toEndOf="@+id/fichaVitrinaInventarioTextView"
+            app:layout_constraintStart_toEndOf="@+id/fichaVitrinaLabelContratoTextView"
+            app:layout_constraintTop_toTopOf="@+id/fichaVitrinaLabelContratoTextView"
+            tools:text="No contratado" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/fichaVitrinaLableMantenimientoTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/label_mantenimientos"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <ImageView
+        android:id="@+id/addMantenimientoImageView"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="32dp"
+        android:clickable="true"
+        android:contentDescription="@string/icon_add_description"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/fichaVitrinaLableMantenimientoTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fichaVitrinaLableMantenimientoTextView"
+        app:srcCompat="@drawable/ic_baseline_add_circle_24"
+        app:tint="@color/primaryColor"
+        tools:ignore="ImageContrastCheck" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listMantenimientosRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fichaVitrinaLableMantenimientoTextView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

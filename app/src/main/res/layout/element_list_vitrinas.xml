@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/vitrinaCardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    android:backgroundTint="@color/atlas_romero_ultra_light"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/fabricanteVitrinaTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Fabricante de la Vitrina" />
+
+        <View
+            android:id="@+id/hFrabricanteVitrinaDivider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fabricanteVitrinaTextView" />
+
+        <TextView
+            android:id="@+id/labelTipoVitrinaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/label_tipo"
+            android:textColor="@color/primaryTextColor"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hFrabricanteVitrinaDivider" />
+
+        <TextView
+            android:id="@+id/tipoVitrinaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:textColor="@color/primaryTextColor"
+            app:layout_constraintBottom_toBottomOf="@+id/labelTipoVitrinaTextView"
+            app:layout_constraintStart_toEndOf="@id/labelTipoVitrinaTextView"
+            app:layout_constraintTop_toTopOf="@+id/labelTipoVitrinaTextView"
+            tools:text="Ácidos Concentrados" />
+
+        <TextView
+            android:id="@+id/labelLongitudVitrinaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/label_longitud"
+            android:textColor="@color/primaryTextColor"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/labelTipoVitrinaTextView"
+            app:layout_constraintTop_toBottomOf="@id/labelTipoVitrinaTextView" />
+
+        <TextView
+            android:id="@+id/longitudVitrinaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginBottom="1dp"
+            android:textColor="@color/primaryTextColor"
+            app:layout_constraintBottom_toBottomOf="@id/labelLongitudVitrinaTextView"
+            app:layout_constraintStart_toEndOf="@id/labelLongitudVitrinaTextView"
+            app:layout_constraintTop_toTopOf="@id/labelLongitudVitrinaTextView"
+            tools:text="1200" />
+
+        <TextView
+            android:id="@+id/labelLongitudGuillotinaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:text="@string/label_guillotina"
+            android:textColor="@color/primaryTextColor"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/longitudVitrinaTextView"
+            app:layout_constraintStart_toEndOf="@id/longitudVitrinaTextView"
+            app:layout_constraintTop_toTopOf="@id/longitudVitrinaTextView" />
+
+        <TextView
+            android:id="@+id/longitudGuillotinaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:textColor="@color/primaryTextColor"
+            app:layout_constraintBottom_toBottomOf="@id/labelLongitudGuillotinaTextView"
+            app:layout_constraintStart_toEndOf="@id/labelLongitudGuillotinaTextView"
+            app:layout_constraintTop_toTopOf="@id/labelLongitudGuillotinaTextView"
+            tools:text="0.9" />
+
+        <TextView
+            android:id="@+id/labelReferenciaVitrinaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/label_referencia"
+            android:textColor="@color/primaryTextColor"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/labelLongitudVitrinaTextView"
+            app:layout_constraintTop_toBottomOf="@+id/labelLongitudVitrinaTextView" />
+
+        <TextView
+            android:id="@+id/referenciaVitrinaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:textColor="@color/primaryTextColor"
+            app:layout_constraintBottom_toBottomOf="@+id/labelReferenciaVitrinaTextView"
+            app:layout_constraintStart_toEndOf="@+id/labelReferenciaVitrinaTextView"
+            app:layout_constraintTop_toTopOf="@+id/labelReferenciaVitrinaTextView"
+            tools:text="XXXXXXXXX" />
+
+        <TextView
+            android:id="@+id/labelInventarioVitrinaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/label_inventario"
+            android:textColor="@color/primaryTextColor"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/labelReferenciaVitrinaTextView"
+            app:layout_constraintTop_toBottomOf="@+id/labelReferenciaVitrinaTextView" />
+
+        <TextView
+            android:id="@+id/inventarioVitrinaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:textColor="@color/primaryTextColor"
+            app:layout_constraintBottom_toBottomOf="@+id/labelInventarioVitrinaTextView"
+            app:layout_constraintStart_toEndOf="@+id/labelInventarioVitrinaTextView"
+            app:layout_constraintTop_toTopOf="@+id/labelInventarioVitrinaTextView"
+            tools:text="YYYYYYYYYYYY" />
+
+        <TextView
+            android:id="@+id/labelAnhoVitrinaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/label_anho"
+            android:textColor="@color/primaryTextColor"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/labelInventarioVitrinaTextView"
+            app:layout_constraintTop_toBottomOf="@+id/labelInventarioVitrinaTextView" />
+
+        <TextView
+            android:id="@+id/anhoVitrinaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:textColor="@color/primaryTextColor"
+            app:layout_constraintBottom_toBottomOf="@+id/labelAnhoVitrinaTextView"
+            app:layout_constraintStart_toEndOf="@+id/labelAnhoVitrinaTextView"
+            app:layout_constraintTop_toTopOf="@+id/labelAnhoVitrinaTextView"
+            tools:text="2018" />
+
+        <TextView
+            android:id="@+id/labelContratoVitrinaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_contrato"
+            android:textColor="@color/primaryTextColor"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/anhoVitrinaTextView"
+            app:layout_constraintStart_toStartOf="@+id/labelLongitudGuillotinaTextView"
+            app:layout_constraintTop_toTopOf="@+id/anhoVitrinaTextView" />
+
+        <TextView
+            android:id="@+id/contratoVitrinaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:textColor="@color/primaryTextColor"
+            app:layout_constraintBottom_toBottomOf="@+id/labelContratoVitrinaTextView"
+            app:layout_constraintStart_toEndOf="@+id/labelContratoVitrinaTextView"
+            app:layout_constraintTop_toTopOf="@+id/labelContratoVitrinaTextView"
+            tools:text="-" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
