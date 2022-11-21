@@ -40,7 +40,7 @@
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".ListEmpresasActivity"
+            android:name=".ui.main.ListEmpresasActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity

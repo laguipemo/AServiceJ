@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import net.iessanclemente.a19lazaropm.aservice.ListEmpresasActivity;
+import net.iessanclemente.a19lazaropm.aservice.ui.main.ListEmpresasActivity;
 import net.iessanclemente.a19lazaropm.aservice.R;
 import net.iessanclemente.a19lazaropm.aservice.security.SecurityCipherWithKey;
 import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseOperations;
