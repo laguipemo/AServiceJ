@@ -1,21 +1,21 @@
-package net.iessanclemente.a19lazaropm.aservice.models.dao;
+package net.iessanclemente.a19lazaropm.aservice.database.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Contacto;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Cualitativo;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Empresa;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Fabricante;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Longitud;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Mantenimiento;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Medicion;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Tecnico;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.TipoLongFlow;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.TipoVitrina;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Vitrina;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Cualitativo;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Fabricante;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Tecnico;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.TipoVitrina;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Contacto;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Empresa;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Longitud;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Mantenimiento;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Medicion;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.TipoLongFlow;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Vitrina;
 
 import java.util.ArrayList;
 import java.util.List;

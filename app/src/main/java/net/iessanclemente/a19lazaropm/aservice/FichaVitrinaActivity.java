@@ -16,10 +16,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.iessanclemente.a19lazaropm.aservice.models.dao.DataBaseContract;
-import net.iessanclemente.a19lazaropm.aservice.models.dao.DataBaseOperations;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Mantenimiento;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Vitrina;
+import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseContract;
+import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseOperations;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Mantenimiento;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Vitrina;
 import net.iessanclemente.a19lazaropm.aservice.adapters.ElementListMantenimientos;
 import net.iessanclemente.a19lazaropm.aservice.adapters.ListMantenimientosAdapter;
 

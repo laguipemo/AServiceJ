@@ -1,4 +1,4 @@
-package net.iessanclemente.a19lazaropm.aservice.models.dao;
+package net.iessanclemente.a19lazaropm.aservice.database.dao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

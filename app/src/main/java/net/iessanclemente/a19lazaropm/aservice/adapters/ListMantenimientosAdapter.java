@@ -18,8 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.iessanclemente.a19lazaropm.aservice.FichaMantenimientoActivity;
 import net.iessanclemente.a19lazaropm.aservice.FormNewMantenimientoActivity;
 import net.iessanclemente.a19lazaropm.aservice.R;
-import net.iessanclemente.a19lazaropm.aservice.models.dao.DataBaseOperations;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Mantenimiento;
+import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseOperations;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Mantenimiento;
 import net.iessanclemente.a19lazaropm.aservice.utils.UtilsMenu;
 
 import java.util.List;

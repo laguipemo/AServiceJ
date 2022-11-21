@@ -19,8 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.iessanclemente.a19lazaropm.aservice.FichaEmpresaActivity;
 import net.iessanclemente.a19lazaropm.aservice.FormNewEmpresaActivity;
 import net.iessanclemente.a19lazaropm.aservice.R;
-import net.iessanclemente.a19lazaropm.aservice.models.dao.DataBaseOperations;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Empresa;
+import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseOperations;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Empresa;
 import net.iessanclemente.a19lazaropm.aservice.utils.UtilsMenu;
 
 import java.util.List;

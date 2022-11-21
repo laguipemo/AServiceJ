@@ -14,8 +14,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import net.iessanclemente.a19lazaropm.aservice.models.dao.DataBaseOperations;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Empresa;
+import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseOperations;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Empresa;
 import net.iessanclemente.a19lazaropm.aservice.adapters.ElementListEmpresas;
 import net.iessanclemente.a19lazaropm.aservice.adapters.ListEmpresasAdapter;
 

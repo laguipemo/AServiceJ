@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -28,13 +27,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.iessanclemente.a19lazaropm.aservice.models.dao.DataBaseOperations;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Cualitativo;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Longitud;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Mantenimiento;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Tecnico;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.TipoVitrina;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Vitrina;
+import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseOperations;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Cualitativo;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Longitud;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Mantenimiento;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Tecnico;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Vitrina;
 
 import java.util.ArrayList;
 import java.util.Calendar;

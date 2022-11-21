@@ -16,11 +16,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.iessanclemente.a19lazaropm.aservice.models.dao.DataBaseOperations;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Fabricante;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Longitud;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.TipoVitrina;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Vitrina;
+import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseOperations;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Fabricante;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Longitud;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.TipoVitrina;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Vitrina;
 
 import java.util.ArrayList;
 import java.util.Calendar;

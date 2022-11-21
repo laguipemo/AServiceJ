@@ -1,4 +1,4 @@
-package net.iessanclemente.a19lazaropm.aservice.models.dto;
+package net.iessanclemente.a19lazaropm.aservice.database.dto;
 
 public class Longitud {
 

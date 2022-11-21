@@ -16,13 +16,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.iessanclemente.a19lazaropm.aservice.models.dao.DataBaseContract;
-import net.iessanclemente.a19lazaropm.aservice.models.dao.DataBaseOperations;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Contacto;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Empresa;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Longitud;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.TipoVitrina;
-import net.iessanclemente.a19lazaropm.aservice.models.dto.Vitrina;
+import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseContract;
+import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseOperations;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Contacto;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Empresa;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Longitud;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.TipoVitrina;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Vitrina;
 import net.iessanclemente.a19lazaropm.aservice.adapters.ElementListVitrinas;
 import net.iessanclemente.a19lazaropm.aservice.adapters.ListVitrinasAdapter;
 
