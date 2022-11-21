@@ -62,14 +62,11 @@ public class FichaEmpresaActivity extends AppCompatActivity {
     }
 
     private void eventHandler() {
-        addVitrinaImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(
-                    FichaEmpresaActivity.this, FormNewVitrinaActivity.class);
-                intent.putExtra("NOMBRE_EMPRESA", fichaEmpNombreTextView.getText().toString());
-                activityResultLauncher.launch(intent);
-            }
+        addVitrinaImageView.setOnClickListener(v -> {
+            Intent intent = new Intent(
+                FichaEmpresaActivity.this, FormNewVitrinaActivity.class);
+            intent.putExtra("NOMBRE_EMPRESA", fichaEmpNombreTextView.getText().toString());
+            activityResultLauncher.launch(intent);
         });
     }
 
