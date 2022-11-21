@@ -33,7 +33,6 @@ import java.util.List;
 
 public class FichaEmpresaActivity extends AppCompatActivity {
 
-    private ActionBar actionBar;
     private TextView fichaEmpNombreTextView;
     private TextView fichaEmpDireccTextView;
     private TextView fichaEmpNomContactTextView;
@@ -52,7 +51,7 @@ public class FichaEmpresaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ficha_empresa);
 
-        actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_ios_24);
             actionBar.setDisplayHomeAsUpEnabled(true);
