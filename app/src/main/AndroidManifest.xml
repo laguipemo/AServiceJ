@@ -20,11 +20,11 @@
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".FichaMantenimientoActivity"
+            android:name=".ui.secondary.FichaMantenimientoActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".FichaVitrinaActivity"
+            android:name=".ui.secondary.FichaVitrinaActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
@@ -36,7 +36,7 @@
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".FichaEmpresaActivity"
+            android:name=".ui.secondary.FichaEmpresaActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity

@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.iessanclemente.a19lazaropm.aservice.FichaMantenimientoActivity;
+import net.iessanclemente.a19lazaropm.aservice.ui.secondary.FichaMantenimientoActivity;
 import net.iessanclemente.a19lazaropm.aservice.ui.forms.FormNewMantenimientoActivity;
 import net.iessanclemente.a19lazaropm.aservice.R;
 import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseOperations;

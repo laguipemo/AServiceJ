@@ -1,4 +1,4 @@
-package net.iessanclemente.a19lazaropm.aservice;
+package net.iessanclemente.a19lazaropm.aservice.ui.secondary;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.iessanclemente.a19lazaropm.aservice.R;
 import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseContract;
 import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseOperations;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Mantenimiento;

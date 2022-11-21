@@ -1,4 +1,4 @@
-package net.iessanclemente.a19lazaropm.aservice;
+package net.iessanclemente.a19lazaropm.aservice.ui.secondary;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +9,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import net.iessanclemente.a19lazaropm.aservice.R;
 import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseOperations;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Mantenimiento;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Vitrina;
