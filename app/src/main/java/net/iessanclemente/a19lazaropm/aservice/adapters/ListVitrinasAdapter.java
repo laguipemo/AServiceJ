@@ -16,7 +16,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.iessanclemente.a19lazaropm.aservice.FichaVitrinaActivity;
-import net.iessanclemente.a19lazaropm.aservice.FormNewVitrinaActivity;
+import net.iessanclemente.a19lazaropm.aservice.ui.forms.FormNewVitrinaActivity;
 import net.iessanclemente.a19lazaropm.aservice.R;
 import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseOperations;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Vitrina;

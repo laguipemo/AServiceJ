@@ -25,6 +25,7 @@ import net.iessanclemente.a19lazaropm.aservice.database.dto.TipoVitrina;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Vitrina;
 import net.iessanclemente.a19lazaropm.aservice.adapters.ElementListVitrinas;
 import net.iessanclemente.a19lazaropm.aservice.adapters.ListVitrinasAdapter;
+import net.iessanclemente.a19lazaropm.aservice.ui.forms.FormNewVitrinaActivity;
 
 import java.util.ArrayList;
 import java.util.List;

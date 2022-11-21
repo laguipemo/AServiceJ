@@ -18,6 +18,7 @@ import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseOperations;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Empresa;
 import net.iessanclemente.a19lazaropm.aservice.adapters.ElementListEmpresas;
 import net.iessanclemente.a19lazaropm.aservice.adapters.ListEmpresasAdapter;
+import net.iessanclemente.a19lazaropm.aservice.ui.forms.FormNewEmpresaActivity;
 
 import java.util.ArrayList;
 import java.util.List;

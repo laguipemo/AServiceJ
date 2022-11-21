@@ -16,7 +16,7 @@
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".FormNewMantenimientoActivity"
+            android:name=".ui.forms.FormNewMantenimientoActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
@@ -28,11 +28,11 @@
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".FormNewVitrinaActivity"
+            android:name=".ui.forms.FormNewVitrinaActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".FormNewEmpresaActivity"
+            android:name=".ui.forms.FormNewEmpresaActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity

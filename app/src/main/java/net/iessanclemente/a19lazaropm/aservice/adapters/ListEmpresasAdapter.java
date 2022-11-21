@@ -17,7 +17,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.iessanclemente.a19lazaropm.aservice.FichaEmpresaActivity;
-import net.iessanclemente.a19lazaropm.aservice.FormNewEmpresaActivity;
+import net.iessanclemente.a19lazaropm.aservice.ui.forms.FormNewEmpresaActivity;
 import net.iessanclemente.a19lazaropm.aservice.R;
 import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseOperations;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Empresa;

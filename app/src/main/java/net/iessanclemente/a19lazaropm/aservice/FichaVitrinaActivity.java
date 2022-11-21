@@ -22,6 +22,7 @@ import net.iessanclemente.a19lazaropm.aservice.database.dto.Mantenimiento;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Vitrina;
 import net.iessanclemente.a19lazaropm.aservice.adapters.ElementListMantenimientos;
 import net.iessanclemente.a19lazaropm.aservice.adapters.ListMantenimientosAdapter;
+import net.iessanclemente.a19lazaropm.aservice.ui.forms.FormNewMantenimientoActivity;
 
 import java.util.ArrayList;
 import java.util.List;
