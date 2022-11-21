@@ -82,7 +82,8 @@ public class ListVitrinasAdapter extends RecyclerView.Adapter<ListVitrinasAdapte
                             boolean isVitrinaDeleted = datos.deleteVitrina(idVitrina);
                             if (isVitrinaDeleted) {
                                 listElementsVitrinas.remove(pos);
-                                notifyDataSetChanged();
+                                //notifyDataSetChanged();
+                                notifyItemRemoved(pos);
                                 Toast.makeText(
                                         context,
                                         "Borrada Vitrina",
