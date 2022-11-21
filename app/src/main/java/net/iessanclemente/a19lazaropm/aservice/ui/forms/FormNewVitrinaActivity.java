@@ -31,8 +31,6 @@ public class FormNewVitrinaActivity extends AppCompatActivity {
 
     private static final int RESULT_ADD_PROBLEM = 666;
 
-    private ActionBar actionBar;
-
     private AutoCompleteTextView newVitrinaFabriNameAutoCompleteTextView;
     private Spinner newVitrinaTipoSpinner;
     private EditText newVitrinaReferenceEditText;
@@ -60,7 +58,7 @@ public class FormNewVitrinaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_new_vitrina);
 
-        actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
         actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_ios_24);
         actionBar.setDisplayHomeAsUpEnabled(true);
