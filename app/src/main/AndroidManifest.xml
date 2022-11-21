@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AService">
         <activity
-            android:name=".MedicionesVolumenExtraccionActivity"
+            android:name=".ui.extra.MedicionesVolumenExtraccionActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
