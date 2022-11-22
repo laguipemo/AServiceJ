@@ -90,5 +90,8 @@
     <string name="email">Email</string>
     <string name="show_pdf_report">Show pdf report</string>
     <string name="send_pdf_report">Send pdf report</string>
+    <string name="title_pin">Pin</string>
+    <string name="message_supervisor_pin">You need a supervisor authorization</string>
+    <string name="hint_supervisor_pin">Supervisor pin</string>
 
 </resources>

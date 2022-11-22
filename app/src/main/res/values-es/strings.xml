@@ -90,5 +90,9 @@
     <string name="email">Correo</string>
     <string name="show_pdf_report">Mostrar reporte pdf</string>
     <string name="send_pdf_report">Enviar reporte pdf</string>
+    <string name="title_pin">Pin</string>
+    <string name="message_supervisor_pin">You need a supervisor authorization</string>
+    <string name="hint_supervisor_pin">Supervisor pin</string>
+
 
 </resources>
