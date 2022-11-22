@@ -93,6 +93,8 @@
     <string name="title_pin">Pin</string>
     <string name="message_supervisor_pin">You need a supervisor authorization</string>
     <string name="hint_supervisor_pin">Supervisor pin</string>
+    <string name="message_alert_delete">¿Está seguro que desea borrar el elemento?</string>
+    <string name="close_app">Cerrar app</string>
 
 
 </resources>
