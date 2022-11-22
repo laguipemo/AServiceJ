@@ -46,6 +46,8 @@ public class FichaVitrinaActivity extends AppCompatActivity {
 
     private List<ElementListMantenimientos> listElementsMantenimientos;
 
+    ProgressBar progressBar;
+
     private String nombreEmpresa;
     private int idVitrina;
 
@@ -63,9 +65,12 @@ public class FichaVitrinaActivity extends AppCompatActivity {
                         }
                         init();
                     } else if (result != null && result.getResultCode() == RESULT_CANCELED) {
-                        Toast.makeText(
+                        if (result.getData() != null && result.getData().hasExtra("MANTENIMIENTO")) {
+                           Toast.makeText(
                                 FichaVitrinaActivity.this,
                                 "Se canceló la adición del nuevo mantenimiento", Toast.LENGTH_SHORT).show();
+                        }
+                        progressBar.setVisibility(View.GONE);
                     } else if (result != null && result.getResultCode() == RESULT_ADD_PROBLEM) {
                         if (result.getData() != null && result.getData().hasExtra("MANTENIMIENTO")) {
                             Toast.makeText(
@@ -73,6 +78,7 @@ public class FichaVitrinaActivity extends AppCompatActivity {
                                     "No se pudo crear mantenimiento con fecha: " + result.getData().getStringExtra("MANTENIMIENTO"),
                                     Toast.LENGTH_SHORT).show();
                         }
+                        progressBar.setVisibility(View.GONE);
                     }
                 }
             });
@@ -107,7 +113,7 @@ public class FichaVitrinaActivity extends AppCompatActivity {
     }
 
     private void init() {
-        ProgressBar progressBar = findViewById(R.id.progress_circular);
+        progressBar = findViewById(R.id.progress_circular);
         //recupero las views del layout
         fichaVitrinaEmpNombreTextView = findViewById(R.id.fichaVitrinaEmpNombreTextView);
         fichaVitrinaFabricanteTextView = findViewById(R.id.fichaVitrinaFabricanteTextView);
