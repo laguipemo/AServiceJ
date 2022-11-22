@@ -2,7 +2,6 @@ package net.iessanclemente.a19lazaropm.aservice.database.dto;
 
 public class TipoLongFlow {
 
-    private int id;
     private int idTipoVitrina;
     private int idLongintud;
     private int flowMin;
@@ -13,23 +12,14 @@ public class TipoLongFlow {
     public TipoLongFlow() {
     }
 
-    public TipoLongFlow(int id, int idTipoVitrina, int idLongintud, int flowMin, int flowRecom,
+    public TipoLongFlow(int idTipoVitrina, int idLongintud, int flowMin, int flowRecom,
                         int flowMax, int pressDrop) {
-        this.id = id;
         this.idTipoVitrina = idTipoVitrina;
         this.idLongintud = idLongintud;
         this.flowMin = flowMin;
         this.flowRecom = flowRecom;
         this.flowMax = flowMax;
         this.pressDrop = pressDrop;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getIdTipoVitrina() {
@@ -83,7 +73,6 @@ public class TipoLongFlow {
     @Override
     public String toString() {
         return "TipoLongFlow{" +
-                "id=" + id +
                 ", idTipoVitrina=" + idTipoVitrina +
                 ", idLongintud=" + idLongintud +
                 ", flowMin=" + flowMin +
@@ -100,7 +89,6 @@ public class TipoLongFlow {
 
         TipoLongFlow that = (TipoLongFlow) o;
 
-        if (getId() != that.getId()) return false;
         if (getIdTipoVitrina() != that.getIdTipoVitrina()) return false;
         if (getIdLongintud() != that.getIdLongintud()) return false;
         if (getFlowMin() != that.getFlowMin()) return false;
@@ -111,8 +99,7 @@ public class TipoLongFlow {
 
     @Override
     public int hashCode() {
-        int result = getId();
-        result = 31 * result + getIdTipoVitrina();
+        int result = 31  + getIdTipoVitrina();
         result = 31 * result + getIdLongintud();
         result = 31 * result + getFlowMin();
         result = 31 * result + getFlowRecom();
