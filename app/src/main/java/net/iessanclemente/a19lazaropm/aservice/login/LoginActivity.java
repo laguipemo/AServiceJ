@@ -104,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
         //Recupero las vistas con los datos
         EditText usuario = customDialog.findViewById(R.id.forgotPassUserEditText);
         EditText nombreCompleto = customDialog.findViewById(R.id.forgotPassFullNameEditText);
-        EditText correo = customDialog.findViewById(R.id.forgotPassEmailEditTextText);
+        EditText correo = customDialog.findViewById(R.id.forgotPassEmailEditText);
 
         alertDialogBuilder.setView(customDialog);
         alertDialogBuilder.setPositiveButton(
