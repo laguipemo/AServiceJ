@@ -121,6 +121,10 @@ public class Medicion {
         this.valor9 = valor9;
     }
 
+    public float[] getAllValues() {
+        return new float[]{valor1, valor2, valor3, valor4, valor5, valor6, valor7, valor8, valor9};
+    }
+
     @Override
     public String toString() {
         return "Medicion{" +
