@@ -71,7 +71,7 @@ public class TemplatePdf {
         }
 
         public void onStartPage(PdfWriter pdfWriter, Document document) {
-            TemplatePdf.this.addImageDrawableAsBackgroud(R.drawable.fondo_informe_atlas);
+            addImageDrawableAsBackgroud(R.drawable.fondo_informe_atlas);
         }
     }
 
@@ -152,7 +152,8 @@ public class TemplatePdf {
 
     public void addTitles(String titleInforme, String titleVitrina) {
         paragraph = new Paragraph();
-        addChildParagraphCenter(new Paragraph(titleInforme, FONT_TITLE), 0.0f, 10.0f);
+        addChildParagraphCenter(
+                new Paragraph(titleInforme, FONT_TITLE), 0.0f, 10.0f);
         Paragraph paragraph2 = new Paragraph();
         paragraph2.setSpacingBefore(20.0f);
         PdfPTable pdfPTable = new PdfPTable(1);
@@ -336,7 +337,9 @@ public class TemplatePdf {
         paragraph2.setSpacingBefore(30.0f);
         paragraph2.setSpacingAfter(10.0f);
         addChildParagraphLeft(paragraph2);
+
         paragraph.setFont(this.FONT_TEXT);
+
         PdfPTable pdfPTable = new PdfPTable(arrayValoresMedicion.length - 1);
         pdfPTable.setWidthPercentage(100.0f);
         for (int indiceValor = 1; indiceValor < arrayValoresMedicion.length; indiceValor++) {
@@ -356,8 +359,8 @@ public class TemplatePdf {
             pdfPCell.setVerticalAlignment(5);
             pdfPTable.addCell(pdfPCell);
         }
-
         paragraph.add(pdfPTable);
+
         Paragraph paragraph3 = new Paragraph();
         paragraph3.add(new Chunk("Velocidad media (m/s): ", FONT_TEXT_BOLD));
         paragraph3.add(new Chunk(
@@ -579,75 +582,75 @@ public class TemplatePdf {
         }
     }
 
-    public void addChildParagraphCenter(Paragraph paragraph) {
-        addChildParagraphCenter(paragraph, 0.0f, 0.0f);
+    public void addChildParagraphCenter(Paragraph paragraphToAdd) {
+        addChildParagraphCenter(paragraphToAdd, 0.0f, 0.0f);
     }
 
-    public void addChildParagraphCenter(Paragraph paragraph, float spacingBefore, float spacingAfter) {
-        paragraph.setAlignment(1);
+    public void addChildParagraphCenter(Paragraph paragraphToAdd, float spacingBefore, float spacingAfter) {
+        paragraphToAdd.setAlignment(1);
         paragraph.setSpacingBefore(spacingBefore);
-        paragraph.add(paragraph);
+        paragraph.add(paragraphToAdd);
         paragraph.setSpacingAfter(spacingAfter);
     }
 
-    public void addChildParagraphLeft(Paragraph paragraph) {
-        addChildParagraphLeft(paragraph, 0.0f, 0.0f);
+    public void addChildParagraphLeft(Paragraph paragraphToAdd) {
+        addChildParagraphLeft(paragraphToAdd, 0.0f, 0.0f);
     }
 
-    public void addChildParagraphLeft(Paragraph paragraph, float spacingBefore, float spacingAfter) {
-        paragraph.setAlignment(0);
+    public void addChildParagraphLeft(Paragraph paragraphToAdd, float spacingBefore, float spacingAfter) {
+        paragraphToAdd.setAlignment(0);
         paragraph.setSpacingBefore(spacingBefore);
-        paragraph.add(paragraph);
+        paragraph.add(paragraphToAdd);
         paragraph.setSpacingAfter(spacingAfter);
     }
 
-    public void addChildParagraphRight(Paragraph paragraph2) {
-        addChildParagraphRight(paragraph2, 0.0f, 0.0f);
+    public void addChildParagraphRight(Paragraph paragraphToAdd) {
+        addChildParagraphRight(paragraphToAdd, 0.0f, 0.0f);
     }
 
-    public void addChildParagraphRight(Paragraph paragraph2, float spacingBefore, float spacingAfter) {
-        paragraph2.setAlignment(2);
+    public void addChildParagraphRight(Paragraph paragraphToAdd, float spacingBefore, float spacingAfter) {
+        paragraphToAdd.setAlignment(2);
         paragraph.setSpacingBefore(spacingBefore);
-        paragraph.add(paragraph2);
+        paragraph.add(paragraphToAdd);
         paragraph.setSpacingAfter(spacingAfter);
     }
 
-    public void addChildParagraphJustified(Paragraph paragraph) {
-        addChildParagraphJustified(paragraph, 0.0f, 0.0f);
+    public void addChildParagraphJustified(Paragraph paragraphToAdd) {
+        addChildParagraphJustified(paragraphToAdd, 0.0f, 0.0f);
     }
 
-    public void addChildParagraphJustified(Paragraph paragraph2, float spacingBefore, float spacingAfter) {
-        paragraph2.setAlignment(3);
+    public void addChildParagraphJustified(Paragraph paragraphToAdd, float spacingBefore, float spacingAfter) {
+        paragraphToAdd.setAlignment(3);
         paragraph.setSpacingBefore(spacingBefore);
-        paragraph.add(paragraph2);
+        paragraph.add(paragraphToAdd);
         paragraph.setSpacingAfter(spacingAfter);
     }
 
-    public void addChildParagraphAligned(Paragraph paragraph, int align) {
-        addChildParagraphAligned(paragraph, align, 0.0f, 0.0f);
+    public void addChildParagraphAligned(Paragraph paragraphToAdd, int align) {
+        addChildParagraphAligned(paragraphToAdd, align, 0.0f, 0.0f);
     }
 
-    public void addChildParagraphAligned(Paragraph paragraph, int align, float spacingBefore, float spacingAfter) {
+    public void addChildParagraphAligned(Paragraph paragraphToAdd, int align, float spacingBefore, float spacingAfter) {
         paragraph.setSpacingBefore(spacingBefore);
         if (align == 0) {
-            addChildParagraphLeft(paragraph);
+            addChildParagraphLeft(paragraphToAdd);
         } else if (align == 1) {
-            addChildParagraphCenter(paragraph);
+            addChildParagraphCenter(paragraphToAdd);
         } else if (align == 2) {
-            addChildParagraphRight(paragraph);
+            addChildParagraphRight(paragraphToAdd);
         } else if (align != 3) {
-            paragraph.setAlignment(align);
-            paragraph.add(paragraph);
+            paragraphToAdd.setAlignment(align);
+            paragraph.add(paragraphToAdd);
         } else {
-            addChildParagraphJustified(paragraph);
+            addChildParagraphJustified(paragraphToAdd);
         }
         paragraph.setSpacingAfter(spacingAfter);
     }
 
     public void addParagraph(String textoParrafo, float intSpacingBefore, float intSpacingAfter) {
-        Paragraph paragraph = new Paragraph(textoParrafo, this.FONT_TEXT);
-        paragraph = paragraph;
+        Paragraph paragraphToAdd = new Paragraph(textoParrafo, this.FONT_TEXT);
         paragraph.setSpacingBefore((float) intSpacingBefore);
+        paragraph.add(paragraphToAdd);
         paragraph.setSpacingAfter((float) intSpacingAfter);
         try {
             document.add(paragraph);
@@ -721,10 +724,17 @@ public class TemplatePdf {
     public void attachPdfAndSendMail() {
         Intent intent = new Intent("android.intent.action.SENDTO");
         intent.setData(Uri.parse(MailTo.MAILTO_SCHEME));
-        intent.putExtra("android.intent.extra.EMAIL", new String[]{"sat@atlasromero.com", "administracion@atlasromero.com", "laguipemo@me.com"});
+        intent.putExtra(
+                "android.intent.extra.EMAIL",
+                new String[]{
+                        "sat@atlasromero.com",
+                        "administracion@atlasromero.com",
+                        "laguipemo@gmail.com"});
         intent.putExtra("android.intent.extra.SUBJECT", "Informe del mantenimiento");
-        intent.putExtra("android.intent.extra.TEXT", "Le adjuntamos el informe del mantenimiento realizado a su vitrina");
-        intent.putExtra("android.intent.extra.STREAM", Uri.fromFile(this.pdfFile));
+        intent.putExtra(
+                "android.intent.extra.TEXT",
+                "Le adjuntamos el informe del mantenimiento realizado a su vitrina");
+        intent.putExtra("android.intent.extra.STREAM", Uri.fromFile(pdfFile));
         if (intent.resolveActivity(context.getPackageManager()) != null) {
             context.startActivity(intent);
         }
