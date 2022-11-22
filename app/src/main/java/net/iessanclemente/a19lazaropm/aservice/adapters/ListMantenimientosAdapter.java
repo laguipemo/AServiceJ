@@ -1,11 +1,13 @@
 package net.iessanclemente.a19lazaropm.aservice.adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.core.net.MailTo;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +32,7 @@ import net.iessanclemente.a19lazaropm.aservice.database.dto.TipoVitrina;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Vitrina;
 import net.iessanclemente.a19lazaropm.aservice.reports.TemplatePdf;
 import net.iessanclemente.a19lazaropm.aservice.reports.ViewPdfActivity;
+import net.iessanclemente.a19lazaropm.aservice.security.SecurityCipherWithKey;
 import net.iessanclemente.a19lazaropm.aservice.ui.forms.FormNewMantenimientoActivity;
 import net.iessanclemente.a19lazaropm.aservice.ui.secondary.FichaMantenimientoActivity;
 import net.iessanclemente.a19lazaropm.aservice.utils.UtilsMenu;
@@ -106,31 +110,10 @@ public class ListMantenimientosAdapter extends RecyclerView.Adapter<ListMantenim
 
                     switch (item.getItemId()) {
                         case R.id.menuItemDelete:
-                            boolean isMantenimientoDeleted = datos.deleteMantenimiento(idMantenimiento);
-                            if (isMantenimientoDeleted) {
-                                listElementsMantenimientos.remove(pos);
-                                notifyDataSetChanged();
-                                Toast.makeText(
-                                        context,
-                                        "Borrado Mantenimiento",
-                                        Toast.LENGTH_SHORT).show();
-                            }
+                            deletMantenimiento(pos, datos, idMantenimiento);
                             break;
                         case R.id.menuItemUpdate:
-                            //paso a la actividad de la ficha para un nuevo mantenimiento
-                            Intent intent = new Intent(
-                                    context, FormNewMantenimientoActivity.class);
-                            intent.putExtra("TASK", "UPDATE");
-                            intent.putExtra(
-                                    "NOMBRE_EMPRESA",
-                                    listElementsMantenimientos.get(pos).getEmpresa());
-                            intent.putExtra(
-                                    "ID_VITRINA",
-                                    listElementsMantenimientos.get(pos).getIdVitrina());
-                            intent.putExtra(
-                                    "ID_MANTENIMIENTO",
-                                    listElementsMantenimientos.get(pos).getId());
-                            activityResultLauncher.launch(intent);
+                            showSupervisorPinDialog(pos);
                             break;
                         case R.id.menuItemShowReport:
                             new Thread(new Runnable() {
@@ -138,6 +121,7 @@ public class ListMantenimientosAdapter extends RecyclerView.Adapter<ListMantenim
                                 public void run() {
                                     createReportPdf(
                                             pos, DataBaseOperations.getInstance(context), idMantenimiento);
+
                                     Intent intent = new Intent(context, ViewPdfActivity.class);
                                     intent.putExtra("PATH", templatePdf.getPdfFile().getAbsolutePath());
                                     activityResultLauncher.launch(intent);
@@ -190,7 +174,64 @@ public class ListMantenimientosAdapter extends RecyclerView.Adapter<ListMantenim
         });
     }
 
+    private void showSupervisorPinDialog(int pos) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomAlertDialog);
+        View inflate = LayoutInflater.from(context).inflate(
+                R.layout.alert_dialog_admin_permissions, null);
+        final EditText editText = inflate.findViewById(R.id.supervisor_pin_editText);
+        final SecurityCipherWithKey securityCipherWithKey = new SecurityCipherWithKey();
+        securityCipherWithKey.addKey("AtlasRomero");
+        builder.setView(inflate)
+                .setTitle(R.string.title_pin)
+                .setIcon(R.drawable.ic_baseline_error_outline_24)
+                .setPositiveButton(R.string.accept, (dialogInterface, i) -> {
+                    if (securityCipherWithKey.encrypt(editText.getText().toString().trim()).trim()
+                            .equals(ListMantenimientosAdapter.SUPERVISOR)) {
+                        launchMaintenanceEdition(pos);
+                    } else {
+                        Toast.makeText(context, "Pin incorrecto", Toast.LENGTH_SHORT).show();
+                    }
+                    dialogInterface.dismiss();
+                })
+                .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {
+                    Toast.makeText(
+                            context, "Cancelada la actualización", Toast.LENGTH_SHORT).show();
+                    dialogInterface.cancel();
+                });
+        builder.create().show();
+    }
+
+    private void launchMaintenanceEdition(int pos) {
+        //paso a la actividad de la ficha para un nuevo mantenimiento
+        Intent intent = new Intent(
+                context, FormNewMantenimientoActivity.class);
+        intent.putExtra("TASK", "UPDATE");
+        intent.putExtra(
+                "NOMBRE_EMPRESA",
+                listElementsMantenimientos.get(pos).getEmpresa());
+        intent.putExtra(
+                "ID_VITRINA",
+                listElementsMantenimientos.get(pos).getIdVitrina());
+        intent.putExtra(
+                "ID_MANTENIMIENTO",
+                listElementsMantenimientos.get(pos).getId());
+        activityResultLauncher.launch(intent);
+    }
+
+    private void deletMantenimiento(int pos, DataBaseOperations datos, int idMantenimiento) {
+        boolean isMantenimientoDeleted = datos.deleteMantenimiento(idMantenimiento);
+        if (isMantenimientoDeleted) {
+            listElementsMantenimientos.remove(pos);
+            notifyItemRemoved(pos);
+            Toast.makeText(
+                    context,
+                    "Borrado Mantenimiento",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public void createReportPdf(int pos, DataBaseOperations db, int manteniId) {
+        // Recupero información necesaria sobre el mantenimiento que se se va a reportar
         Empresa empresa = db.selectEmpresaWithName(listElementsMantenimientos.get(pos).getEmpresa());
         Contacto contacto = db.selectContactoWithId(empresa.getIdContacto());
         Mantenimiento mantenimiento = db.selectMantenimientoWithId(manteniId);
@@ -205,18 +246,26 @@ public class ListMantenimientosAdapter extends RecyclerView.Adapter<ListMantenim
         TipoLongFlow tipoLongFlow = db.selectTipoLongFlowWithId(
                 vitrina.getIdTipo(), vitrina.getIdLongitud());
 
+        // Instancio la plantilla del informe y abro el documento
         templatePdf = new TemplatePdf(context);
+        // Abro el documento. Al hacerlo sin pasarle el fileName entonces utiliza "InformeVitrina.pdf"
         templatePdf.openDocument();
+        // Añado los metadatos (Título, objetivo y técnico que realizó el mantenimiento) a la plantilla
         templatePdf.addMetaData(
                 "Revisión de vitrina de gases", "Mantenimiento",
                 tecnico.getTecnicoNombre());
+        // Identificación de la vitrina preferentemente su número de referencia o su número de inventario
+        // en caso de que no se cuente con ninguno de ellos, se utiliza "-" para luego añadirla a la
+        // plantilla
         String titleVitrina = "-";
         if (vitrinaReferencia != null && !vitrinaReferencia.isEmpty() && !vitrinaReferencia.equals(titleVitrina)) {
             titleVitrina = vitrinaReferencia;
         } else if (vitrinaInventario != null && !vitrinaInventario.isEmpty() && !vitrinaInventario.equals(titleVitrina)) {
             titleVitrina = vitrinaInventario;
         }
+        // Añado el título del reporte y el subtítulo con la identificación de la vitrina a la plantilla
         templatePdf.addTitles("REVISION DE VITRINA DE GASES", titleVitrina);
+        // Añado los datos de la empresa a la plantilla
         templatePdf.addDatosEmpresa(
                 mantenimiento.getFecha(), empresa.getEmpresaNombre(),
                 empresa.getEmpresaDirecc(), contacto.getContactoNombre(),
