@@ -32,7 +32,6 @@ public class ViewPdfActivity extends AppCompatActivity {
         pdfView = findViewById(R.id.viewerPdf);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            Log.i("CHACHY::::", extras.getString("PATH"));
             filePdf = new File(extras.getString("PATH", null));
         }
         if (filePdf == null || !filePdf.isFile()) {
