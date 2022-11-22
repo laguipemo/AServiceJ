@@ -2,7 +2,6 @@ package net.iessanclemente.a19lazaropm.aservice.ui.secondary;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +44,7 @@ public class FichaEmpresaActivity extends AppCompatActivity {
 
     private List<ElementListVitrinas> listElementsVitrinas;
 
+    DataBaseOperations datos = DataBaseOperations.getInstance(FichaEmpresaActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,8 +111,6 @@ public class FichaEmpresaActivity extends AppCompatActivity {
         //recupero nombre de la empresa de los extras del intent
         String nombreEmpresa = getIntent().getStringExtra("NOMBRE_EMPRESA");
 
-        //creo instancia de la base de datos pasándo como contexto esta actividad
-        DataBaseOperations datos = DataBaseOperations.getInstance(FichaEmpresaActivity.this);
         //Recupero de la base de datos la empresa en cuestión y de su contacto
         Empresa empresa = datos.selectEmpresaWithName(nombreEmpresa);
         Contacto contacto = datos.selectContactoWithId(empresa.getIdContacto());

@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -32,6 +31,7 @@ public class ListEmpresasActivity extends AppCompatActivity {
     private final static int ADD_NEW_EMP_REQUEST_CODE = 1;
     private static final int RESULT_ADD_PROBLEM = 666;
 
+    DataBaseOperations datos = DataBaseOperations.getInstance(ListEmpresasActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +83,6 @@ public class ListEmpresasActivity extends AppCompatActivity {
 
     public void init() {
         listElementsEmpresas = new ArrayList<>();
-        DataBaseOperations datos = DataBaseOperations.getInstance(ListEmpresasActivity.this);
         List<Empresa> listEmpresas = datos.selectEmpresas();
 
         for (Empresa empresa : listEmpresas) {

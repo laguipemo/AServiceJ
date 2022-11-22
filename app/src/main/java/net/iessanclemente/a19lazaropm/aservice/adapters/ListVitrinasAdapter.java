@@ -3,7 +3,6 @@ package net.iessanclemente.a19lazaropm.aservice.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
@@ -15,10 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseOperations;
 import net.iessanclemente.a19lazaropm.aservice.ui.secondary.FichaVitrinaActivity;
 import net.iessanclemente.a19lazaropm.aservice.ui.forms.FormNewVitrinaActivity;
 import net.iessanclemente.a19lazaropm.aservice.R;
-import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseOperations;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Vitrina;
 import net.iessanclemente.a19lazaropm.aservice.utils.UtilsMenu;
 
@@ -30,6 +29,7 @@ public class ListVitrinasAdapter extends RecyclerView.Adapter<ListVitrinasAdapte
     private LayoutInflater listElementsVitrinasInflater;
     private Context context;
     private ActivityResultLauncher<Intent> activityResultLauncher;
+    DataBaseOperations datos;
 
     public ListVitrinasAdapter(
             List<ElementListVitrinas> listElementsVitrinas,
@@ -39,6 +39,8 @@ public class ListVitrinasAdapter extends RecyclerView.Adapter<ListVitrinasAdapte
         this.context = context;
         this.activityResultLauncher = activityResultLauncher;
         this.listElementsVitrinas = listElementsVitrinas;
+        this.datos = DataBaseOperations.getInstance(context);
+
     }
 
     @NonNull
@@ -71,7 +73,6 @@ public class ListVitrinasAdapter extends RecyclerView.Adapter<ListVitrinasAdapte
 
             popupMenu.setOnMenuItemClickListener(item -> {
                 int pos = holder.getAdapterPosition();
-                DataBaseOperations datos = DataBaseOperations.getInstance(context);
                 Vitrina vitrina = datos.selectVitrinaWithId(
                         listElementsVitrinas.get(pos).getId());
                 if (vitrina != null) {

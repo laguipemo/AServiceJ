@@ -45,7 +45,7 @@ public class FormNewVitrinaActivity extends AppCompatActivity {
     private boolean isUpdateTask;
     private Vitrina vitrinaOld;
 
-    private final DataBaseOperations datos = DataBaseOperations.getInstance(FormNewVitrinaActivity.this);
+    public final DataBaseOperations datos = DataBaseOperations.getInstance(FormNewVitrinaActivity.this);
 
     private List<String> listFabricantes;
     private List<String> listTipos;

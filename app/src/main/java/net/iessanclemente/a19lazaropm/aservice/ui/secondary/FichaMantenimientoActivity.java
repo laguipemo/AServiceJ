@@ -46,6 +46,10 @@ public class FichaMantenimientoActivity extends AppCompatActivity {
     private RadioButton fichaManteniNecesarioRepaNoRadioButton;
     private TextView fichaManteniComentarioTextView;
 
+    //Creo instancia de la base de dato pasando como contexto esta actividad
+    DataBaseOperations datos = DataBaseOperations.getInstance(FichaMantenimientoActivity.this);
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,8 +103,6 @@ public class FichaMantenimientoActivity extends AppCompatActivity {
         int idVitrina = getIntent().getIntExtra("ID_VITRINA", -1);
         int idMantenimiento = getIntent().getIntExtra("ID_MANTENIMIENTO", -1);
 
-        //Creo instancia de la base de dato pasando como contexto esta actividad
-        DataBaseOperations datos = DataBaseOperations.getInstance(FichaMantenimientoActivity.this);
         //recupero vitrina para tener algunso datos necesarios
         Vitrina vitrina = datos.selectVitrinaWithId(idVitrina);
         //recupero el mantenimiento en cuestión desde la base de datos

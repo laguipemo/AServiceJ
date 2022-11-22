@@ -45,8 +45,6 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
 
     private static final int RESULT_ADD_PROBLEM = 666;
 
-    private ActionBar actionBar;
-
     private EditText fechaNewMantenimientoEditText;
     private AutoCompleteTextView tecnicoNombreNewManteniAutoCompleteTextView;
     private CheckBox puestaMarchaNewManteniCheckBox;
@@ -78,7 +76,7 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
     private boolean isUpdateTask;
     private Mantenimiento mantenimientoOld;
 
-    private DataBaseOperations datos = DataBaseOperations.getInstance(FormNewMantenimientoActivity.this);
+    private DataBaseOperations datos = DataBaseOperations.getInstance(this);
 
     private List<String> listTecnicos;
     private List<String> listCualitativos;
@@ -96,7 +94,7 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_new_mantenimiento);
 
-        actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_ios_24);
             actionBar.setDisplayHomeAsUpEnabled(true);
