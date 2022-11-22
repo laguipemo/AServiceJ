@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +31,9 @@ import java.util.List;
 
 public class FichaVitrinaActivity extends AppCompatActivity {
 
-    private ActionBar actionBar;
+    private static final int ADD_NEW_MANTENIMIENTO_REQUEST_CODE = 3;
+    private static final int RESULT_ADD_PROBLEM = 666;
+
     private TextView fichaVitrinaEmpNombreTextView;
     private TextView fichaVitrinaFabricanteTextView;
     private TextView fichaVitrinasReferenciaTextView;
@@ -41,13 +44,38 @@ public class FichaVitrinaActivity extends AppCompatActivity {
     private TextView fichaVitrinaContratoTextView;
     private ImageView addMantenimientoImageView;
 
-    private static final int ADD_NEW_MANTENIMIENTO_REQUEST_CODE = 3;
-    private static final int RESULT_ADD_PROBLEM = 666;
-
     private List<ElementListMantenimientos> listElementsMantenimientos;
 
     private String nombreEmpresa;
     private int idVitrina;
+
+    ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result != null && result.getResultCode() == RESULT_OK) {
+                        if (result.getData() != null && result.getData().hasExtra("MANTENIMIENTO")) {
+                            Toast.makeText(
+                                    FichaVitrinaActivity.this,
+                                    "Adicionado manenimiento fecha: " + result.getData().getStringExtra("MANTENIMIENTO"),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        init();
+                    } else if (result != null && result.getResultCode() == RESULT_CANCELED) {
+                        Toast.makeText(
+                                FichaVitrinaActivity.this,
+                                "Se canceló la adición del nuevo mantenimiento", Toast.LENGTH_SHORT).show();
+                    } else if (result != null && result.getResultCode() == RESULT_ADD_PROBLEM) {
+                        if (result.getData() != null && result.getData().hasExtra("MANTENIMIENTO")) {
+                            Toast.makeText(
+                                    FichaVitrinaActivity.this,
+                                    "No se pudo crear mantenimiento con fecha: " + result.getData().getStringExtra("MANTENIMIENTO"),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            });
 
 
     @Override
@@ -55,7 +83,7 @@ public class FichaVitrinaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ficha_vitrina);
 
-        actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_ios_24);
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -78,35 +106,8 @@ public class FichaVitrinaActivity extends AppCompatActivity {
         });
     }
 
-    ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result != null && result.getResultCode() == RESULT_OK) {
-                        if (result.getData().hasExtra("MANTENIMIENTO")) {
-                            Toast.makeText(
-                                    FichaVitrinaActivity.this,
-                                    "Adicionado manenimiento fecha: " + result.getData().getStringExtra("MANTENIMIENTO"),
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        init();
-                    } else if (result != null && result.getResultCode() == RESULT_CANCELED) {
-                        Toast.makeText(
-                                FichaVitrinaActivity.this,
-                                "Se canceló la adición del nuevo mantenimiento", Toast.LENGTH_SHORT).show();
-                    } else if (result != null && result.getResultCode() == RESULT_ADD_PROBLEM) {
-                        if (result.getData().hasExtra("MANTENIMIENTO")) {
-                            Toast.makeText(
-                                    FichaVitrinaActivity.this,
-                                    "No se pudo crear mantenimiento con fecha: " + result.getData().getStringExtra("MANTENIMIENTO"),
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-            });
-
     private void init() {
+        ProgressBar progressBar = findViewById(R.id.progress_circular);
         //recupero las views del layout
         fichaVitrinaEmpNombreTextView = findViewById(R.id.fichaVitrinaEmpNombreTextView);
         fichaVitrinaFabricanteTextView = findViewById(R.id.fichaVitrinaFabricanteTextView);
@@ -164,7 +165,7 @@ public class FichaVitrinaActivity extends AppCompatActivity {
             }
             //Instancio el adaptador con la lista de elementos Mantenimientos a mostrar
             ListMantenimientosAdapter listMantenimientosAdapter = new ListMantenimientosAdapter(
-                    listElementsMantenimientos, activityResultLauncher, FichaVitrinaActivity.this);
+                    listElementsMantenimientos, activityResultLauncher, progressBar,FichaVitrinaActivity.this);
             //Instancio el RecyclerView, lo configuro y finalmente le asigno su adaptador.
             RecyclerView listMantenimintosRecyclerView = findViewById(R.id.listMantenimientosRecyclerView);
             listMantenimintosRecyclerView.setHasFixedSize(true);
