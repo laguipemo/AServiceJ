@@ -93,7 +93,10 @@
     <string name="title_pin">Pin</string>
     <string name="message_supervisor_pin">You need a supervisor authorization</string>
     <string name="hint_supervisor_pin">Supervisor pin</string>
-    <string name="message_alert_delete">Are you sure you want to delete the item?</string>
+    <string name="message_alert_delete">Are you sure you want to delete %1$s?</string>
     <string name="close_app">Close app</string>
+    <string name="the_company">the company</string>
+    <string name="the_cupboard">the cupboard</string>
+    <string name="the_maintenance">the maintenance</string>
 
 </resources>
