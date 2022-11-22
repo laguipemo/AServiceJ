@@ -2,24 +2,35 @@ package net.iessanclemente.a19lazaropm.aservice.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.net.MailTo;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.iessanclemente.a19lazaropm.aservice.ui.secondary.FichaMantenimientoActivity;
-import net.iessanclemente.a19lazaropm.aservice.ui.forms.FormNewMantenimientoActivity;
 import net.iessanclemente.a19lazaropm.aservice.R;
 import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseOperations;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Contacto;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Empresa;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Fabricante;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Mantenimiento;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Tecnico;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.TipoLongFlow;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.TipoVitrina;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Vitrina;
+import net.iessanclemente.a19lazaropm.aservice.reports.TemplatePdf;
+import net.iessanclemente.a19lazaropm.aservice.reports.ViewPdfActivity;
+import net.iessanclemente.a19lazaropm.aservice.ui.forms.FormNewMantenimientoActivity;
+import net.iessanclemente.a19lazaropm.aservice.ui.secondary.FichaMantenimientoActivity;
 import net.iessanclemente.a19lazaropm.aservice.utils.UtilsMenu;
 
 import java.util.List;
@@ -27,19 +38,29 @@ import java.util.Locale;
 
 public class ListMantenimientosAdapter extends RecyclerView.Adapter<ListMantenimientosAdapter.ViewHolder> {
 
+    public static final String SUPERVISOR = "BBR/b9r6ZEsNFF7tdbo+/A==";
+    private final String KEY_ATLAS_ROMERO = "AtlasRomero";
+
     private List<ElementListMantenimientos> listElementsMantenimientos;
     private LayoutInflater listElementsMantenimientosInflater;
     private Context context;
     private ActivityResultLauncher<Intent> activityResultLauncher;
 
+    private ProgressBar createReportProgressBar;
+    private TemplatePdf templatePdf;
+
     public ListMantenimientosAdapter(
             List<ElementListMantenimientos> listElementsMantenimientos,
             ActivityResultLauncher<Intent> activityResultLauncher,
-            Context context) {
+            ProgressBar progressBar,
+            Context context
+    ) {
         this.listElementsMantenimientosInflater = LayoutInflater.from(context);
         this.context = context;
         this.activityResultLauncher = activityResultLauncher;
         this.listElementsMantenimientos = listElementsMantenimientos;
+        this.createReportProgressBar = progressBar;
+        progressBar.setVisibility(View.GONE);
     }
 
     @NonNull
@@ -68,61 +89,183 @@ public class ListMantenimientosAdapter extends RecyclerView.Adapter<ListMantenim
             }
         });
 
-        holder.mantenimientoCardView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                PopupMenu popupMenu = new PopupMenu(context, v);
-                UtilsMenu.setForceShowIcon(popupMenu);
-                popupMenu.inflate(R.menu.menu_contextual);
-                popupMenu.show();
+        holder.mantenimientoCardView.setOnLongClickListener(v -> {
+            PopupMenu popupMenu = new PopupMenu(context, v);
+            UtilsMenu.setForceShowIcon(popupMenu);
+            popupMenu.inflate(R.menu.menu_contextual_extended);
+            popupMenu.show();
 
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        int pos = holder.getAdapterPosition();
-                        DataBaseOperations datos = DataBaseOperations.getInstance(context);
-                        Mantenimiento mantenimiento = datos.selectMantenimientoWithId(
-                                listElementsMantenimientos.get(pos).getId());
+            popupMenu.setOnMenuItemClickListener(item -> {
+                int pos = holder.getAdapterPosition();
+                DataBaseOperations datos = DataBaseOperations.getInstance(context);
+                Mantenimiento mantenimiento = datos.selectMantenimientoWithId(
+                        listElementsMantenimientos.get(pos).getId());
 
-                        if (mantenimiento != null) {
-                            int idMantenimiento = mantenimiento.getId();
+                if (mantenimiento != null) {
+                    int idMantenimiento = mantenimiento.getId();
 
-                            switch (item.getItemId()) {
-                                case R.id.menuItemDelete:
-                                    boolean isMantenimientoDeleted = datos.deleteMantenimiento(idMantenimiento);
-                                    if (isMantenimientoDeleted) {
-                                        listElementsMantenimientos.remove(pos);
-                                        notifyDataSetChanged();
-                                        Toast.makeText(
-                                                context,
-                                                "Borrado Mantenimiento",
-                                                Toast.LENGTH_SHORT).show();
-                                    }
-                                    break;
-                                case R.id.menuItemUpdate:
-                                    //paso a la actividad de la ficha para un nuevo mantenimiento
-                                    Intent intent = new Intent(
-                                            context, FormNewMantenimientoActivity.class);
-                                    intent.putExtra("TASK", "UPDATE");
-                                    intent.putExtra(
-                                            "NOMBRE_EMPRESA",
-                                            listElementsMantenimientos.get(pos).getEmpresa());
-                                    intent.putExtra(
-                                            "ID_VITRINA",
-                                            listElementsMantenimientos.get(pos).getIdVitrina());
-                                    intent.putExtra(
-                                            "ID_MANTENIMIENTO",
-                                            listElementsMantenimientos.get(pos).getId());
-                                    activityResultLauncher.launch(intent);
-                                    break;
+                    switch (item.getItemId()) {
+                        case R.id.menuItemDelete:
+                            boolean isMantenimientoDeleted = datos.deleteMantenimiento(idMantenimiento);
+                            if (isMantenimientoDeleted) {
+                                listElementsMantenimientos.remove(pos);
+                                notifyDataSetChanged();
+                                Toast.makeText(
+                                        context,
+                                        "Borrado Mantenimiento",
+                                        Toast.LENGTH_SHORT).show();
                             }
-                        }
-                        return false;
+                            break;
+                        case R.id.menuItemUpdate:
+                            //paso a la actividad de la ficha para un nuevo mantenimiento
+                            Intent intent = new Intent(
+                                    context, FormNewMantenimientoActivity.class);
+                            intent.putExtra("TASK", "UPDATE");
+                            intent.putExtra(
+                                    "NOMBRE_EMPRESA",
+                                    listElementsMantenimientos.get(pos).getEmpresa());
+                            intent.putExtra(
+                                    "ID_VITRINA",
+                                    listElementsMantenimientos.get(pos).getIdVitrina());
+                            intent.putExtra(
+                                    "ID_MANTENIMIENTO",
+                                    listElementsMantenimientos.get(pos).getId());
+                            activityResultLauncher.launch(intent);
+                            break;
+                        case R.id.menuItemShowReport:
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    createReportPdf(
+                                            pos, DataBaseOperations.getInstance(context), idMantenimiento);
+                                    Intent intent = new Intent(context, ViewPdfActivity.class);
+                                    intent.putExtra("PATH", templatePdf.getPdfFile().getAbsolutePath());
+                                    activityResultLauncher.launch(intent);
+                                }
+                            }).start();
+                            createReportProgressBar.setVisibility(View.VISIBLE);
+                            break;
+                        case R.id.menuItemSendReport:
+                            if (templatePdf != null) {
+                                templatePdf.attachPdfAndSendMail();
+                                break;
+                            } else {
+                                new Thread(new Runnable() {
+                                    public void run() {
+                                        createReportPdf(
+                                                pos, DataBaseOperations.getInstance(context), idMantenimiento);
+                                        Intent intent = new Intent("android.intent.action.SENDTO");
+                                        intent.setData(Uri.parse(MailTo.MAILTO_SCHEME));
+                                        intent.putExtra(
+                                                "android.intent.extra.EMAIL",
+                                                new String[]{
+                                                        "sat@atlasromero.com",
+                                                        "administracion@atlasromero.com",
+                                                        "laguipemo@gmail.com"}
+                                        );
+                                        intent.putExtra(
+                                                "android.intent.extra.SUBJECT",
+                                                "Informe del mantenimiento"
+                                        );
+                                        intent.putExtra(
+                                                "android.intent.extra.TEXT",
+                                                "Le adjuntamos el informe del mantenimiento realizado a su vitrina"
+                                        );
+                                        intent.putExtra(
+                                                "android.intent.extra.STREAM",
+                                                Uri.fromFile(ListMantenimientosAdapter.this.templatePdf.getPdfFile()));
+                                        if (intent.resolveActivity(context.getPackageManager()) != null) {
+                                            activityResultLauncher.launch(intent);
+                                        }
+                                    }
+                                }).start();
+                                createReportProgressBar.setVisibility(View.VISIBLE);
+                                break;
+                            }
                     }
-                });
-                return true;
-            }
+                }
+                return false;
+            });
+            return true;
         });
+    }
+
+    public void createReportPdf(int pos, DataBaseOperations db, int manteniId) {
+        Empresa empresa = db.selectEmpresaWithName(listElementsMantenimientos.get(pos).getEmpresa());
+        Contacto contacto = db.selectContactoWithId(empresa.getIdContacto());
+        Mantenimiento mantenimiento = db.selectMantenimientoWithId(manteniId);
+        Tecnico tecnico = db.selectTecnicoWithId(mantenimiento.getIdTecnico());
+        Vitrina vitrina = db.selectVitrinaWithId(mantenimiento.getIdVitrina());
+        Fabricante fabricante = db.selectFabricanteWithId(vitrina.getIdFabricante());
+        String vitrinaReferencia = vitrina.getVitrinaReferencia();
+        String vitrinaInventario = vitrina.getVitrinaInventario();
+        TipoVitrina tipoVitrina = db.selectTipoVitrinaWithId(vitrina.getIdTipo());
+        int longitudVitrina = db.getLongitudVitrinaWithIdLongitud(vitrina.getIdLongitud());
+        float guillotina = db.getGuillotinaWithIdLongitud(vitrina.getIdLongitud());
+        TipoLongFlow tipoLongFlow = db.selectTipoLongFlowWithId(
+                vitrina.getIdTipo(), vitrina.getIdLongitud());
+
+        templatePdf = new TemplatePdf(context);
+        templatePdf.openDocument();
+        templatePdf.addMetaData(
+                "Revisión de vitrina de gases", "Mantenimiento",
+                tecnico.getTecnicoNombre());
+        String titleVitrina = "-";
+        if (vitrinaReferencia != null && !vitrinaReferencia.isEmpty() && !vitrinaReferencia.equals(titleVitrina)) {
+            titleVitrina = vitrinaReferencia;
+        } else if (vitrinaInventario != null && !vitrinaInventario.isEmpty() && !vitrinaInventario.equals(titleVitrina)) {
+            titleVitrina = vitrinaInventario;
+        }
+        templatePdf.addTitles("REVISION DE VITRINA DE GASES", titleVitrina);
+        templatePdf.addDatosEmpresa(
+                mantenimiento.getFecha(), empresa.getEmpresaNombre(),
+                empresa.getEmpresaDirecc(), contacto.getContactoNombre(),
+                contacto.getContactoTelef(), contacto.getContactoCorreo()
+        );
+        templatePdf.addDatosVitrina(
+                fabricante.getNombre(), tipoVitrina.getTipoVitrina(),
+                vitrinaReferencia, String.valueOf(vitrina.getVitrinaAnho()),
+                "-", vitrinaInventario, mantenimiento.isPuestaMarcha(),
+                vitrina.getVitrinaContrato(), tecnico.getTecnicoNombre()
+        );
+        templatePdf.addNewPage();
+        templatePdf.addComprobAjusteSistemaExtracion(
+                db.getCualitativoWithId(mantenimiento.getFunCtrlDigi()),
+                db.getCualitativoWithId(mantenimiento.getVisSistExtr()),
+                mantenimiento.isSegunDin(), mantenimiento.isSegunEn(),
+                longitudVitrina, guillotina
+        );
+        float[] allValores = db.selectMedicionWithId(
+                mantenimiento.getIdMedicion()).getAllValues();
+        templatePdf.createTableMediciones(allValores);
+        templatePdf.creatTableCalcVolExtraccion(
+                guillotina, allValores[0], tipoLongFlow.getFlowMin(),
+                tipoLongFlow.getFlowMax(), tipoLongFlow.getFlowRecom()
+        );
+        templatePdf.addNewPage();
+        templatePdf.addComprobAjusteComponentesFijos(
+                db.getCualitativoWithId(mantenimiento.getProtSuperf()),
+                db.getCualitativoWithId(mantenimiento.getJuntas()),
+                db.getCualitativoWithId(mantenimiento.getFijacion()),
+                db.getCualitativoWithId(mantenimiento.getFuncGuillo()),
+                db.getCualitativoWithId(mantenimiento.getEstadoGuillo()),
+                mantenimiento.getValFuerzaGuillo(),
+                db.getCualitativoWithId(mantenimiento.getFuerzaGuillo()),
+                db.getCualitativoWithId(mantenimiento.getCtrlPresencia()),
+                db.getCualitativoWithId(mantenimiento.getAutoproteccion()),
+                db.getCualitativoWithId(mantenimiento.getGrifosMonored())
+        );
+        templatePdf.addComentAndFinalEvalu(
+                mantenimiento.getComentario(),
+                mantenimiento.isAcordeNormasReguSi(),
+                mantenimiento.isNecesarioRepaSi()
+        );
+        templatePdf.addSignatures();
+        templatePdf.closeDocument();
+
+        TemplatePdf templatePdf3 = new TemplatePdf(this.context);
+        this.templatePdf = templatePdf3;
+        templatePdf3.openDocumetStamperPageNumering();
     }
 
     @Override
