@@ -98,5 +98,7 @@
     <string name="the_company">la empresa</string>
     <string name="the_cupboard">la vitrina</string>
     <string name="the_maintenance">el mantenimiento</string>
+    <string name="logout">Salir</string>
+    <string name="message_logut">¿Está seguro qeu de desea cerrar la app?</string>
 
 </resources>
