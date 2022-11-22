@@ -222,7 +222,9 @@ public class ListMantenimientosAdapter extends RecyclerView.Adapter<ListMantenim
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomAlertDialog);
         builder.setTitle(R.string.delete)
                 .setIcon(R.drawable.ic_baseline_error_outline_24)
-                .setMessage(R.string.message_alert_delete)
+                .setMessage(context.getString(R.string.message_alert_delete,
+                        context.getString(R.string.the_maintenance))
+                )
                 .setPositiveButton(R.string.accept, (dialog, which) -> {
                     boolean isMantenimientoDeleted = datos.deleteMantenimiento(idMantenimiento);
                     if (isMantenimientoDeleted) {

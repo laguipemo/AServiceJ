@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -85,20 +86,32 @@ public class ListEmpresasAdapter extends RecyclerView.Adapter<ListEmpresasAdapte
 
                             switch (item.getItemId()) {
                                 case R.id.menuItemDelete:
-                                    boolean isEmpDeleted = datos.deleteEmpresa(idEmpresa);
-                                    if (isEmpDeleted) {
-                                        boolean isContactDeleted = datos.deleteContacto(idContactoEmp);
-                                        if (isContactDeleted) {
-                                            listElementsEmpresas.remove(pos);
-                                            //notifyDataSetChanged();
-                                            notifyItemRemoved(pos);
-                                            Toast.makeText(
-                                                    context,
-                                                    "Borrada Empresa: " +
-                                                            holder.direccEmpresaTextView.getText().toString(),
-                                                    Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(
+                                            context, R.style.CustomAlertDialog);
+                                    builder.setTitle(R.string.delete)
+                                            .setIcon(R.drawable.ic_baseline_error_outline_24)
+                                            .setMessage(
+                                                    context.getString(R.string.message_alert_delete,
+                                                                    context.getString(R.string.the_company))
+                                            )
+                                            .setPositiveButton(R.string.accept, (dialog, which) -> {
+                                                boolean isEmpDeleted = datos.deleteEmpresa(idEmpresa);
+                                                if (isEmpDeleted) {
+                                                    boolean isContactDeleted = datos.deleteContacto(idContactoEmp);
+                                                    if (isContactDeleted) {
+                                                        listElementsEmpresas.remove(pos);
+                                                        notifyItemRemoved(pos);
+                                                        Toast.makeText(
+                                                                context,
+                                                                "Borrada Empresa: " +
+                                                                        holder.direccEmpresaTextView.getText().toString(),
+                                                                Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }
+                                            })
+                                            .setNegativeButton(R.string.cancel, (dialog, which) -> {
+                                                dialog.dismiss();
+                                            }).create().show();
                                     break;
                                 case R.id.menuItemUpdate:
                                     //paso a la actividad de la ficha para nueva empresa

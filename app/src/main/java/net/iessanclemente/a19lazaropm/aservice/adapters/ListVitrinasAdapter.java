@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -80,16 +81,28 @@ public class ListVitrinasAdapter extends RecyclerView.Adapter<ListVitrinasAdapte
 
                     switch (item.getItemId()) {
                         case R.id.menuItemDelete:
-                            boolean isVitrinaDeleted = datos.deleteVitrina(idVitrina);
-                            if (isVitrinaDeleted) {
-                                listElementsVitrinas.remove(pos);
-                                //notifyDataSetChanged();
-                                notifyItemRemoved(pos);
-                                Toast.makeText(
-                                        context,
-                                        "Borrada Vitrina",
-                                        Toast.LENGTH_SHORT).show();
-                            }
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomAlertDialog);
+                            builder.setTitle(R.string.delete)
+                                    .setIcon(R.drawable.ic_baseline_error_outline_24)
+                                    .setMessage(context.getString(R.string.message_alert_delete,
+                                            context.getString(R.string.the_cupboard))
+                                    )
+                                    .setPositiveButton(R.string.accept, (dialog, which) -> {
+                                        boolean isVitrinaDeleted = datos.deleteVitrina(idVitrina);
+                                        if (isVitrinaDeleted) {
+                                            listElementsVitrinas.remove(pos);
+                                            //notifyDataSetChanged();
+                                            notifyItemRemoved(pos);
+                                            Toast.makeText(
+                                                    context,
+                                                    "Borrada Vitrina",
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+                                    })
+                                    .setNegativeButton(R.string.cancel, (dialog, which) -> {
+                                        dialog.dismiss();
+                                    }).create().show();
+
                             break;
                         case R.id.menuItemUpdate:
                             //paso a la actividad de la ficha para nueva vitrina
