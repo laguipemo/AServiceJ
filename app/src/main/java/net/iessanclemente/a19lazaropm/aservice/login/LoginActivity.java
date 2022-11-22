@@ -16,10 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseOperations;
 import net.iessanclemente.a19lazaropm.aservice.ui.main.ListEmpresasActivity;
 import net.iessanclemente.a19lazaropm.aservice.R;
 import net.iessanclemente.a19lazaropm.aservice.security.SecurityCipherWithKey;
-import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseOperations;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Tecnico;
 
 public class LoginActivity extends AppCompatActivity {
@@ -44,50 +44,42 @@ public class LoginActivity extends AppCompatActivity {
         TextView forgotPasswordTextView = findViewById(R.id.forgotPasswordTextView);
         Button accessButton = findViewById(R.id.accessButton);
 
-        forgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showForgotPassDialog();
-            }
-        });
+        forgotPasswordTextView.setOnClickListener(v -> showForgotPassDialog());
 
-        accessButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Recupero los datos introducidos por el usuario
-                String usuario = userLoginTextInputEditText.getText().toString().trim();
-                String password = passwordLoginTextInputEditText.getText().toString().trim();
-                // Encript la clave introducido por el usuario para compararla con la base de datos
-                SecurityCipherWithKey security = new SecurityCipherWithKey();
-                security.addKey(KEY_ATLAS_ROMERO);
-                String passwordEncrypted = security.encrypt(password);
+        accessButton.setOnClickListener(v -> {
+            // Recupero los datos introducidos por el usuario
+            String usuario = userLoginTextInputEditText.getText().toString().trim();
+            String password = passwordLoginTextInputEditText.getText().toString().trim();
+            // Encript la clave introducido por el usuario para compararla con la base de datos
+            SecurityCipherWithKey security = new SecurityCipherWithKey();
+            security.addKey(KEY_ATLAS_ROMERO);
+            String passwordEncrypted = security.encrypt(password);
 
-                //Recupero, desde la base de datos la clave encriptada para el usuario introducido
-                DataBaseOperations datos = DataBaseOperations.getInstance(LoginActivity.this);
+            //Recupero, desde la base de datos la clave encriptada para el usuario introducido
+            DataBaseOperations datos = DataBaseOperations.getInstance(LoginActivity.this);
 
-                //Comprobar si el usuario introducido es un ténico y de ser así comprueba la clave
-                //son correctos los datos, se sigue con la app
-                Tecnico tecnico = datos.selectTecnicoWithUsuario(usuario);
-                if (tecnico == null){
-                    if (usuario.isEmpty()) {
-                        showToast(getString(R.string.user_does_not_exist));
-                    } else {
-                        showToast(getString(R.string.user_does_not_exist));
-                    }
-                    clearAll();
+            //Comprobar si el usuario introducido es un ténico y de ser así comprueba la clave
+            //son correctos los datos, se sigue con la app
+            Tecnico tecnico = datos.selectTecnicoWithUsuario(usuario);
+            if (tecnico == null){
+                if (usuario.isEmpty()) {
+                    showToast(getString(R.string.user_does_not_exist));
                 } else {
-                    String passwordEncryptedValido = tecnico.getTecnicoClave();
-                    if (passwordEncryptedValido == null || passwordEncryptedValido.isEmpty()) {
-                        showToast(getString(R.string.incorrect_password));
-                    } else if (passwordEncrypted.trim().equals(passwordEncryptedValido.trim())) {
-                        Intent intent = new Intent(
-                                LoginActivity.this, ListEmpresasActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        showToast(getString(R.string.incorrect_user_or_password));
-                        clearAll();
-                    }
+                    showToast(getString(R.string.user_does_not_exist));
+                }
+                clearAll();
+            } else {
+                String passwordEncryptedValido = tecnico.getTecnicoClave();
+                if (passwordEncryptedValido == null || passwordEncryptedValido.isEmpty()) {
+                    showToast(getString(R.string.incorrect_password));
+                } else if (passwordEncrypted.trim().equals(passwordEncryptedValido.trim())) {
+                    Intent intent = new Intent(
+                            LoginActivity.this, ListEmpresasActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    showToast(getString(R.string.incorrect_user_or_password));
+                    clearAll();
                 }
             }
         });
