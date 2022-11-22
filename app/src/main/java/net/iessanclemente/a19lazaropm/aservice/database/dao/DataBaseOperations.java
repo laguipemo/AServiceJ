@@ -5,16 +5,16 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import net.iessanclemente.a19lazaropm.aservice.database.dto.Cualitativo;
-import net.iessanclemente.a19lazaropm.aservice.database.dto.Fabricante;
-import net.iessanclemente.a19lazaropm.aservice.database.dto.Tecnico;
-import net.iessanclemente.a19lazaropm.aservice.database.dto.TipoVitrina;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Contacto;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Cualitativo;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Empresa;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Fabricante;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Longitud;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Mantenimiento;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Medicion;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Tecnico;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.TipoLongFlow;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.TipoVitrina;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Vitrina;
 
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class DataBaseOperations {
      */
     public long insertTecnico(Tecnico tecnico) {
         //Creo instancia para escribir en la base de datos
-        SQLiteDatabase db = dataBase.getWritableDatabase();
+        SQLiteDatabase writableDatabase = dataBase.getWritableDatabase();
         //Creo el objeto ContentValues para colocar los datos a insertar
         ContentValues contentValues = new ContentValues();
         contentValues.put(DataBaseContract.TecnicosTable.COL_USUARIO, tecnico.getTecnicoNombre());
@@ -58,7 +58,7 @@ public class DataBaseOperations {
         contentValues.put(DataBaseContract.TecnicosTable.COL_TELEF, tecnico.getTecnicoTelef());
         contentValues.put(DataBaseContract.TecnicosTable.COL_CORREO, tecnico.getTecnicoCorreo());
 
-        return db.insert(
+        return writableDatabase.insert(
                 DataBaseContract.TecnicosTable.TABLE_NAME, null, contentValues);
     }
 
@@ -357,7 +357,6 @@ public class DataBaseOperations {
         return empresa;
     }
 
-
     public boolean updateEmpresa(Empresa empresa) {
         //Obtengo instancia de la base de datos para escritura
         SQLiteDatabase db = dataBase.getWritableDatabase();
@@ -408,7 +407,7 @@ public class DataBaseOperations {
 
     public boolean existEmpresa(Empresa empresa) {
         boolean exist = false;
-        for (Empresa emp: selectEmpresas()) {
+        for (Empresa emp : selectEmpresas()) {
             if (emp.equals(empresa)) {
                 exist = true;
                 break;
@@ -435,7 +434,7 @@ public class DataBaseOperations {
 
     public List<Contacto> selectContactos() {
         //String con secuencia SQL para la búsqueda
-        String sqlSelectContactos = "SELECT * FROM " + DataBaseContract.EmpresasTable.TABLE_NAME;
+        String sqlSelectContactos = "SELECT * FROM " + DataBaseContract.ContactosTable.TABLE_NAME;
         return selectContactos(sqlSelectContactos);
     }
 
@@ -546,10 +545,10 @@ public class DataBaseOperations {
         return id;
     }
 
-    public boolean existContacto(Contacto c) {
+    public boolean existContacto(Contacto contacto) {
         boolean exist = false;
-        for (Contacto contacto: selectContactos()) {
-            if (contacto.equals(c)) {
+        for (Contacto c : selectContactos()) {
+            if (c.equals(contacto)) {
                 exist = true;
                 break;
             }
@@ -708,17 +707,16 @@ public class DataBaseOperations {
         return listIds;
     }
 
-    public boolean existVitrina(Vitrina v) {
+    public boolean existVitrina(Vitrina vitrina) {
         boolean exist = false;
-        for (Vitrina vitrina: selectVitrinas()) {
-            if (vitrina.equals(v)) {
+        for (Vitrina v : selectVitrinas()) {
+            if (v.equals(vitrina)) {
                 exist = true;
                 break;
             }
         }
         return exist;
     }
-
 
     /*
         CRUD sobre la entidad TipoVitrina
@@ -831,23 +829,22 @@ public class DataBaseOperations {
 
     public List<Integer> getIdsOfTiposVitrinasForEmpresa(int idEmpresa) {
         List<Integer> listIdsTiposVitrinas = new ArrayList<>();
-        for (int idVitrina: getIdsOfVitrinasForEmpresa(idEmpresa)) {
+        for (int idVitrina : getIdsOfVitrinasForEmpresa(idEmpresa)) {
             listIdsTiposVitrinas.add(selectVitrinaWithId(idVitrina).getIdTipo());
         }
         return listIdsTiposVitrinas;
     }
 
-    public int getIdOfVitrinaTipo(String tipo) {
+    public int getIdOfVitrinaTipo(String tipoVitrina) {
         int idTipoVitrina = -1;
-        for (TipoVitrina tipoVitrina: selectTiposVitrinas()) {
-            if (tipoVitrina.getTipoVitrina().equals(tipo)) {
-                idTipoVitrina = tipoVitrina.getId();
+        for (TipoVitrina tipo : selectTiposVitrinas()) {
+            if (tipo.getTipoVitrina().equals(tipoVitrina)) {
+                idTipoVitrina = tipo.getId();
                 break;
             }
         }
         return idTipoVitrina;
     }
-
 
     /*
         CRUD sobre la entidad Fabricante
@@ -963,7 +960,7 @@ public class DataBaseOperations {
 
     public int getIdOfFabricanteWithName(String nameFabricante) {
         int id = -1;
-        for (Fabricante fabricante: selectFabricantes()) {
+        for (Fabricante fabricante : selectFabricantes()) {
             if (fabricante.getNombre().trim().equalsIgnoreCase(nameFabricante.trim())) {
                 id = fabricante.getId();
                 break;
@@ -974,7 +971,7 @@ public class DataBaseOperations {
 
     public boolean existFabricante(Fabricante fabricante) {
         boolean exist = false;
-        for (Fabricante fab: selectFabricantes()) {
+        for (Fabricante fab : selectFabricantes()) {
             if (fab.equals(fabricante)) {
                 exist = true;
                 break;
@@ -982,7 +979,6 @@ public class DataBaseOperations {
         }
         return exist;
     }
-
 
     /*
         CRUD sobre la entidad Longitud
@@ -1098,7 +1094,7 @@ public class DataBaseOperations {
 
     public int getIdOfLongitudWithName(int longitudVitrina) {
         int id = -1;
-        for (Longitud longitud: selectLongitudes()) {
+        for (Longitud longitud : selectLongitudes()) {
             if (longitud.getLongitudVitrina() == longitudVitrina) {
                 id = longitud.getId();
                 break;
@@ -1109,7 +1105,7 @@ public class DataBaseOperations {
 
     public int getIdLongitudForLongVitrina(int longitudVitrina) {
         int id = -1;
-        for (Longitud longitud: selectLongitudes()) {
+        for (Longitud longitud : selectLongitudes()) {
             if (longitud.getLongitudVitrina() == longitudVitrina) {
                 id = longitud.getId();
                 break;
@@ -1123,12 +1119,12 @@ public class DataBaseOperations {
     }
 
     public float getGuillotinaWithIdLongitud(int idLongitud) {
-       return selectLongitudWithId(idLongitud).getLogintudGillotina();
+        return selectLongitudWithId(idLongitud).getLogintudGillotina();
     }
 
     public float getGuillotinaForLongVitrina(int longitudVitrina) {
         float guillotina = 0F;
-        for (Longitud longitud: selectLongitudes()) {
+        for (Longitud longitud : selectLongitudes()) {
             if (longitud.getLongitudVitrina() == longitudVitrina) {
                 guillotina = longitud.getLogintudGillotina();
                 break;
@@ -1158,7 +1154,7 @@ public class DataBaseOperations {
 
     public List<TipoLongFlow> selectTipoLongFlow() {
         //String con secuencia SQL para la búsqueda
-        String sqlSelectTipoLongFlow = "SELECT * FROM " + DataBaseContract.LongitudesTable.TABLE_NAME;
+        String sqlSelectTipoLongFlow = "SELECT * FROM " + DataBaseContract.TiposLongsFlowsTable.TABLE_NAME;
         return this.selectTipoLongFlow(sqlSelectTipoLongFlow);
     }
 
@@ -1177,16 +1173,15 @@ public class DataBaseOperations {
             //Recupero el primer elemento del cursor y repito esta operación mientras que el cursor
             //devuelva true con el método moveToNext(), es decir, mientras tenga un siguiente elemento
             do {
-                int id = cursor.getInt(0);
-                int idTipoVitrina = cursor.getInt(1);
-                int idLongitud = cursor.getInt(2);
-                int flowMin = cursor.getInt(3);
-                int flowRecom = cursor.getInt(4);
-                int flowMax = cursor.getInt(5);
-                int pressDrop = cursor.getInt(6);
+                int idTipoVitrina = cursor.getInt(0);
+                int idLongitud = cursor.getInt(1);
+                int flowMin = cursor.getInt(2);
+                int flowRecom = cursor.getInt(3);
+                int flowMax = cursor.getInt(4);
+                int pressDrop = cursor.getInt(5);
                 //Construyo objeto TipoLongFlow y lo añado a la lista
                 TipoLongFlow tipoVitrinaLongitud = new TipoLongFlow(
-                        id, idTipoVitrina, idLongitud, flowMin, flowRecom, flowMax, pressDrop);
+                        idTipoVitrina, idLongitud, flowMin, flowRecom, flowMax, pressDrop);
                 tiposLongsFlowsSelected.add(tipoVitrinaLongitud);
             } while (cursor.moveToNext());
         }
@@ -1195,33 +1190,33 @@ public class DataBaseOperations {
         return tiposLongsFlowsSelected;
     }
 
-    public TipoLongFlow selectTipoLongFlowWithId(int idToSelect) {
+    public TipoLongFlow selectTipoLongFlowWithId(int idTipo, int idLong) {
         TipoLongFlow tipoLongFlow = null;
         //Creo instancia para leer de la base de datos
         SQLiteDatabase db = dataBase.getReadableDatabase();
         //String con la consulta SQL a realizar, faltaría el parámetro en la posición ? que intruduce
         //en la rawQuery como un array de string
-        String sqlSelect = String.format("SELECT * FROM %s WHERE %s=?",
+        String sqlSelect = String.format("SELECT * FROM %s WHERE %s=? AND %s=?",
                 DataBaseContract.TiposLongsFlowsTable.TABLE_NAME,
-                DataBaseContract.TiposLongsFlowsTable._ID);
+                DataBaseContract.TiposLongsFlowsTable.COL_ID_TIPO,
+                DataBaseContract.TiposLongsFlowsTable.COL_ID_LONGITUD);
         //Creo array de strings con los parámetros para la consulta parametrizada anterior
-        String[] selectArguments = {String.valueOf(idToSelect)};
+        String[] selectArguments = {String.valueOf(idTipo), String.valueOf(idLong)};
         //Realizo al consulta almacenado el resultado en un cursor
         Cursor cursor = db.rawQuery(sqlSelect, selectArguments);
         //Si el cursor almacena algún elemento, pues devuelve true con el método moveToFirst()
         if (cursor.moveToFirst()) {
             //Recupero el primer elemento del cursor, que además el único que debe haber (no debe
             // haber duplicados) y la consulta es para recuperar el elemento de id indicado.
-            int id = cursor.getInt(0);
-            int idTipoVitrina = cursor.getInt(1);
-            int idLongitud = cursor.getInt(2);
-            int flowMin = cursor.getInt(3);
-            int flowRecom = cursor.getInt(4);
-            int flowMax = cursor.getInt(5);
-            int pressDrop = cursor.getInt(6);
+            int idTipoVitrina = cursor.getInt(0);
+            int idLongitud = cursor.getInt(1);
+            int flowMin = cursor.getInt(2);
+            int flowRecom = cursor.getInt(3);
+            int flowMax = cursor.getInt(4);
+            int pressDrop = cursor.getInt(5);
             //Construyo objeto Longitud y lo añado a la lista
             tipoLongFlow = new TipoLongFlow(
-                    id, idTipoVitrina, idLongitud, flowMin, flowRecom, flowMax, pressDrop);
+                    idTipoVitrina, idLongitud, flowMin, flowRecom, flowMax, pressDrop);
         }
         cursor.close();
         return tipoLongFlow;
@@ -1240,9 +1235,11 @@ public class DataBaseOperations {
         contentValues.put(DataBaseContract.TiposLongsFlowsTable.COL_PRESS_DROP, tipoLongFlow.getPressDrop());
         //Para actualizar un elemento se utiliza el médodo:
         //   update(nombre_tabla, valores, criterio_seleccion, parametros_criterio_seleccion)
-        String criterioSeleccion = String.format("%s=?", DataBaseContract.TiposLongsFlowsTable._ID);
+        String criterioSeleccion = String.format("%s=? AND %s=?",
+                DataBaseContract.TiposLongsFlowsTable.COL_ID_TIPO,
+                DataBaseContract.TiposLongsFlowsTable.COL_ID_LONGITUD);
         //array de string con los parámetros del criterio de selección
-        String[] paramCriterioSeleccion = {String.valueOf(tipoLongFlow.getId())};
+        String[] paramCriterioSeleccion = {String.valueOf(tipoLongFlow.getIdTipoVitrina()), String.valueOf(tipoLongFlow.getIdLongintud())};
         //Realizo la actualización
         int updated = db.update(
                 DataBaseContract.TiposLongsFlowsTable.TABLE_NAME,
@@ -1252,21 +1249,22 @@ public class DataBaseOperations {
         return updated > 0; // true si se actualizó algo
     }
 
-    public boolean deleteTipoLongFlow(int id) {
+    public boolean deleteTipoLongFlow(int idTipo, int idLong) {
         //obtengo instancia de la base de datos para escritura
         SQLiteDatabase db = dataBase.getWritableDatabase();
         //Para borrar se utilizar el método:
         //  delete(nombre_tabla, criterio_seleccion, parametros_criterio_seleccion
         //Defino la string con el criterio de seleccion parametrizado.
-        String criterioSeleccion = String.format("%s=?", DataBaseContract.TiposLongsFlowsTable._ID);
+        String criterioSeleccion = String.format("%s=? AND %s=?",
+                DataBaseContract.TiposLongsFlowsTable.COL_ID_TIPO,
+                DataBaseContract.TiposLongsFlowsTable.COL_ID_LONGITUD);
         //array de string con los valores de los parámetros para completar la query parametrizada
-        String[] paramCriterioSeleccion = {String.valueOf(id)};
+        String[] paramCriterioSeleccion = {String.valueOf(idTipo), String.valueOf(idLong)};
         //ejecuto el borrado
         int deleted = db.delete(
                 DataBaseContract.TiposLongsFlowsTable.TABLE_NAME, criterioSeleccion, paramCriterioSeleccion);
         return deleted > 0;
     }
-
 
     /*
         CRUD sobre la entidad Cualitativo
@@ -1378,7 +1376,7 @@ public class DataBaseOperations {
 
     public int getIdOfCualitativoWithEvalu(String evaluCualitativo) {
         int id = -1;
-        for (Cualitativo cualitativo: selectCualitativos()) {
+        for (Cualitativo cualitativo : selectCualitativos()) {
             if (cualitativo.getCualitativo().equals(evaluCualitativo)) {
                 id = cualitativo.getId();
                 break;
@@ -1389,7 +1387,7 @@ public class DataBaseOperations {
 
     public String getCualitativoWithId(int idCualitativo) {
         String evaluCualitativo = "";
-        for (Cualitativo cualitativo: selectCualitativos()) {
+        for (Cualitativo cualitativo : selectCualitativos()) {
             if (cualitativo.getId() == idCualitativo) {
                 evaluCualitativo = cualitativo.getCualitativo();
                 break;
@@ -1397,7 +1395,6 @@ public class DataBaseOperations {
         }
         return evaluCualitativo;
     }
-
 
     /*
         CRUD sobre la entidad Mantenimiento
@@ -1626,7 +1623,7 @@ public class DataBaseOperations {
 
     public boolean existMantemiento(Mantenimiento m) {
         boolean exist = false;
-        for (Mantenimiento mantenimiento: selectMantenimientos()) {
+        for (Mantenimiento mantenimiento : selectMantenimientos()) {
             if (mantenimiento.equals(m)) {
                 exist = true;
                 break;
@@ -1635,9 +1632,8 @@ public class DataBaseOperations {
         return exist;
     }
 
-
     /*
-        CRUD sobre la entidad Mantenimiento
+        CRUD sobre la entidad Mediciones
      */
     public long insertMediciones(Medicion medicion) {
         //Creo instancia para escribir en la base de datos
@@ -1661,7 +1657,7 @@ public class DataBaseOperations {
 
     public List<Medicion> selectMediciones() {
         //String con secuencia SQL para la búsqueda
-        String sqlSelectMediciones = "SELECT * FROM " + DataBaseContract.MantenimientosTable.TABLE_NAME;
+        String sqlSelectMediciones = "SELECT * FROM " + DataBaseContract.MedicionesVolTable.TABLE_NAME;
         return selectMediciones(sqlSelectMediciones);
     }
 
@@ -1690,7 +1686,7 @@ public class DataBaseOperations {
                 float valor6 = cursor.getFloat(7);
                 float valor7 = cursor.getFloat(8);
                 float valor8 = cursor.getFloat(9);
-                float valor9 = cursor.getFloat(1);
+                float valor9 = cursor.getFloat(10);
 
                 //Construyo objeto Medicion y lo añado a la lista
                 Medicion medicion = new Medicion(
@@ -1730,7 +1726,7 @@ public class DataBaseOperations {
             float valor6 = cursor.getFloat(7);
             float valor7 = cursor.getFloat(8);
             float valor8 = cursor.getFloat(9);
-            float valor9 = cursor.getFloat(1);
+            float valor9 = cursor.getFloat(10);
 
             //Construyo objeto Medicion y lo añado a la lista
             medicion = new Medicion(
@@ -1785,10 +1781,10 @@ public class DataBaseOperations {
         return deleted > 0;
     }
 
-    public boolean existMedicion(Medicion m) {
+    public boolean existMedicion(Medicion medicion) {
         boolean exist = false;
-        for (Medicion medicion: selectMediciones()) {
-            if (medicion.equals(m)) {
+        for (Medicion m : selectMediciones()) {
+            if (m.equals(medicion)) {
                 exist = true;
                 break;
             }
@@ -1796,11 +1792,11 @@ public class DataBaseOperations {
         return exist;
     }
 
-    public int getIdOfMedicion(Medicion m) {
+    public int getIdOfMedicion(Medicion medicion) {
         int idMedicion = -1;
-        for (Medicion medicion: selectMediciones()) {
-            if (medicion.equals(m)) {
-                idMedicion = medicion.getId();
+        for (Medicion m : selectMediciones()) {
+            if (m.equals(medicion)) {
+                idMedicion = m.getId();
                 break;
             }
         }
