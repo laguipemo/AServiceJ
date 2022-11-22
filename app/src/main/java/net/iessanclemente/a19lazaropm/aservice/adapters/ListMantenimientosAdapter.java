@@ -116,6 +116,7 @@ public class ListMantenimientosAdapter extends RecyclerView.Adapter<ListMantenim
                             showSupervisorPinDialog(pos);
                             break;
                         case R.id.menuItemShowReport:
+                            createReportProgressBar.setVisibility(View.VISIBLE);
                             new Thread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -127,7 +128,6 @@ public class ListMantenimientosAdapter extends RecyclerView.Adapter<ListMantenim
                                     activityResultLauncher.launch(intent);
                                 }
                             }).start();
-                            createReportProgressBar.setVisibility(View.VISIBLE);
                             break;
                         case R.id.menuItemSendReport:
                             if (templatePdf != null) {
@@ -219,15 +219,23 @@ public class ListMantenimientosAdapter extends RecyclerView.Adapter<ListMantenim
     }
 
     private void deletMantenimiento(int pos, DataBaseOperations datos, int idMantenimiento) {
-        boolean isMantenimientoDeleted = datos.deleteMantenimiento(idMantenimiento);
-        if (isMantenimientoDeleted) {
-            listElementsMantenimientos.remove(pos);
-            notifyItemRemoved(pos);
-            Toast.makeText(
-                    context,
-                    "Borrado Mantenimiento",
-                    Toast.LENGTH_SHORT).show();
-        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomAlertDialog);
+        builder.setTitle(R.string.delete)
+                .setIcon(R.drawable.ic_baseline_error_outline_24)
+                .setMessage(R.string.message_alert_delete)
+                .setPositiveButton(R.string.accept, (dialog, which) -> {
+                    boolean isMantenimientoDeleted = datos.deleteMantenimiento(idMantenimiento);
+                    if (isMantenimientoDeleted) {
+                        listElementsMantenimientos.remove(pos);
+                        notifyItemRemoved(pos);
+                        Toast.makeText(
+                                context,"Borrado Mantenimiento", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, (dialog, which) -> {
+                    dialog.dismiss();
+                })
+                .create().show();
     }
 
     public void createReportPdf(int pos, DataBaseOperations db, int manteniId) {
