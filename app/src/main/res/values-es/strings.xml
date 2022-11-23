@@ -99,11 +99,12 @@
     <string name="the_cupboard">la vitrina</string>
     <string name="the_maintenance">el mantenimiento</string>
     <string name="logout">Salir</string>
-    <string name="message_logut">¿Está seguro qeu de desea cerrar la app?</string>
+    <string name="message_logut">¿Está seguro que de desea cerrar la app?</string>
     <string name="lux">lux</string>
     <string name="label_valor_light">Iluminación:</string>
     <string name="label_valor_sound">Sonido:</string>
-    <string name="measurement_instruments_used">Insturmentos de medida utilizados</string>
+    <string name="measurement_instruments_used">Instrumentos de medida utilizados</string>
     <string name="elipse_button">···</string>
+    <string name="dba">dBA</string>
 
 </resources>
