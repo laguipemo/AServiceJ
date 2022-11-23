@@ -38,6 +38,10 @@ public class FichaMantenimientoActivity extends AppCompatActivity {
     private TextView fichaManteniEvaluFuncGrifosMonoredTextView;
     private TextView fichaManteniValorVolumenExtraccionRealTextView;
     private TextView fichaManteniEvaluVolumExtraccionRealTextView;
+    private TextView fichaManteniValorLightTextView;
+    private TextView fichaManteniEvaluLightTextView;
+    private TextView fichaManteniValorSoundTextView;
+    private TextView fichaManteniEvaluSoundTextView;
     private RadioGroup fichaManteniAcuerdoNormasReguRadioGroup;
     private RadioButton fichaManteniAcuerdoNormasReguSiRadioButton;
     private RadioButton fichaManteniAcuerdoNormasReguNoRadioButton;
@@ -89,6 +93,10 @@ public class FichaMantenimientoActivity extends AppCompatActivity {
         fichaManteniEvaluAutoproteccionTextView = findViewById(R.id.fichaManteniEvaluAutoproteccionTextView);
         fichaManteniEvaluFuncGrifosMonoredTextView = findViewById(R.id.fichaManteniEvaluFuncGrifosMonoredTextView);
         fichaManteniValorVolumenExtraccionRealTextView = findViewById(R.id.fichaManteniValorVolumenExtraccionRealTextView);
+        fichaManteniValorLightTextView = findViewById(R.id.fichaManteniValorLightTextView);
+        fichaManteniEvaluLightTextView = findViewById(R.id.fichaManteniEvaluLightTextView);
+        fichaManteniValorSoundTextView = findViewById(R.id.fichaManteniValorSoundTextView);
+        fichaManteniEvaluSoundTextView = findViewById(R.id.fichaManteniEvaluSoundTextView);
         fichaManteniEvaluVolumExtraccionRealTextView = findViewById(R.id.fichaManteniEvaluVolExtraccionTextView);
         fichaManteniAcuerdoNormasReguRadioGroup = findViewById(R.id.fichaManteniAcuerdoNormasReguRadioGroup);
         fichaManteniAcuerdoNormasReguSiRadioButton = findViewById(R.id.fichaManteniAcuerdoNormasReguSiRadioButton);
@@ -129,16 +137,27 @@ public class FichaMantenimientoActivity extends AppCompatActivity {
                     datos.getCualitativoWithId(mantenimiento.getFuncGuillo()));
             fichaManteniEvaluEstadoGeneralGuilloTextView.setText(
                     datos.getCualitativoWithId(mantenimiento.getEstadoGuillo()));
-            fichaManteniValorFuerzaDesplazaGuilloTextView.setText(
-                    String.valueOf(mantenimiento.getValFuerzaGuillo()));
+
+            if (Float.compare(mantenimiento.getValFuerzaGuillo(), 0.00F) != 0 ){
+                fichaManteniValorFuerzaDesplazaGuilloTextView.setText(
+                        String.format(
+                                Locale.getDefault(),
+                                "%.2f",
+                                mantenimiento.getValFuerzaGuillo())
+                );
+            } else {
+                fichaManteniValorFuerzaDesplazaGuilloTextView.setText("");
+            }
             fichaManteniEvaluFuerzaDesplazaGuilloTextView.setText(
                     datos.getCualitativoWithId(mantenimiento.getFuerzaGuillo()));
+
             fichaManteniEvaluControlPresenciaTextView.setText(
                     datos.getCualitativoWithId(mantenimiento.getCtrlPresencia()));
             fichaManteniEvaluAutoproteccionTextView.setText(
                     datos.getCualitativoWithId(mantenimiento.getAutoproteccion()));
             fichaManteniEvaluFuncGrifosMonoredTextView.setText(
                     datos.getCualitativoWithId(mantenimiento.getGrifosMonored()));
+
             fichaManteniValorVolumenExtraccionRealTextView.setText(
                     String.format(Locale.getDefault(),
                             "%.2f",
@@ -147,6 +166,36 @@ public class FichaMantenimientoActivity extends AppCompatActivity {
                                     datos.getGuillotinaWithIdLongitud(vitrina.getIdLongitud()))));
             fichaManteniEvaluVolumExtraccionRealTextView.setText(
                     datos.getCualitativoWithId(mantenimiento.getEvaluVolExtrac()));
+
+
+            if (Float.compare(mantenimiento.getValLight(), 0.00F) != 0 ){
+                fichaManteniValorLightTextView.setText(
+                        String.format(
+                                Locale.getDefault(),
+                                "%.2f",
+                                mantenimiento.getValLight())
+                );
+            } else {
+                fichaManteniValorLightTextView.setText("");
+            }
+            fichaManteniEvaluLightTextView.setText(
+                    datos.getCualitativoWithId(mantenimiento.getLight()));
+
+
+            if (Float.compare(mantenimiento.getValSound(), 0.00F) != 0 ){
+                fichaManteniValorSoundTextView.setText(
+                        String.format(
+                                Locale.getDefault(),
+                                "%.2f",
+                                mantenimiento.getValSound())
+                );
+            } else {
+                fichaManteniValorSoundTextView.setText("");
+            }
+            fichaManteniEvaluSoundTextView.setText(
+                    datos.getCualitativoWithId(mantenimiento.getSound()));
+
+
             fichaManteniAcuerdoNormasReguSiRadioButton.setChecked(mantenimiento.isAcordeNormasReguSi());
             fichaManteniAcuerdoNormasReguNoRadioButton.setChecked(mantenimiento.isAcordeNormasReguNo());
             fichaManteniNecesarioRepaSiRadioButton.setChecked(mantenimiento.isNecesarioRepaSi());

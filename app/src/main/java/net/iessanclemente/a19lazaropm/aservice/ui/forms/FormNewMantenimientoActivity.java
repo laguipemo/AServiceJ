@@ -9,7 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -33,6 +36,7 @@ import net.iessanclemente.a19lazaropm.aservice.database.dto.Cualitativo;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Longitud;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Mantenimiento;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Tecnico;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.TipoLongFlow;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Vitrina;
 import net.iessanclemente.a19lazaropm.aservice.ui.extra.MedicionesVolumenExtraccionActivity;
 
@@ -57,13 +61,20 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
     private Spinner evaluFijacionPiezasRigidasSpnner;
     private Spinner evaluFuncionamientoGuilloSpinner;
     private Spinner evaluEstadoGeneralGuilloSpinner;
+    private TextView labelFuezaDesplazaGuilloNewManteniTextView;
     private EditText valorFuerzaDesplazaGuilloNewManteniEditText;
     private Spinner evaluFuerzaDesplazaGuilloSpinner;
     private Spinner evaluControlPresenciaSpinner;
     private Spinner evaluAutoproteccionSpinner;
     private Spinner evaluFuncGrifosMonoredSpinner;
+    private TextView labelVolumExtraccionRealNewManteniTextView;
     private EditText valorVolumenExtraccionRealNewManteniEditText;
+    private TextView unidadVolumenExtraccionRealNewManteniTextView;
     private Spinner evaluVolumenExtraccionRealSpinner;
+    private EditText valorLightNewManteniEditText;
+    private Spinner evaluLightSpinner;
+    private EditText valorSoundNewManteniEditText;
+    private Spinner evaluSoundSpinner;
     private RadioButton acuerdoNormasReguSiNewManteniRadioButton;
     private RadioButton acuerdoNormasReguNoNewManteniRadioButton;
     private RadioButton necesarioRepaSiNewManteniRadioButton;
@@ -84,7 +95,7 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
     private String nombreEmpresa;
     private int idVitrina;
     private Vitrina vitrina;
-    private int idMedicion;
+    private int idMedicion = -1;
     private int idMantenimiento;
 
     private InputMethodManager virtualKeyboard;
@@ -109,57 +120,35 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
         // instancia del teclado virtual
         virtualKeyboard = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 
-        fechaNewMantenimientoEditText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDatePickerDialog();
+        fechaNewMantenimientoEditText.setOnClickListener(v -> showDatePickerDialog());
+
+        newMantenimientoCancelButton.setOnClickListener(v -> sendResult("", RESULT_CANCELED));
+
+        newMantenimientoAcceptButton.setOnClickListener(v -> {
+            boolean isAdded = addMantenimiento();
+            if (isAdded) {
+                sendResult(fechaNewMantenimientoEditText.getText().toString(), RESULT_OK);
+            } else {
+                sendResult("", RESULT_ADD_PROBLEM);
             }
         });
 
-        newMantenimientoCancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendResult("", RESULT_CANCELED);
+        tecnicoNombreNewManteniAutoCompleteTextView
+                .setOnItemClickListener((parent, view, position, id) ->
+                        virtualKeyboard.hideSoftInputFromWindow(view.getApplicationWindowToken(), 0));
+
+        valorFuerzaDesplazaGuilloNewManteniEditText.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
+                virtualKeyboard.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
             }
+            return false;
         });
 
-        newMantenimientoAcceptButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean isAdded = addMantenimiento();
-                if (isAdded) {
-                    sendResult(fechaNewMantenimientoEditText.getText().toString(), RESULT_OK);
-                } else {
-                    sendResult("", RESULT_ADD_PROBLEM);
-                }
-            }
-        });
-
-        tecnicoNombreNewManteniAutoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                virtualKeyboard.hideSoftInputFromWindow(view.getApplicationWindowToken(), 0);
-            }
-        });
-
-        valorFuerzaDesplazaGuilloNewManteniEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
-                    virtualKeyboard.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
-                }
-                return false;
-            }
-        });
-
-        valorVolumenExtraccionRealNewManteniEditText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(
-                        FormNewMantenimientoActivity.this,
-                        MedicionesVolumenExtraccionActivity.class);
-                activityResultLauncher.launch(intent);
-            }
+        valorVolumenExtraccionRealNewManteniEditText.setOnClickListener(v -> {
+            Intent intent = new Intent(
+                    FormNewMantenimientoActivity.this,
+                    MedicionesVolumenExtraccionActivity.class);
+            activityResultLauncher.launch(intent);
         });
     }
 
@@ -203,16 +192,24 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
                 evaluFuncionamientoGuilloSpinner.getSelectedItem().toString());
         int estadoGuillotina = datos.getIdOfCualitativoWithEvalu(
                 evaluEstadoGeneralGuilloSpinner.getSelectedItem().toString());
-        float valFuerzaGuillo = Float.parseFloat(
-                valorFuerzaDesplazaGuilloNewManteniEditText.getText().toString());
+
+        float valFuerzaGuillo;
+        try {
+            valFuerzaGuillo = Float.parseFloat(
+                    valorFuerzaDesplazaGuilloNewManteniEditText.getText().toString());
+        } catch (Exception e) {
+            valFuerzaGuillo = 0f;
+        }
         int fuerzaGuillotina = datos.getIdOfCualitativoWithEvalu(
                 evaluFuerzaDesplazaGuilloSpinner.getSelectedItem().toString());
+
         int ctrlPresencia = datos.getIdOfCualitativoWithEvalu(
                 evaluControlPresenciaSpinner.getSelectedItem().toString());
         int autoproteccion = datos.getIdOfCualitativoWithEvalu(
                 evaluAutoproteccionSpinner.getSelectedItem().toString());
         int grifosMonored = datos.getIdOfCualitativoWithEvalu(
                 evaluFuncGrifosMonoredSpinner.getSelectedItem().toString());
+
         if (idMedicion < 0) {
             Toast.makeText(
                     FormNewMantenimientoActivity.this,
@@ -222,6 +219,23 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
         }
         int evaluVolExtrac = datos.getIdOfCualitativoWithEvalu(
                 evaluVolumenExtraccionRealSpinner.getSelectedItem().toString());
+
+        float valLight;
+        try {
+            valLight = Float.parseFloat(valorLightNewManteniEditText.getText().toString());
+        } catch (NumberFormatException e) {
+            valLight = 0f;
+        }
+        int light = datos.getIdOfCualitativoWithEvalu(evaluLightSpinner.getSelectedItem().toString());
+
+        float valSound;
+        try {
+            valSound = Float.parseFloat(valorSoundNewManteniEditText.getText().toString());
+        } catch (NumberFormatException e) {
+            valSound = 0f;
+        }
+        int sound = datos.getIdOfCualitativoWithEvalu(evaluSoundSpinner.getSelectedItem().toString());
+
         boolean acordeNormasSi = acuerdoNormasReguSiNewManteniRadioButton.isChecked();
         boolean acordeNormasNo = acuerdoNormasReguNoNewManteniRadioButton.isChecked();
         if (!acordeNormasSi && !acordeNormasNo) {
@@ -246,8 +260,8 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
                 idMantenimiento, fecha, idVitrina, puestaMarcha, idTecnico, segunDin, segunEn, ctrlDigital,
                 sistExtraccion, protSuperficie, juntas, fijacion, funcGuillotina, estadoGuillotina,
                 valFuerzaGuillo, fuerzaGuillotina, ctrlPresencia, autoproteccion, grifosMonored,
-                idMedicion, evaluVolExtrac, acordeNormasSi, acordeNormasNo, necesarioRepaSi, necesarioRepaNo,
-                comentario);
+                idMedicion, evaluVolExtrac, valLight, light, valSound, sound, acordeNormasSi, acordeNormasNo,
+                necesarioRepaSi, necesarioRepaNo, comentario);
         //compruebo si este mantenimiento ya existe para saber si añadir o actualizar
         boolean existIdMantenimiento = datos.getIdsOfMantenimientosForVitrina(idVitrina).contains(idMantenimiento);
         if (!existIdMantenimiento) {
@@ -290,6 +304,29 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
                                     String.format(Locale.getDefault(),
                                             "%.2f",
                                             volumenExtraccion));
+                            Vitrina vitrina = datos.selectVitrinaWithId(idVitrina);
+                            TipoLongFlow tipoLongFlow = datos.selectTipoLongFlowWithId(
+                                    vitrina.getIdTipo(), vitrina.getIdLongitud());
+                            if (volumenExtraccion >= tipoLongFlow.getFlowMin() &&
+                                    volumenExtraccion <= tipoLongFlow.getFlowMax()
+                            ) {
+                                evaluVolumenExtraccionRealSpinner.setSelection(
+                                        datos.getIdOfCualitativoWithEvalu("O.K.") - 1);
+                                labelVolumExtraccionRealNewManteniTextView.setTextColor(
+                                        Color.parseColor("BLACK"));
+                                unidadVolumenExtraccionRealNewManteniTextView.setTextColor(
+                                        Color.parseColor("BLACK"));
+                            } if (volumenExtraccion < tipoLongFlow.getFlowMin()
+                                    || volumenExtraccion > tipoLongFlow.getFlowMax()
+                            ){
+                                evaluVolumenExtraccionRealSpinner.setSelection(
+                                        datos.getIdOfCualitativoWithEvalu("R.R.") - 1);
+                                evaluVolumenExtraccionRealSpinner.setEnabled(false);
+                                labelVolumExtraccionRealNewManteniTextView.setTextColor(
+                                        Color.parseColor("RED"));
+                                unidadVolumenExtraccionRealNewManteniTextView.setTextColor(
+                                        Color.parseColor("RED"));
+                            }
                         }
                     } else if (result != null && result.getResultCode() == RESULT_CANCELED) {
                         Toast.makeText(
@@ -378,6 +415,7 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
         evaluFuncionamientoGuilloSpinner.setAdapter(cualitativoAdapter);
         evaluEstadoGeneralGuilloSpinner = findViewById(R.id.evaluEstadoGeneralGuilloSpinner);
         evaluEstadoGeneralGuilloSpinner.setAdapter(cualitativoAdapter);
+        labelFuezaDesplazaGuilloNewManteniTextView = findViewById(R.id.labelFuezaDesplazaGuilloNewManteniTextView);
         valorFuerzaDesplazaGuilloNewManteniEditText = findViewById(R.id.valorFuerzaDesplazaGuilloNewManteniEditText);
         evaluFuerzaDesplazaGuilloSpinner = findViewById(R.id.evaluFuerzaDesplazaGuilloSpinner);
         evaluFuerzaDesplazaGuilloSpinner.setAdapter(cualitativoAdapter);
@@ -386,12 +424,21 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
         evaluAutoproteccionSpinner = findViewById(R.id.evaluAutoproteccionSpinner);
         evaluAutoproteccionSpinner.setAdapter(cualitativoAdapter);
         evaluFuncGrifosMonoredSpinner = findViewById(R.id.evaluFuncGrifosMonoredSpinner);
+        evaluFuncGrifosMonoredSpinner.setAdapter(cualitativoAdapter);
 
+        labelVolumExtraccionRealNewManteniTextView = findViewById(R.id.labelVolumExtraccionRealNewManteniTextView);
         valorVolumenExtraccionRealNewManteniEditText = findViewById(R.id.valorVolumenExtraccionRealNewManteniEditText);
+        unidadVolumenExtraccionRealNewManteniTextView = findViewById(R.id.unidadVolumenExtraccionRealNewManteniTextView);
         evaluVolumenExtraccionRealSpinner = findViewById(R.id.evaluVolumenExtraccionRealSpinner);
         evaluVolumenExtraccionRealSpinner.setAdapter(cualitativoAdapter);
 
-        evaluFuncGrifosMonoredSpinner.setAdapter(cualitativoAdapter);
+        valorLightNewManteniEditText = findViewById(R.id.valorLightNewManteniEditText);
+        evaluLightSpinner = findViewById(R.id.evaluLightSpinner);
+        evaluLightSpinner.setAdapter(cualitativoAdapter);
+        valorSoundNewManteniEditText = findViewById(R.id.valorSoundNewManteniEditText);
+        evaluSoundSpinner = findViewById(R.id.evaluSoundSpinner);
+        evaluSoundSpinner.setAdapter(cualitativoAdapter);
+
         acuerdoNormasReguSiNewManteniRadioButton = findViewById(R.id.acuerdoNormasReguSiNewManteniRadioButton);
         acuerdoNormasReguNoNewManteniRadioButton = findViewById(R.id.acuerdoNormasReguNoNewManteniRadioButton);
         necesarioRepaSiNewManteniRadioButton = findViewById(R.id.necesarioRepaSiNewManteniRadioButton);
@@ -427,9 +474,15 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
                 evaluFijacionPiezasRigidasSpnner.setSelection(mantenimientoOld.getFijacion()-1);
                 evaluFuncionamientoGuilloSpinner.setSelection(mantenimientoOld.getFuncGuillo()-1);
                 evaluEstadoGeneralGuilloSpinner.setSelection(mantenimientoOld.getEstadoGuillo()-1);
-                valorFuerzaDesplazaGuilloNewManteniEditText.setText(
-                        String.format(
-                                Locale.getDefault(),"%.2f", mantenimientoOld.getValFuerzaGuillo()));
+
+                float fuerzaGuilloOld = mantenimientoOld.getFuerzaGuillo();
+                if (Float.compare(fuerzaGuilloOld, 0.00F) != 0) {
+                    valorFuerzaDesplazaGuilloNewManteniEditText.setText(
+                            String.format(
+                                    Locale.getDefault(), "%.2f", mantenimientoOld.getValFuerzaGuillo()));
+                } else {
+                    valorFuerzaDesplazaGuilloNewManteniEditText.setText("");
+                }
 
                 evaluFuerzaDesplazaGuilloSpinner.setSelection(mantenimientoOld.getFuerzaGuillo()-1);
                 evaluControlPresenciaSpinner.setSelection(mantenimientoOld.getCtrlPresencia()-1);
@@ -446,6 +499,14 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
                                 datos.getVolumenExtraccionReal(
                                         idMedicion,
                                         longitudOld.getLogintudGillotina())));
+
+                valorLightNewManteniEditText.setText(
+                        String.format(
+                                Locale.getDefault(),"%.2f", mantenimientoOld.getValLight()));
+                valorSoundNewManteniEditText.setText(
+                        String.format(
+                                Locale.getDefault(),"%.2f", mantenimientoOld.getValSound()));
+
                 evaluVolumenExtraccionRealSpinner.setSelection(mantenimientoOld.getEvaluVolExtrac()-1);
                 acuerdoNormasReguSiNewManteniRadioButton.setChecked(mantenimientoOld.isAcordeNormasReguSi());
                 acuerdoNormasReguNoNewManteniRadioButton.setChecked(mantenimientoOld.isAcordeNormasReguNo());

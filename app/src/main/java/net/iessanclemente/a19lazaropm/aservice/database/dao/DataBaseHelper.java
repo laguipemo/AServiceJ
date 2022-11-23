@@ -160,6 +160,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                         DataBaseContract.MantenimientosTable.COL_EVALU_VOL_EXTRAC + " INTEGER REFERENCES " +
                         DataBaseContract.CualitativosTable.TABLE_NAME + " (" +
                         DataBaseContract.CualitativosTable._ID + "), " +
+                        DataBaseContract.MantenimientosTable.COL_VAL_LIGHT + " DECIMAL(5,2)," +
+                        DataBaseContract.MantenimientosTable.COL_LIGHT + " INTEGER REFERENCES " +
+                        DataBaseContract.CualitativosTable.TABLE_NAME + " (" +
+                        DataBaseContract.CualitativosTable._ID + "), " +
+                        DataBaseContract.MantenimientosTable.COL_VAL_SOUND + " DECIMAL(5,2)," +
+                        DataBaseContract.MantenimientosTable.COL_SOUND + " INTEGER REFERENCES " +
+                        DataBaseContract.CualitativosTable.TABLE_NAME + " (" +
+                        DataBaseContract.CualitativosTable._ID + "), " +
                         DataBaseContract.MantenimientosTable.COL_ACORDE_NORMAS_SI + " BOOLEAN," +
                         DataBaseContract.MantenimientosTable.COL_ACORDE_NORMAS_NO + " BOOLEAN," +
                         DataBaseContract.MantenimientosTable.COL_NECESARIO_REPA_SI + " BOOLEAN," +
@@ -547,6 +555,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "                grifos_monored,\n" +
                 "                id_medicion,\n" +
                 "                evalu_vol_extrac,\n" +
+                "                val_light,\n" +
+                "                light,\n" +
+                "                val_sound,\n" +
+                "                sound,\n" +
                 "                acorde_normas_si,\n" +
                 "                acorde_normas_no,\n" +
                 "                necesario_repa_si,\n" +
@@ -575,6 +587,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "                2,\n" +
                 "                1,\n" +
                 "                2,\n" +
+                "                835.0,\n" +
+                "                1,\n" +
+                "                57.2,\n" +
+                "                1,\n" +
                 "                1,\n" +
                 "                0,\n" +
                 "                0,\n" +
@@ -604,6 +620,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "                grifos_monored,\n" +
                 "                id_medicion,\n" +
                 "                evalu_vol_extrac,\n" +
+                "                val_light,\n" +
+                "                light,\n" +
+                "                val_sound,\n" +
+                "                sound,\n" +
                 "                acorde_normas_si,\n" +
                 "                acorde_normas_no,\n" +
                 "                necesario_repa_si,\n" +
@@ -632,6 +652,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "                2,\n" +
                 "                2,\n" +
                 "                2,\n" +
+                "                740.0,\n" +
+                "                1,\n" +
+                "                55.4,\n" +
+                "                1,\n" +
                 "                1,\n" +
                 "                0,\n" +
                 "                0,\n" +
@@ -661,6 +685,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "                grifos_monored,\n" +
                 "                id_medicion,\n" +
                 "                evalu_vol_extrac,\n" +
+                "                val_light,\n" +
+                "                light,\n" +
+                "                val_sound,\n" +
+                "                sound,\n" +
                 "                acorde_normas_si,\n" +
                 "                acorde_normas_no,\n" +
                 "                necesario_repa_si,\n" +
@@ -689,6 +717,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "                2,\n" +
                 "                3,\n" +
                 "                2,\n" +
+                "                870.0,\n" +
+                "                1,\n" +
+                "                59.2,\n" +
+                "                1,\n" +
                 "                1,\n" +
                 "                0,\n" +
                 "                0,\n" +

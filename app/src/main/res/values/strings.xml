@@ -100,5 +100,9 @@
     <string name="the_maintenance">the maintenance</string>
     <string name="logout">Logout</string>
     <string name="message_logut">Are your sure you want to close the app?</string>
+    <string name="lux">lux</string>
+    <string name="dba">dBA</string>
+    <string name="label_valor_light">Ilumination:</string>
+    <string name="label_valor_sound">Sound:</string>
 
 </resources>

@@ -1424,6 +1424,10 @@ public class DataBaseOperations {
         contentValues.put(DataBaseContract.MantenimientosTable.COL_GRIFOS_MONORED, mantenimiento.getGrifosMonored());
         contentValues.put(DataBaseContract.MantenimientosTable.COL_ID_MEDICION, mantenimiento.getIdMedicion());
         contentValues.put(DataBaseContract.MantenimientosTable.COL_EVALU_VOL_EXTRAC, mantenimiento.getEvaluVolExtrac());
+        contentValues.put(DataBaseContract.MantenimientosTable.COL_VAL_LIGHT, mantenimiento.getValLight());
+        contentValues.put(DataBaseContract.MantenimientosTable.COL_LIGHT, mantenimiento.getLight());
+        contentValues.put(DataBaseContract.MantenimientosTable.COL_VAL_SOUND, mantenimiento.getValSound());
+        contentValues.put(DataBaseContract.MantenimientosTable.COL_SOUND, mantenimiento.getSound());
         contentValues.put(DataBaseContract.MantenimientosTable.COL_ACORDE_NORMAS_SI, mantenimiento.isAcordeNormasReguSi());
         contentValues.put(DataBaseContract.MantenimientosTable.COL_ACORDE_NORMAS_NO, mantenimiento.isAcordeNormasReguNo());
         contentValues.put(DataBaseContract.MantenimientosTable.COL_NECESARIO_REPA_SI, mantenimiento.isNecesarioRepaSi());
@@ -1476,18 +1480,22 @@ public class DataBaseOperations {
                 int grifosMonored = cursor.getInt(18);
                 int idMedicion = cursor.getInt(19);
                 int evaluVolExtrac = cursor.getInt(20);
-                boolean isAcordeNormasReguSi = cursor.getInt(21) > 0;
-                boolean isAcordeNormasReguNo = cursor.getInt(22) > 0;
-                boolean isNecesarioRepaSi = cursor.getInt(23) > 0;
-                boolean isNecesarioRepaNo = cursor.getInt(24) > 0;
-                String comentario = cursor.getString(25);
+                float valLight = cursor.getFloat(21);
+                int light = cursor.getInt(22);
+                float valSound = cursor.getFloat(23);
+                int sound = cursor.getInt(24);
+                boolean isAcordeNormasReguSi = cursor.getInt(25) > 0;
+                boolean isAcordeNormasReguNo = cursor.getInt(26) > 0;
+                boolean isNecesarioRepaSi = cursor.getInt(27) > 0;
+                boolean isNecesarioRepaNo = cursor.getInt(28) > 0;
+                String comentario = cursor.getString(29);
                 //Construyo objeto Mantenimiento y lo añado a la lista
                 Mantenimiento mantenimiento = new Mantenimiento(
                         id, fecha, idVitrina, puestaMarcha, idTecnico, segunDin, segunEn, funCtrlDigi,
                         visSistExtr, protSuperf, juntas, fijacion, funcGuillo, estadoGuillo,
                         valFuerzaGuillo, fuerzaGuillo, ctrlPresencia, autoproteccion, grifosMonored,
-                        idMedicion, evaluVolExtrac, isAcordeNormasReguSi, isAcordeNormasReguNo, isNecesarioRepaSi,
-                        isNecesarioRepaNo, comentario);
+                        idMedicion, evaluVolExtrac, valLight, light, valSound, sound, isAcordeNormasReguSi,
+                        isAcordeNormasReguNo, isNecesarioRepaSi, isNecesarioRepaNo, comentario);
                 mantenimientoSelected.add(mantenimiento);
             } while (cursor.moveToNext());
         }
@@ -1534,18 +1542,22 @@ public class DataBaseOperations {
             int grifosMonored = cursor.getInt(18);
             int idMedicion = cursor.getInt(19);
             int evaluVolExtrac = cursor.getInt(20);
-            boolean isAcordeNormasReguSi = cursor.getInt(21) > 0;
-            boolean isAcordeNormasReguNo = cursor.getInt(22) > 0;
-            boolean isNecesarioRepaSi = cursor.getInt(23) > 0;
-            boolean isNecesarioRepaNo = cursor.getInt(24) > 0;
-            String comentario = cursor.getString(25);
+            float valLight = cursor.getFloat(21);
+            int light = cursor.getInt(22);
+            float valSound = cursor.getFloat(23);
+            int sound = cursor.getInt(24);
+            boolean isAcordeNormasReguSi = cursor.getInt(25) > 0;
+            boolean isAcordeNormasReguNo = cursor.getInt(26) > 0;
+            boolean isNecesarioRepaSi = cursor.getInt(27) > 0;
+            boolean isNecesarioRepaNo = cursor.getInt(28) > 0;
+            String comentario = cursor.getString(29);
             //Construyo objeto Mantenimiento para devolverlo
             mantenimiento = new Mantenimiento(
                     id, fecha, idVitrina, puestaMarcha, idTecnico, segunDin, segunEn, funCtrlDigi,
                     visSistExtr, protSuperf, juntas, fijacion, funcGuillo, estadoGuillo,
                     valFuerzaGuillo, fuerzaGuillo, ctrlPresencia, autoproteccion, grifosMonored,
-                    idMedicion, evaluVolExtrac, isAcordeNormasReguSi, isAcordeNormasReguNo, isNecesarioRepaSi,
-                    isNecesarioRepaNo, comentario);
+                    idMedicion, evaluVolExtrac, valLight, light, valSound, sound, isAcordeNormasReguSi,
+                    isAcordeNormasReguNo, isNecesarioRepaSi, isNecesarioRepaNo, comentario);
         }
         cursor.close();
         return mantenimiento;
@@ -1576,6 +1588,10 @@ public class DataBaseOperations {
         contentValues.put(DataBaseContract.MantenimientosTable.COL_GRIFOS_MONORED, mantenimiento.getGrifosMonored());
         contentValues.put(DataBaseContract.MantenimientosTable.COL_ID_MEDICION, mantenimiento.getIdMedicion());
         contentValues.put(DataBaseContract.MantenimientosTable.COL_EVALU_VOL_EXTRAC, mantenimiento.getEvaluVolExtrac());
+        contentValues.put(DataBaseContract.MantenimientosTable.COL_VAL_LIGHT, mantenimiento.getValLight());
+        contentValues.put(DataBaseContract.MantenimientosTable.COL_LIGHT, mantenimiento.getLight());
+        contentValues.put(DataBaseContract.MantenimientosTable.COL_VAL_SOUND, mantenimiento.getValSound());
+        contentValues.put(DataBaseContract.MantenimientosTable.COL_SOUND, mantenimiento.getSound());
         contentValues.put(DataBaseContract.MantenimientosTable.COL_ACORDE_NORMAS_SI, mantenimiento.isAcordeNormasReguSi());
         contentValues.put(DataBaseContract.MantenimientosTable.COL_ACORDE_NORMAS_NO, mantenimiento.isAcordeNormasReguNo());
         contentValues.put(DataBaseContract.MantenimientosTable.COL_NECESARIO_REPA_SI, mantenimiento.isNecesarioRepaSi());

@@ -107,6 +107,12 @@ public class DataBaseContract {
         public static final String COL_GRIFOS_MONORED = "grifos_monored";
         public static final String COL_ID_MEDICION = "id_medicion";
         public static final String COL_EVALU_VOL_EXTRAC = "evalu_vol_extrac";
+
+        public static final String COL_VAL_LIGHT = "val_light";
+        public static final String COL_LIGHT = "light";
+        public static final String COL_VAL_SOUND = "val_sound";
+        public static final String COL_SOUND = "sound";
+
         public static final String COL_ACORDE_NORMAS_SI = "acorde_normas_si";
         public static final String COL_ACORDE_NORMAS_NO = "acorde_normas_no";
         public static final String COL_NECESARIO_REPA_SI = "necesario_repa_si";

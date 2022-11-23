@@ -60,7 +60,7 @@ public class FichaVitrinaActivity extends AppCompatActivity {
                         if (result.getData() != null && result.getData().hasExtra("MANTENIMIENTO")) {
                             Toast.makeText(
                                     FichaVitrinaActivity.this,
-                                    "Adicionado manenimiento fecha: " + result.getData().getStringExtra("MANTENIMIENTO"),
+                                    "Adicionado mantenimiento fecha: " + result.getData().getStringExtra("MANTENIMIENTO"),
                                     Toast.LENGTH_SHORT).show();
                         }
                         init();
@@ -68,14 +68,15 @@ public class FichaVitrinaActivity extends AppCompatActivity {
                         if (result.getData() != null && result.getData().hasExtra("MANTENIMIENTO")) {
                            Toast.makeText(
                                 FichaVitrinaActivity.this,
-                                "Se canceló la adición del nuevo mantenimiento", Toast.LENGTH_SHORT).show();
+                                "Se canceló la adición del nuevo mantenimiento",
+                                   Toast.LENGTH_SHORT).show();
                         }
                         progressBar.setVisibility(View.GONE);
                     } else if (result != null && result.getResultCode() == RESULT_ADD_PROBLEM) {
                         if (result.getData() != null && result.getData().hasExtra("MANTENIMIENTO")) {
                             Toast.makeText(
                                     FichaVitrinaActivity.this,
-                                    "No se pudo crear mantenimiento con fecha: " + result.getData().getStringExtra("MANTENIMIENTO"),
+                                    "No se pudo crear mantenimiento",
                                     Toast.LENGTH_SHORT).show();
                         }
                         progressBar.setVisibility(View.GONE);

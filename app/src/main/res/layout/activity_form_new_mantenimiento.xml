@@ -577,13 +577,11 @@
                 app:layout_constraintTop_toTopOf="@+id/unidadVolumenExtraccionRealNewManteniTextView"
                 tools:text="999.99" />
 
-
             <TextView
                 android:id="@+id/unidadVolumenExtraccionRealNewManteniTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:inputType="numberDecimal"
                 android:text="@string/label_unidad_volumen_extraccion"
                 android:textColor="@color/primaryTextColor"
                 app:layout_constraintBottom_toBottomOf="@+id/evaluVolumenExtraccionRealSpinner"
@@ -606,6 +604,128 @@
                 app:layout_constraintTop_toBottomOf="@+id/evaluFuncGrifosMonoredSpinner" />
 
             <TextView
+                android:id="@+id/labelLightNewManteniTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:gravity="end|center_vertical"
+                android:labelFor="@id/evaluVolumenExtraccionRealSpinner"
+                android:text="@string/label_valor_light"
+                android:textColor="@color/primaryTextColor"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/valorLightNewManteniEditText"
+                app:layout_constraintEnd_toStartOf="@+id/valorLightNewManteniEditText"
+                app:layout_constraintStart_toStartOf="@+id/labelVolumExtraccionRealNewManteniTextView"
+                app:layout_constraintTop_toTopOf="@+id/valorLightNewManteniEditText" />
+
+            <EditText
+                android:id="@+id/valorLightNewManteniEditText"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:clickable="true"
+                android:focusable="false"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:minHeight="48dp"
+                android:singleLine="true"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/unidadLightNewManteniTextView"
+                app:layout_constraintEnd_toStartOf="@+id/unidadLightNewManteniTextView"
+                app:layout_constraintTop_toTopOf="@+id/unidadLightNewManteniTextView"
+                tools:text="999.99" />
+
+            <TextView
+                android:id="@+id/unidadLightNewManteniTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/lux"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintBottom_toBottomOf="@+id/evaluLightSpinner"
+                app:layout_constraintEnd_toStartOf="@+id/evaluLightSpinner"
+                app:layout_constraintTop_toTopOf="@+id/evaluLightSpinner" />
+
+            <Spinner
+                android:id="@+id/evaluLightSpinner"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/spinner_shape_transp_corner0_stroke2_primary"
+                android:backgroundTint="@color/primaryColor"
+                android:focusable="true"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:nextFocusForward="@id/acuerdoNormasReguNewManteniRadioGroup"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintEnd_toEndOf="@+id/evaluVolumenExtraccionRealSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/evaluVolumenExtraccionRealSpinner" />
+
+            <TextView
+                android:id="@+id/labelSoundNewManteniTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:gravity="end|center_vertical"
+                android:labelFor="@id/evaluVolumenExtraccionRealSpinner"
+                android:text="@string/label_valor_sound"
+                android:textColor="@color/primaryTextColor"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/valorSoundNewManteniEditText"
+                app:layout_constraintEnd_toStartOf="@+id/valorSoundNewManteniEditText"
+                app:layout_constraintStart_toStartOf="@+id/labelLightNewManteniTextView"
+                app:layout_constraintTop_toTopOf="@+id/valorSoundNewManteniEditText" />
+
+            <EditText
+                android:id="@+id/valorSoundNewManteniEditText"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:clickable="true"
+                android:focusable="false"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:minHeight="48dp"
+                android:singleLine="true"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/unidadSoundNewManteniTextView"
+                app:layout_constraintEnd_toStartOf="@+id/unidadSoundNewManteniTextView"
+                app:layout_constraintTop_toTopOf="@+id/unidadSoundNewManteniTextView"
+                tools:text="999.99" />
+
+            <TextView
+                android:id="@+id/unidadSoundNewManteniTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/dba"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintBottom_toBottomOf="@+id/evaluSoundSpinner"
+                app:layout_constraintEnd_toStartOf="@+id/evaluSoundSpinner"
+                app:layout_constraintTop_toTopOf="@+id/evaluSoundSpinner" />
+
+            <Spinner
+                android:id="@+id/evaluSoundSpinner"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/spinner_shape_transp_corner0_stroke2_primary"
+                android:backgroundTint="@color/primaryColor"
+                android:focusable="true"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:nextFocusForward="@id/acuerdoNormasReguNewManteniRadioGroup"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintEnd_toEndOf="@+id/evaluLightSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/evaluLightSpinner" />
+
+            <TextView
                 android:id="@+id/labelEvaluacionFinalNewManteniTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -614,8 +734,8 @@
                 android:textColor="@color/primaryTextColor"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/labelVolumExtraccionRealNewManteniTextView"
-                app:layout_constraintTop_toBottomOf="@+id/valorVolumenExtraccionRealNewManteniEditText" />
+                app:layout_constraintStart_toStartOf="@+id/labelSoundNewManteniTextView"
+                app:layout_constraintTop_toBottomOf="@+id/valorSoundNewManteniEditText" />
 
             <TextView
                 android:id="@+id/labelAcuerdoNormasReguNewManteniTextView"

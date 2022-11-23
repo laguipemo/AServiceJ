@@ -23,6 +23,10 @@ public class Mantenimiento {
     private int grifosMonored;
     private int idMedicion;
     private int evaluVolExtrac;
+    private float valLight;
+    private int light;
+    private float valSound;
+    private int sound;
     private boolean isAcordeNormasReguSi;
     private boolean isAcordeNormasReguNo;
     private boolean isNecesarioRepaSi;
@@ -37,9 +41,10 @@ public class Mantenimiento {
                          boolean segunDin, boolean segunEn, int funCtrlDigi, int visSistExtr,
                          int protSuperf, int juntas, int fijacion, int funcGuillo, int estadoGuillo,
                          float valFuerzaGuillo, int fuerzaGuillo, int ctrlPresencia, int autoproteccion,
-                         int grifosMonored, int idMedicion, int evaluVolExtrac, boolean isAcordeNormasReguSi,
-                         boolean isAcordeNormasReguNo, boolean isNecesarioRepaSi,
-                         boolean isNecesarioRepaNo, String comentario) {
+                         int grifosMonored, int idMedicion, int evaluVolExtrac, float valLight, int light,
+                         float valSound, int sound, boolean isAcordeNormasReguSi, boolean isAcordeNormasReguNo,
+                         boolean isNecesarioRepaSi, boolean isNecesarioRepaNo, String comentario
+    ) {
         this.id = id;
         this.fecha = fecha;
         this.idVitrina = idVitrina;
@@ -61,6 +66,10 @@ public class Mantenimiento {
         this.grifosMonored = grifosMonored;
         this.idMedicion = idMedicion;
         this.evaluVolExtrac = evaluVolExtrac;
+        this.valLight = valLight;
+        this.light = light;
+        this.valSound = valSound;
+        this.sound = sound;
         this.isAcordeNormasReguSi = isAcordeNormasReguSi;
         this.isAcordeNormasReguNo = isAcordeNormasReguNo;
         this.isNecesarioRepaSi = isNecesarioRepaSi;
@@ -236,6 +245,22 @@ public class Mantenimiento {
         this.evaluVolExtrac = evaluVolExtrac;
     }
 
+    public float getValLight() { return valLight; }
+
+    public void setValLight(float valLight) { this.valLight = valLight; }
+
+    public int getLight() { return light; }
+
+    public void setLight(int light) { this.light = light; }
+
+    public float getValSound() { return valSound; }
+
+    public void setValSound(float valSound) { this.valSound = valSound; }
+
+    public int getSound() { return sound; }
+
+    public void setSound(int sound) { this.sound = sound; }
+
     public boolean isAcordeNormasReguSi() {
         return isAcordeNormasReguSi;
     }
@@ -300,6 +325,10 @@ public class Mantenimiento {
                 ", grifosMonored=" + grifosMonored +
                 ", idMedicion=" + idMedicion +
                 ", evaluVolExtrac=" + evaluVolExtrac +
+                ", valLight=" + valLight +
+                ", light=" + light +
+                ", valSound=" + valSound +
+                ", sound=" + sound +
                 ", isAcordeNormasReguSi=" + isAcordeNormasReguSi +
                 ", isAcordeNormasReguNo=" + isAcordeNormasReguNo +
                 ", isNecesarioRepaSi=" + isNecesarioRepaSi +
@@ -335,6 +364,10 @@ public class Mantenimiento {
         if (getGrifosMonored() != that.getGrifosMonored()) return false;
         if (getIdMedicion() != that.getIdMedicion()) return false;
         if (getEvaluVolExtrac() != that.getEvaluVolExtrac()) return false;
+        if (getValLight() != that.getValLight()) return false;
+        if (getLight() != that.getLight()) return false;
+        if (getValSound() != that.getValSound()) return false;
+        if (getSound() != that.getSound()) return false;
         if (isAcordeNormasReguSi() != that.isAcordeNormasReguSi()) return false;
         if (isAcordeNormasReguNo() != that.isAcordeNormasReguNo()) return false;
         if (isNecesarioRepaSi() != that.isNecesarioRepaSi()) return false;
@@ -365,6 +398,10 @@ public class Mantenimiento {
         result = 31 * result + getGrifosMonored();
         result = 31 * result + getIdMedicion();
         result = 31 * result + getEvaluVolExtrac();
+        result = 31 * result + (getValLight() != +0.0f ? Float.floatToIntBits(getValLight()) : 0);
+        result = 31 * result + getLight();
+        result = 31 * result + (getValSound() != +0.0f ? Float.floatToIntBits(getValSound()) : 0);
+        result = 31 * result + getSound();
         result = 31 * result + (isAcordeNormasReguSi() ? 1 : 0);
         result = 31 * result + (isAcordeNormasReguNo() ? 1 : 0);
         result = 31 * result + (isNecesarioRepaSi() ? 1 : 0);
