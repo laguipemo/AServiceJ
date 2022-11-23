@@ -83,7 +83,7 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
     private RadioButton necesarioRepaNoNewManteniRadioButton;
     private EditText comentarioNewManteniEditText;
     private ImageButton instrumentosNewManteniImageButton;
-    private EditText instrumentosNewManteniTextMultiLine;
+    private TextView instrumentosNewManteniTextMultiLine;
 
     private Button newMantenimientoAcceptButton;
     private Button newMantenimientoCancelButton;
@@ -559,6 +559,7 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
                 necesarioRepaSiNewManteniRadioButton.setChecked(mantenimientoOld.isNecesarioRepaSi());
                 necesarioRepaNoNewManteniRadioButton.setChecked(mantenimientoOld.isNecesarioRepaNo());
                 comentarioNewManteniEditText.setText(mantenimientoOld.getComentario());
+                instrumentosNewManteniTextMultiLine.setText(mantenimientoOld.getInstrumentosMedida());
             }
         }
 
