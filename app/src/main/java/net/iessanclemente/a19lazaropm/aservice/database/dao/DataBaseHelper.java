@@ -172,7 +172,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                         DataBaseContract.MantenimientosTable.COL_ACORDE_NORMAS_NO + " BOOLEAN," +
                         DataBaseContract.MantenimientosTable.COL_NECESARIO_REPA_SI + " BOOLEAN," +
                         DataBaseContract.MantenimientosTable.COL_NECESARIO_REPA_NO + " BOOLEAN," +
-                        DataBaseContract.MantenimientosTable.COL_COMENTARIO + " TEXT)";
+                        DataBaseContract.MantenimientosTable.COL_COMENTARIO + " TEXT," +
+                        DataBaseContract.MantenimientosTable.COL_INSTRUMENTOS + " TEXT)";
         db.execSQL(createMantenimientosTable);
 
         String createCualitativosTable =
@@ -195,6 +196,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                         DataBaseContract.MedicionesVolTable.COL_VALOR8 + " DECIMAL(3,2)," +
                         DataBaseContract.MedicionesVolTable.COL_VALOR9 + " DECIMAL(3,2))";
         db.execSQL(createMedicionesVolTable);
+
+        String createInstrumentosTable =
+                "CREATE TABLE IF NOT EXISTS " + DataBaseContract.InstrumentosTable.TABLE_NAME + " (" +
+                        DataBaseContract.InstrumentosTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        DataBaseContract.InstrumentosTable.COL_NOMBRE + " TEXT," +
+                        DataBaseContract.InstrumentosTable.COL_MODELO + " TEXT," +
+                        DataBaseContract.InstrumentosTable.COL_MARCA + " TEXT)";
+        db.execSQL(createInstrumentosTable);
 
         //Insertar registros en las diferentes tablas
 
@@ -563,7 +572,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "                acorde_normas_no,\n" +
                 "                necesario_repa_si,\n" +
                 "                necesario_repa_no,\n" +
-                "                comentario\n" +
+                "                comentario,\n" +
+                "                instrumentos\n" +
                 "        )\n" +
                 "        VALUES (\n" +
                 "                1,\n" +
@@ -595,7 +605,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "                0,\n" +
                 "                0,\n" +
                 "                1,\n" +
-                "                'Solo es una prueba de un comentario para tener que mostrar. Todo fue ok.'\n" +
+                "                'Solo es una prueba de un comentario para tener que mostrar. Todo fue ok.',\n" +
+                "                ''\n" +
                 "        );";
         db.execSQL(insertMantenimiento);
         insertMantenimiento = "INSERT INTO Mantenimientos (\n" +
@@ -628,7 +639,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "                acorde_normas_no,\n" +
                 "                necesario_repa_si,\n" +
                 "                necesario_repa_no,\n" +
-                "                comentario\n" +
+                "                comentario,\n" +
+                "                instrumentos\n" +
                 "        )\n" +
                 "        VALUES (\n" +
                 "                2,\n" +
@@ -660,7 +672,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "                0,\n" +
                 "                0,\n" +
                 "                1,\n" +
-                "                'Otro comentario de relleno...'\n" +
+                "                'Otro comentario de relleno...',\n" +
+                "                ''\n" +
                 "        );";
         db.execSQL(insertMantenimiento);
         insertMantenimiento = "INSERT INTO Mantenimientos (\n" +
@@ -693,7 +706,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "                acorde_normas_no,\n" +
                 "                necesario_repa_si,\n" +
                 "                necesario_repa_no,\n" +
-                "                comentario\n" +
+                "                comentario,\n" +
+                "                instrumentos\n" +
                 "        )\n" +
                 "        VALUES (\n" +
                 "                3,\n" +
@@ -725,7 +739,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "                0,\n" +
                 "                0,\n" +
                 "                1,\n" +
-                "                'Todo ok. Recomendar que contraten servicio mantenimiento anual.'\n" +
+                "                'Todo ok. Recomendar que contraten servicio mantenimiento anual.',\n" +
+                "                ''\n" +
                 "        );";
         db.execSQL(insertMantenimiento);
 
@@ -968,6 +983,49 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "                'No Contratado'\n" +
                 "        );";
         db.execSQL(insertVitrina);
+        // Instrumentos
+        String insertInstrumento = "INSERT INTO Instrumentos (_id, nombre, modelo, marca) " +
+                "VALUES (1, 'Anemómetro + Sondas', '', 'TESTO');";
+        db.execSQL(insertInstrumento);
+        insertInstrumento = "INSERT INTO Instrumentos (_id, nombre, modelo, marca) " +
+                "VALUES (2, 'Anemómetro', '', 'PCE');";
+        db.execSQL(insertInstrumento);
+        insertInstrumento = "INSERT INTO Instrumentos (_id, nombre, modelo, marca) " +
+                "VALUES (3, 'Luxómetro', '', 'PCE');";
+        db.execSQL(insertInstrumento);
+        insertInstrumento = "INSERT INTO Instrumentos (_id, nombre, modelo, marca) " +
+                "VALUES (4, 'Dinamómetro', '', 'PCE');";
+        db.execSQL(insertInstrumento);
+        insertInstrumento = "INSERT INTO Instrumentos (_id, nombre, modelo, marca) " +
+                "VALUES (5, 'Sonómetro', '', 'PCE');";
+        db.execSQL(insertInstrumento);
+        insertInstrumento = "INSERT INTO Instrumentos (_id, nombre, modelo, marca) " +
+                "VALUES (6, 'Sonómetro', 'GM1351', 'COLEMETER');";
+        db.execSQL(insertInstrumento);
+        insertInstrumento = "INSERT INTO Instrumentos (_id, nombre, modelo, marca) " +
+                "VALUES (7, 'Termómetro por infrarrojos', '', 'TESTO');";
+        db.execSQL(insertInstrumento);
+        insertInstrumento = "INSERT INTO Instrumentos (_id, nombre, modelo, marca) " +
+                "VALUES (8, 'Anemómetro de molinete', '', 'TESTO');";
+        db.execSQL(insertInstrumento);
+        insertInstrumento = "INSERT INTO Instrumentos (_id, nombre, modelo, marca) " +
+                "VALUES (9, 'Detector de corriente', '', 'DRAGER');";
+        db.execSQL(insertInstrumento);
+        insertInstrumento = "INSERT INTO Instrumentos (_id, nombre, modelo, marca) " +
+                "VALUES (10, 'Pinza amperimétrica', 'PIN1000', 'XINDAR');";
+        db.execSQL(insertInstrumento);
+        insertInstrumento = "INSERT INTO Instrumentos (_id, nombre, modelo, marca) " +
+                "VALUES (11, 'Multímetro digital', '', 'FLUKE');";
+        db.execSQL(insertInstrumento);
+        insertInstrumento = "INSERT INTO Instrumentos (_id, nombre, modelo, marca) " +
+                "VALUES (12, 'Nivel Laser', 'QUIGO', 'BOSCH');";
+        db.execSQL(insertInstrumento);
+        insertInstrumento = "INSERT INTO Instrumentos (_id, nombre, modelo, marca) " +
+                "VALUES (13, 'Medidor laser', 'PRL 30C', 'BOSCH');";
+        db.execSQL(insertInstrumento);
+        insertInstrumento = "INSERT INTO Instrumentos (_id, nombre, modelo, marca) " +
+                "VALUES (14, 'Nivel laser', 'GCL2-15', 'BOSCH');";
+        db.execSQL(insertInstrumento);
 
     }
 
@@ -985,6 +1043,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + DataBaseContract.MantenimientosTable.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + DataBaseContract.CualitativosTable.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + DataBaseContract.MedicionesVolTable.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + DataBaseContract.InstrumentosTable.TABLE_NAME);
 
         onCreate(db);
 

@@ -83,7 +83,7 @@ public class DataBaseContract {
         public static final String COL_PRESS_DROP = "press_drop";
     }
 
-    // Tabla par los mantenimientos
+    // Tabla para los mantenimientos
     public static class MantenimientosTable implements BaseColumns {
         public static final String TABLE_NAME = "Mantenimientos";
 
@@ -118,16 +118,17 @@ public class DataBaseContract {
         public static final String COL_NECESARIO_REPA_SI = "necesario_repa_si";
         public static final String COL_NECESARIO_REPA_NO = "necesario_repa_no";
         public static final String COL_COMENTARIO = "comentario";
+        public static final String COL_INSTRUMENTOS = "instrumentos";
     }
 
-    // Tabla par los valores cualitativos
+    // Tabla para los valores cualitativos
     public static class CualitativosTable implements BaseColumns {
         public static final String TABLE_NAME = "Cualitativos";
 
         public static final String COL_CUALITATIVO = "cualitativo";
     }
 
-    // Tabla par las mediciones volumen
+    // Tabla para las mediciones volumen
     public static class MedicionesVolTable implements BaseColumns {
         public static final String TABLE_NAME = "MedicionesVol";
 
@@ -141,6 +142,15 @@ public class DataBaseContract {
         public static final String COL_VALOR7 = "valor7";
         public static final String COL_VALOR8 = "valor8";
         public static final String COL_VALOR9 = "valor9";
+    }
+
+    // Tabla para los instrumentos de medición
+    public static class InstrumentosTable implements BaseColumns {
+        public static final String TABLE_NAME = "Instrumentos";
+
+        public static final String COL_NOMBRE = "nombre";
+        public static final String COL_MODELO = "modelo";
+        public static final String COL_MARCA = "marca";
     }
 
 }

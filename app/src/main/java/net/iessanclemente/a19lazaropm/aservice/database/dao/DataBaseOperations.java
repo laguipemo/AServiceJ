@@ -9,6 +9,7 @@ import net.iessanclemente.a19lazaropm.aservice.database.dto.Contacto;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Cualitativo;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Empresa;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Fabricante;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Instrumento;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Longitud;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Mantenimiento;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Medicion;
@@ -1433,6 +1434,8 @@ public class DataBaseOperations {
         contentValues.put(DataBaseContract.MantenimientosTable.COL_NECESARIO_REPA_SI, mantenimiento.isNecesarioRepaSi());
         contentValues.put(DataBaseContract.MantenimientosTable.COL_NECESARIO_REPA_NO, mantenimiento.isNecesarioRepaNo());
         contentValues.put(DataBaseContract.MantenimientosTable.COL_COMENTARIO, mantenimiento.getComentario());
+        contentValues.put(DataBaseContract.MantenimientosTable.COL_COMENTARIO, mantenimiento.getComentario());
+        contentValues.put(DataBaseContract.MantenimientosTable.COL_INSTRUMENTOS, mantenimiento.getInstrumentosMedida());
 
         return db.insert(
                 DataBaseContract.MantenimientosTable.TABLE_NAME, null, contentValues);
@@ -1489,13 +1492,15 @@ public class DataBaseOperations {
                 boolean isNecesarioRepaSi = cursor.getInt(27) > 0;
                 boolean isNecesarioRepaNo = cursor.getInt(28) > 0;
                 String comentario = cursor.getString(29);
+                String instrumentosMedida = cursor.getString(30);
                 //Construyo objeto Mantenimiento y lo añado a la lista
                 Mantenimiento mantenimiento = new Mantenimiento(
                         id, fecha, idVitrina, puestaMarcha, idTecnico, segunDin, segunEn, funCtrlDigi,
                         visSistExtr, protSuperf, juntas, fijacion, funcGuillo, estadoGuillo,
                         valFuerzaGuillo, fuerzaGuillo, ctrlPresencia, autoproteccion, grifosMonored,
                         idMedicion, evaluVolExtrac, valLight, light, valSound, sound, isAcordeNormasReguSi,
-                        isAcordeNormasReguNo, isNecesarioRepaSi, isNecesarioRepaNo, comentario);
+                        isAcordeNormasReguNo, isNecesarioRepaSi, isNecesarioRepaNo, comentario,
+                        instrumentosMedida);
                 mantenimientoSelected.add(mantenimiento);
             } while (cursor.moveToNext());
         }
@@ -1551,13 +1556,15 @@ public class DataBaseOperations {
             boolean isNecesarioRepaSi = cursor.getInt(27) > 0;
             boolean isNecesarioRepaNo = cursor.getInt(28) > 0;
             String comentario = cursor.getString(29);
+            String instrumentosMedida = cursor.getString(30);
             //Construyo objeto Mantenimiento para devolverlo
             mantenimiento = new Mantenimiento(
                     id, fecha, idVitrina, puestaMarcha, idTecnico, segunDin, segunEn, funCtrlDigi,
                     visSistExtr, protSuperf, juntas, fijacion, funcGuillo, estadoGuillo,
                     valFuerzaGuillo, fuerzaGuillo, ctrlPresencia, autoproteccion, grifosMonored,
                     idMedicion, evaluVolExtrac, valLight, light, valSound, sound, isAcordeNormasReguSi,
-                    isAcordeNormasReguNo, isNecesarioRepaSi, isNecesarioRepaNo, comentario);
+                    isAcordeNormasReguNo, isNecesarioRepaSi, isNecesarioRepaNo, comentario,
+                    instrumentosMedida);
         }
         cursor.close();
         return mantenimiento;
@@ -1597,6 +1604,7 @@ public class DataBaseOperations {
         contentValues.put(DataBaseContract.MantenimientosTable.COL_NECESARIO_REPA_SI, mantenimiento.isNecesarioRepaSi());
         contentValues.put(DataBaseContract.MantenimientosTable.COL_NECESARIO_REPA_NO, mantenimiento.isNecesarioRepaNo());
         contentValues.put(DataBaseContract.MantenimientosTable.COL_COMENTARIO, mantenimiento.getComentario());
+        contentValues.put(DataBaseContract.MantenimientosTable.COL_INSTRUMENTOS, mantenimiento.getInstrumentosMedida());
         //Para actualizar un elemento se utiliza el médodo:
         //   update(nombre_tabla, valores, criterio_seleccion, parametros_criterio_seleccion)
         String criterioSeleccion = String.format("%s=?", DataBaseContract.MantenimientosTable._ID);
@@ -1817,6 +1825,146 @@ public class DataBaseOperations {
             }
         }
         return idMedicion;
+    }
+/*
+        CRUD sobre la entidad Intrumentos
+     */
+    public long insertInstrumentos(Instrumento instrumento) {
+        //Creo instancia para escribir en la base de datos
+        SQLiteDatabase db = dataBase.getWritableDatabase();
+        //Creo el objeto ContentValues para colocar los datos a insertar
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DataBaseContract.InstrumentosTable.COL_NOMBRE, instrumento.getNombre());
+        contentValues.put(DataBaseContract.InstrumentosTable.COL_MODELO, instrumento.getModelo());
+        contentValues.put(DataBaseContract.InstrumentosTable.COL_MARCA, instrumento.getMarca());
+
+        return db.insert(
+                DataBaseContract.InstrumentosTable.TABLE_NAME, null, contentValues);
+    }
+
+    public List<Instrumento> selectInstrumentos() {
+        //String con secuencia SQL para la búsqueda
+        String sqlSelectInstrumentos = "SELECT * FROM " + DataBaseContract.InstrumentosTable.TABLE_NAME;
+        return selectInstrumentos(sqlSelectInstrumentos);
+    }
+
+    public List<Instrumento> selectInstrumentos(String sqlSelectInstrumentos) {
+        //Declaro lista de instrumentos seleccionados que se devolverán.
+        List<Instrumento> instrumentosSelected = new ArrayList<>();
+        //Creo instancia para leer de la base de datos
+        SQLiteDatabase db = dataBase.getReadableDatabase();
+        //Para realizar una consulta se utiliza el médodo:
+        //     rawQuery(string_con_consulta_select_parametrizada, lista_de_string_con_los_parámetros
+        //en este caso concreto, la consulta es sencilla y al no utilizar parámetros pues el segundo
+        //argumento del método (lista con parámetros) es null
+        Cursor cursor = db.rawQuery(sqlSelectInstrumentos, null);
+        //Si el cursor almacena algún elemento, pues devuelve true con el método moveToFirst()
+        if (cursor.moveToFirst()) {
+            //Recupero el primer elemento del cursor y repito esta operación mientras que el cursor
+            //devuelva true con el método moveToNext(), es decir, mientras tenga un siguiente elemento
+            do {
+                int id = cursor.getInt(0);
+                String nombre = cursor.getString(1);
+                String modelo = cursor.getString(2);
+                String marca = cursor.getString(3);
+
+                //Construyo objeto Instrumento y lo añado a la lista
+                Instrumento instrumento = new Instrumento(id, nombre, modelo, marca);
+                instrumentosSelected.add(instrumento);
+            } while (cursor.moveToNext());
+        }
+        //Cierro el cursor para liberar recursos
+        cursor.close();
+        return instrumentosSelected;
+    }
+
+    public Instrumento selectInstrumentoWithId(int idToSelect) {
+        Instrumento instrumento = null;
+        //Creo instancia para leer de la base de datos
+        SQLiteDatabase db = dataBase.getReadableDatabase();
+        //String con la consulta SQL a realizar, faltaría el parámetro en la posición ? que intruduce
+        //en la rawQuery como un array de string
+        String sqlSelect = String.format("SELECT * FROM %s WHERE %s=?",
+                DataBaseContract.InstrumentosTable.TABLE_NAME,
+                DataBaseContract.InstrumentosTable._ID);
+        //Creo array de strings con los parámetros para la consulta parametrizada anterior
+        String[] selectArguments = {String.valueOf(idToSelect)};
+        //Realizo al consulta almacenado el resultado en un cursor
+        Cursor cursor = db.rawQuery(sqlSelect, selectArguments);
+        //Si el cursor almacena algún elemento, pues devuelve true con el método moveToFirst()
+        if (cursor.moveToFirst()) {
+            //Recupero el primer elemento del cursor, que además el único que debe haber (no debe
+            // haber duplicados) y la consulta es para recuperar el elemento de id indicado.
+            int id = cursor.getInt(0);
+            String nombre = cursor.getString(1);
+            String modelo = cursor.getString(2);
+            String marca = cursor.getString(3);
+
+            //Construyo objeto Instrumento y lo añado a la lista
+            instrumento = new Instrumento(id, nombre, modelo, marca);
+        }
+        cursor.close();
+        return instrumento;
+    }
+
+    public boolean updateInstrumento(Instrumento instrumento) {
+        //Obtengo instancia de la base de datos para escritura
+        SQLiteDatabase db = dataBase.getWritableDatabase();
+        //Creo objeto ContentValues con los valores del nuevo elemento
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DataBaseContract.InstrumentosTable.COL_NOMBRE, instrumento.getNombre());
+        contentValues.put(DataBaseContract.InstrumentosTable.COL_MODELO, instrumento.getModelo());
+        contentValues.put(DataBaseContract.InstrumentosTable.COL_MARCA,  instrumento.getMarca());
+
+        //Para actualizar un elemento se utiliza el médodo:
+        //   update(nombre_tabla, valores, criterio_seleccion, parametros_criterio_seleccion)
+        String criterioSeleccion = String.format("%s=?", DataBaseContract.InstrumentosTable._ID);
+        //array de string con los parámetros del criterio de selección
+        String[] paramCriterioSeleccion = {String.valueOf(instrumento.getId())};
+        //Realizo la actualización
+        int updated = db.update(
+                DataBaseContract.InstrumentosTable.TABLE_NAME,
+                contentValues,
+                criterioSeleccion,
+                paramCriterioSeleccion);
+        return updated > 0; // true si se actualizó algo
+    }
+
+    public boolean deleteInstrumento(int id) {
+        //obtengo instancia de la base de datos para escritura
+        SQLiteDatabase db = dataBase.getWritableDatabase();
+        //Para borrar se utilizar el método:
+        //  delete(nombre_tabla, criterio_seleccion, parametros_criterio_seleccion
+        //Defino la string con el criterio de seleccion parametrizado.
+        String criterioSeleccion = String.format("%s=?", DataBaseContract.MedicionesVolTable._ID);
+        //array de string con los valores de los parámetros para completar la query parametrizada
+        String[] paramCriterioSeleccion = {String.valueOf(id)};
+        //ejecuto el borrado
+        int deleted = db.delete(
+                DataBaseContract.InstrumentosTable.TABLE_NAME, criterioSeleccion, paramCriterioSeleccion);
+        return deleted > 0;
+    }
+
+    public boolean existInstrumento(Instrumento instrumento) {
+        boolean exist = false;
+        for (Instrumento i : selectInstrumentos()) {
+            if (i.equals(instrumento)) {
+                exist = true;
+                break;
+            }
+        }
+        return exist;
+    }
+
+    public int getIdOfInstrumento(Instrumento instrumento) {
+        int idInstrumento = -1;
+        for (Instrumento i : selectInstrumentos()) {
+            if (i.equals(instrumento)) {
+                idInstrumento = i.getId();
+                break;
+            }
+        }
+        return idInstrumento;
     }
 
     public float getVolumenExtraccionReal(int idMedicion, float largoGuillotina) {
