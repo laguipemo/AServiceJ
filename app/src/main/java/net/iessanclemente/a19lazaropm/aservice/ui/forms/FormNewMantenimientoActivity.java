@@ -196,7 +196,7 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
         float valFuerzaGuillo;
         try {
             valFuerzaGuillo = Float.parseFloat(
-                    valorFuerzaDesplazaGuilloNewManteniEditText.getText().toString());
+                    valorFuerzaDesplazaGuilloNewManteniEditText.getText().toString().replace(",", "."));
         } catch (Exception e) {
             valFuerzaGuillo = 0f;
         }
@@ -222,7 +222,8 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
 
         float valLight;
         try {
-            valLight = Float.parseFloat(valorLightNewManteniEditText.getText().toString());
+            valLight = Float.parseFloat(
+                    valorLightNewManteniEditText.getText().toString().replace(",", "."));
         } catch (NumberFormatException e) {
             valLight = 0f;
         }
@@ -230,7 +231,8 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
 
         float valSound;
         try {
-            valSound = Float.parseFloat(valorSoundNewManteniEditText.getText().toString());
+            valSound = Float.parseFloat(
+                    valorSoundNewManteniEditText.getText().toString().replace(",", "."));
         } catch (NumberFormatException e) {
             valSound = 0f;
         }
