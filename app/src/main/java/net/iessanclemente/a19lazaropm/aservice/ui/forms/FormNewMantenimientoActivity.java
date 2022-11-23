@@ -1,38 +1,39 @@
 package net.iessanclemente.a19lazaropm.aservice.ui.forms;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
-import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import net.iessanclemente.a19lazaropm.aservice.R;
 import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseOperations;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Cualitativo;
+import net.iessanclemente.a19lazaropm.aservice.database.dto.Instrumento;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Longitud;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Mantenimiento;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Tecnico;
@@ -44,6 +45,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class FormNewMantenimientoActivity extends AppCompatActivity {
 
@@ -80,6 +82,8 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
     private RadioButton necesarioRepaSiNewManteniRadioButton;
     private RadioButton necesarioRepaNoNewManteniRadioButton;
     private EditText comentarioNewManteniEditText;
+    private ImageButton instrumentosNewManteniImageButton;
+    private EditText instrumentosNewManteniTextMultiLine;
 
     private Button newMantenimientoAcceptButton;
     private Button newMantenimientoCancelButton;
@@ -97,6 +101,7 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
     private Vitrina vitrina;
     private int idMedicion = -1;
     private int idMantenimiento;
+    private String instrumentosMedida;
 
     private InputMethodManager virtualKeyboard;
 
@@ -149,6 +154,35 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
                     FormNewMantenimientoActivity.this,
                     MedicionesVolumenExtraccionActivity.class);
             activityResultLauncher.launch(intent);
+        });
+
+        instrumentosNewManteniImageButton.setOnClickListener(v -> {
+            List<String> instrumentos = datos.selectInstrumentos().stream()
+                    .map(Instrumento::asString).collect(Collectors.toList());
+            List<Integer> selectedItems = new ArrayList<Integer>();
+
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(
+                    FormNewMantenimientoActivity.this, R.style.CustomAlertDialog
+            );
+            builder.setTitle("Select the instruments")
+                    .setMultiChoiceItems(instrumentos.toArray(new String[0]), null,
+                            (dialog, which, isChecked) -> {
+                                if (isChecked) {
+                                    selectedItems.add(which);
+                                } else if (selectedItems.contains(which)) {
+                                    selectedItems.remove(which);
+                                }
+                            })
+                    .setPositiveButton(R.string.accept, (dialog, which) -> {
+                        instrumentosMedida = instrumentos.stream()
+                                .filter(str -> selectedItems.contains(instrumentos.indexOf(str)))
+                                .collect(Collectors.joining("\n"));
+                        instrumentosNewManteniTextMultiLine.setText(instrumentosMedida);
+
+                    })
+                    .setNegativeButton(R.string.cancel, (dialog, which) -> {
+                        dialog.dismiss();
+                    }).create().show();
         });
     }
 
@@ -257,24 +291,27 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
             return false;
         }
         String comentario = comentarioNewManteniEditText.getText().toString();
+
+        //TODO: recuperar el string con los intrumentos de medida utilizados
+
         //Creo mantenimiento con los nuevos datos o los corregidos
         Mantenimiento mantenimiento = new Mantenimiento(
                 idMantenimiento, fecha, idVitrina, puestaMarcha, idTecnico, segunDin, segunEn, ctrlDigital,
                 sistExtraccion, protSuperficie, juntas, fijacion, funcGuillotina, estadoGuillotina,
                 valFuerzaGuillo, fuerzaGuillotina, ctrlPresencia, autoproteccion, grifosMonored,
                 idMedicion, evaluVolExtrac, valLight, light, valSound, sound, acordeNormasSi, acordeNormasNo,
-                necesarioRepaSi, necesarioRepaNo, comentario);
+                necesarioRepaSi, necesarioRepaNo, comentario, instrumentosMedida);
         //compruebo si este mantenimiento ya existe para saber si añadir o actualizar
         boolean existIdMantenimiento = datos.getIdsOfMantenimientosForVitrina(idVitrina).contains(idMantenimiento);
         if (!existIdMantenimiento) {
             if ((idMantenimiento = (int) datos.insertMantenimiento(mantenimiento)) > 0) {
                 isOk = true;
             } else {
-               Toast.makeText(
-                       FormNewMantenimientoActivity.this,
-                       "No se pudo insertar el mantenimiento",
-                       Toast.LENGTH_SHORT).show();
-               return false;
+                Toast.makeText(
+                        FormNewMantenimientoActivity.this,
+                        "No se pudo insertar el mantenimiento",
+                        Toast.LENGTH_SHORT).show();
+                return false;
             }
         } else {
             boolean isUpdated = datos.updateMantenimiento(mantenimiento);
@@ -318,9 +355,10 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
                                         Color.parseColor("BLACK"));
                                 unidadVolumenExtraccionRealNewManteniTextView.setTextColor(
                                         Color.parseColor("BLACK"));
-                            } if (volumenExtraccion < tipoLongFlow.getFlowMin()
+                            }
+                            if (volumenExtraccion < tipoLongFlow.getFlowMin()
                                     || volumenExtraccion > tipoLongFlow.getFlowMax()
-                            ){
+                            ) {
                                 evaluVolumenExtraccionRealSpinner.setSelection(
                                         datos.getIdOfCualitativoWithEvalu("R.R.") - 1);
                                 evaluVolumenExtraccionRealSpinner.setEnabled(false);
@@ -388,7 +426,7 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
         }
         //fecha
         fechaNewMantenimientoEditText = findViewById(R.id.fechaNewMantenimientoEditText);
-       //Técnico
+        //Técnico
         tecnicoNombreNewManteniAutoCompleteTextView = findViewById(R.id.tecnicoNombreNewManteniAutoCompleteTextView);
         listTecnicos = getListTecnicos();
         ArrayAdapter<String> tecnicoAdapter = new ArrayAdapter<>(
@@ -450,6 +488,9 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
         necesarioRepaNoNewManteniRadioButton = findViewById(R.id.necesarioRepaNoNewManteniRadioButton);
         comentarioNewManteniEditText = findViewById(R.id.comentarioNewManteniEditText);
 
+        instrumentosNewManteniImageButton = findViewById(R.id.instrumentosNewManteniImageButton);
+        instrumentosNewManteniTextMultiLine = findViewById(R.id.instrumentosNewManteniTextMultiLine);
+
         newMantenimientoAcceptButton = findViewById(R.id.newMantenimientoAcceptButton);
         newMantenimientoCancelButton = findViewById(R.id.newMantenimientoCancelButton);
 
@@ -461,7 +502,7 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
         }
         //Poblar con los datos del mantenimiento a actualizar
         if (isUpdateTask) {
-           if (idMantenimiento > 0) {
+            if (idMantenimiento > 0) {
                 mantenimientoOld = datos.selectMantenimientoWithId(idMantenimiento);
             }
             if (mantenimientoOld != null) {
@@ -472,13 +513,13 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
                 segunDinNewManteniCheckBox.setChecked(mantenimientoOld.isSegunDin());
                 segunEnNewManteniCheckBox.setChecked(mantenimientoOld.isSegunEn());
 
-                evaluControlDigitalSpinner.setSelection(mantenimientoOld.getFunCtrlDigi()-1);
-                evaluSistemaExtraccionSpinner.setSelection(mantenimientoOld.getVisSistExtr()-1);
-                evaluProteccionSuperficieSpinner.setSelection(mantenimientoOld.getProtSuperf()-1);
-                evaluJuntasSpinner.setSelection(mantenimientoOld.getJuntas()-1);
-                evaluFijacionPiezasRigidasSpnner.setSelection(mantenimientoOld.getFijacion()-1);
-                evaluFuncionamientoGuilloSpinner.setSelection(mantenimientoOld.getFuncGuillo()-1);
-                evaluEstadoGeneralGuilloSpinner.setSelection(mantenimientoOld.getEstadoGuillo()-1);
+                evaluControlDigitalSpinner.setSelection(mantenimientoOld.getFunCtrlDigi() - 1);
+                evaluSistemaExtraccionSpinner.setSelection(mantenimientoOld.getVisSistExtr() - 1);
+                evaluProteccionSuperficieSpinner.setSelection(mantenimientoOld.getProtSuperf() - 1);
+                evaluJuntasSpinner.setSelection(mantenimientoOld.getJuntas() - 1);
+                evaluFijacionPiezasRigidasSpnner.setSelection(mantenimientoOld.getFijacion() - 1);
+                evaluFuncionamientoGuilloSpinner.setSelection(mantenimientoOld.getFuncGuillo() - 1);
+                evaluEstadoGeneralGuilloSpinner.setSelection(mantenimientoOld.getEstadoGuillo() - 1);
 
                 float fuerzaGuilloOld = mantenimientoOld.getFuerzaGuillo();
                 if (Float.compare(fuerzaGuilloOld, 0.00F) != 0) {
@@ -489,10 +530,10 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
                     valorFuerzaDesplazaGuilloNewManteniEditText.setText("");
                 }
 
-                evaluFuerzaDesplazaGuilloSpinner.setSelection(mantenimientoOld.getFuerzaGuillo()-1);
-                evaluControlPresenciaSpinner.setSelection(mantenimientoOld.getCtrlPresencia()-1);
-                evaluAutoproteccionSpinner.setSelection(mantenimientoOld.getAutoproteccion()-1);
-                evaluFuncGrifosMonoredSpinner.setSelection(mantenimientoOld.getGrifosMonored()-1);
+                evaluFuerzaDesplazaGuilloSpinner.setSelection(mantenimientoOld.getFuerzaGuillo() - 1);
+                evaluControlPresenciaSpinner.setSelection(mantenimientoOld.getCtrlPresencia() - 1);
+                evaluAutoproteccionSpinner.setSelection(mantenimientoOld.getAutoproteccion() - 1);
+                evaluFuncGrifosMonoredSpinner.setSelection(mantenimientoOld.getGrifosMonored() - 1);
 
                 Vitrina vitrinaOld = datos.selectVitrinaWithId(idVitrina);
                 Longitud longitudOld = datos.selectLongitudWithId(vitrinaOld.getIdLongitud());
@@ -507,12 +548,12 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
 
                 valorLightNewManteniEditText.setText(
                         String.format(
-                                Locale.getDefault(),"%.2f", mantenimientoOld.getValLight()));
+                                Locale.getDefault(), "%.2f", mantenimientoOld.getValLight()));
                 valorSoundNewManteniEditText.setText(
                         String.format(
-                                Locale.getDefault(),"%.2f", mantenimientoOld.getValSound()));
+                                Locale.getDefault(), "%.2f", mantenimientoOld.getValSound()));
 
-                evaluVolumenExtraccionRealSpinner.setSelection(mantenimientoOld.getEvaluVolExtrac()-1);
+                evaluVolumenExtraccionRealSpinner.setSelection(mantenimientoOld.getEvaluVolExtrac() - 1);
                 acuerdoNormasReguSiNewManteniRadioButton.setChecked(mantenimientoOld.isAcordeNormasReguSi());
                 acuerdoNormasReguNoNewManteniRadioButton.setChecked(mantenimientoOld.isAcordeNormasReguNo());
                 necesarioRepaSiNewManteniRadioButton.setChecked(mantenimientoOld.isNecesarioRepaSi());
@@ -525,7 +566,7 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
 
     private List<String> getCualitativos() {
         List<String> listCualitativos = new ArrayList<>();
-        for (Cualitativo cualitativo: datos.selectCualitativos()) {
+        for (Cualitativo cualitativo : datos.selectCualitativos()) {
             listCualitativos.add(cualitativo.getCualitativo());
         }
         return listCualitativos;
@@ -533,7 +574,7 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
 
     private List<String> getListTecnicos() {
         List<String> listTecnicos = new ArrayList<>();
-        for (Tecnico tecnico: datos.selectTecnicos()) {
+        for (Tecnico tecnico : datos.selectTecnicos()) {
             listTecnicos.add(tecnico.getTecnicoNombre());
         }
         return listTecnicos;

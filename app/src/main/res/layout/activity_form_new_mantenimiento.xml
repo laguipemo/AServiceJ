@@ -151,7 +151,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newManteniCabeceraConstrainLayout"
         app:layout_constraintVertical_bias="0.0"
@@ -167,7 +167,7 @@
                 android:id="@+id/labelCtrlDigitalNewManteniTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:gravity="end"
                 android:text="@string/label_ctrl_digital"
@@ -184,7 +184,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/spinner_shape_transp_corner0_stroke2_primary"
                 android:backgroundTint="@color/primaryColor"
                 android:focusable="true"
@@ -855,6 +855,50 @@
                 app:layout_constraintStart_toStartOf="@+id/labelComentariosNewManteniTextView"
                 app:layout_constraintTop_toBottomOf="@+id/labelComentariosNewManteniTextView" />
 
+            <TextView
+                android:id="@+id/labelInstrumentosNewManteniTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/measurement_instruments_used"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/instrumentosNewManteniImageButton"
+                app:layout_constraintEnd_toStartOf="@+id/instrumentosNewManteniImageButton"
+                app:layout_constraintTop_toTopOf="@+id/instrumentosNewManteniImageButton" />
+
+            <ImageButton
+                android:id="@+id/instrumentosNewManteniImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:src="@android:drawable/ic_menu_edit"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/comentarioNewManteniEditText"
+                app:layout_constraintTop_toBottomOf="@+id/comentarioNewManteniEditText"
+                app:tint="@android:color/black" />
+
+            <EditText
+                android:id="@+id/instrumentosNewManteniTextMultiLine"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:clickable="false"
+                android:focusable="false"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:minLines="5"
+                android:scrollbars="vertical|horizontal"
+                android:singleLine="false"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/instrumentosNewManteniImageButton"
+                app:layout_constraintStart_toStartOf="@+id/comentarioNewManteniEditText"
+                app:layout_constraintTop_toBottomOf="@+id/instrumentosNewManteniImageButton" />
+
             <Button
                 android:id="@+id/newMantenimientoCancelButton"
                 android:layout_width="wrap_content"
@@ -865,7 +909,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/newMantenimientoAcceptButton"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/comentarioNewManteniEditText" />
+                app:layout_constraintTop_toBottomOf="@+id/instrumentosNewManteniTextMultiLine"
+                app:layout_constraintVertical_bias="0.0" />
 
             <Button
                 android:id="@+id/newMantenimientoAcceptButton"
@@ -876,6 +921,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/newMantenimientoCancelButton"
                 app:layout_constraintTop_toTopOf="@+id/newMantenimientoCancelButton" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
