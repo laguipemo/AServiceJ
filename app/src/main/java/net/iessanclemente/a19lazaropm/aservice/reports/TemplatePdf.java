@@ -534,6 +534,7 @@ public class TemplatePdf {
         paragraph13.add(new Chunk("Iluminación (> 400 lux): ", FONT_TEXT_BOLD));
         paragraph13.add(new Chunk(
                 String.format(Locale.getDefault(), "%.2f lux ", valorLight), FONT_TEXT));
+        paragraph13.add(Chunk.TABBING);
         paragraph13.add(new Chunk(light, FONT_TEXT));
         paragraph13.setSpacingBefore(8.0f);
         addChildParagraphLeft(paragraph13);
@@ -542,6 +543,7 @@ public class TemplatePdf {
         paragraph14.add(new Chunk("Sonido (< 70 dBA): ", FONT_TEXT_BOLD));
         paragraph14.add(new Chunk(
                 String.format(Locale.getDefault(), "%.2f dBA ", valorSound), FONT_TEXT));
+        paragraph14.add(Chunk.TABBING);
         paragraph14.add(new Chunk(sound, FONT_TEXT));
         paragraph14.setSpacingBefore(8.0f);
         addChildParagraphLeft(paragraph14);
