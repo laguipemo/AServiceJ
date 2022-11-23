@@ -66,18 +66,31 @@ public class FichaVitrinaActivity extends AppCompatActivity {
                         init();
                     } else if (result != null && result.getResultCode() == RESULT_CANCELED) {
                         if (result.getData() != null && result.getData().hasExtra("MANTENIMIENTO")) {
+                            String message;
+                            if (result.getData().hasExtra("UPDATE")) {
+                                message = "Se canceló la actualización del mantenimiento";
+                            } else {
+                                message = "Se canceló la adición del nuevo mantenimiento";
+                            }
                            Toast.makeText(
-                                FichaVitrinaActivity.this,
-                                "Se canceló la adición del nuevo mantenimiento",
-                                   Toast.LENGTH_SHORT).show();
+                                FichaVitrinaActivity.this, message, Toast.LENGTH_SHORT
+                           ).show();
                         }
                         progressBar.setVisibility(View.GONE);
                     } else if (result != null && result.getResultCode() == RESULT_ADD_PROBLEM) {
                         if (result.getData() != null && result.getData().hasExtra("MANTENIMIENTO")) {
+                            String message;
+                            if (result.getData().hasExtra("UPDATE")) {
+                                message = "No se pudo actualizar el mantenimiento";
+                            } else {
+                                message = "No se pudo crear el nuevo mantenimiento";
+                            }
                             Toast.makeText(
-                                    FichaVitrinaActivity.this,
-                                    "No se pudo crear mantenimiento",
-                                    Toast.LENGTH_SHORT).show();
+                                    FichaVitrinaActivity.this, message, Toast.LENGTH_SHORT
+                            ).show();
+                            Toast.makeText(
+                                    FichaVitrinaActivity.this, message, Toast.LENGTH_SHORT
+                            ).show();
                         }
                         progressBar.setVisibility(View.GONE);
                     }

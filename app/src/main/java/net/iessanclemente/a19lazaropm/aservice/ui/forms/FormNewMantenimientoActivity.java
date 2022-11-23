@@ -370,6 +370,9 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
     private void sendResult(String fechaMantenimiento, int result) {
         Intent intent = new Intent();
         intent.putExtra("MANTENIMIENTO", fechaMantenimiento);
+        if (isUpdateTask) {
+            intent.putExtra("UPDATE", fechaMantenimiento);
+        }
         setResult(result, intent);
         finish();
     }
