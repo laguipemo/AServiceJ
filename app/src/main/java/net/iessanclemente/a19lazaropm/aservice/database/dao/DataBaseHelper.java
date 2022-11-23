@@ -580,17 +580,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "                2,\n" +
                 "                2,\n" +
                 "                2,\n" +
-                "                0,\n" +
-                "                2,\n" +
+                "                0.0,\n" +
+                "                1,\n" +
                 "                2,\n" +
                 "                2,\n" +
                 "                2,\n" +
                 "                1,\n" +
                 "                2,\n" +
                 "                835.0,\n" +
-                "                1,\n" +
+                "                2,\n" +
                 "                57.2,\n" +
-                "                1,\n" +
+                "                2,\n" +
                 "                1,\n" +
                 "                0,\n" +
                 "                0,\n" +
@@ -653,9 +653,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "                2,\n" +
                 "                2,\n" +
                 "                740.0,\n" +
-                "                1,\n" +
+                "                2,\n" +
                 "                55.4,\n" +
-                "                1,\n" +
+                "                2,\n" +
                 "                1,\n" +
                 "                0,\n" +
                 "                0,\n" +
@@ -710,17 +710,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "                2,\n" +
                 "                2,\n" +
                 "                2,\n" +
-                "                0,\n" +
-                "                2,\n" +
+                "                0.0,\n" +
+                "                1,\n" +
                 "                2,\n" +
                 "                2,\n" +
                 "                2,\n" +
                 "                3,\n" +
                 "                2,\n" +
                 "                870.0,\n" +
-                "                1,\n" +
+                "                2,\n" +
                 "                59.2,\n" +
-                "                1,\n" +
+                "                2,\n" +
                 "                1,\n" +
                 "                0,\n" +
                 "                0,\n" +
