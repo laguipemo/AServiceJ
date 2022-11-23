@@ -454,7 +454,8 @@ public class TemplatePdf {
     public void addComprobAjusteComponentesFijos(
             String protecSuperficie, String aislaJuntas, String piezasFijas, String funcGuillo,
             String estadoGnrlGuillo, float fuerzaGuillo, String evaluFuerzaGuillo,
-            String ctrlPresencia, String autoProtect, String grifosMonored) {
+            String ctrlPresencia, String autoProtect, String grifosMonored, float valorLight,
+            String light, float valorSound, String sound) {
         paragraph = new Paragraph();
         Paragraph paragraph2 = new Paragraph();
         paragraph2.add(new Chunk(
@@ -521,6 +522,30 @@ public class TemplatePdf {
         paragraph11.add(new Chunk(grifosMonored, FONT_TEXT));
         paragraph11.setSpacingBefore(10.0f);
         addChildParagraphLeft(paragraph11);
+
+        Paragraph paragraph12 = new Paragraph();
+        paragraph12.add(new Chunk(
+                "Comprobación de iluminación y nivel de ruido: ",
+                FONT_TEXT_BOLD));
+        paragraph12.setSpacingBefore(10.0f);
+        addChildParagraphLeft(paragraph12);
+        Paragraph paragraph13 = new Paragraph();
+        paragraph13.setIndentationLeft(30.0f);
+        paragraph13.add(new Chunk("Iluminación (> 400 lux): ", FONT_TEXT_BOLD));
+        paragraph13.add(new Chunk(
+                String.format(Locale.getDefault(), "%.2f lux ", valorLight), FONT_TEXT));
+        paragraph13.add(new Chunk(light, FONT_TEXT));
+        paragraph13.setSpacingBefore(8.0f);
+        addChildParagraphLeft(paragraph13);
+        Paragraph paragraph14 = new Paragraph();
+        paragraph14.setIndentationLeft(30.0f);
+        paragraph14.add(new Chunk("Sonido (< 70 dBA): ", FONT_TEXT_BOLD));
+        paragraph14.add(new Chunk(
+                String.format(Locale.getDefault(), "%.2f dBA ", valorSound), FONT_TEXT));
+        paragraph14.add(new Chunk(sound, FONT_TEXT));
+        paragraph14.setSpacingBefore(8.0f);
+        addChildParagraphLeft(paragraph14);
+
         try {
             document.add(paragraph);
         } catch (DocumentException e) {
