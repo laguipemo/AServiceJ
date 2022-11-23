@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -49,6 +50,7 @@ public class FichaMantenimientoActivity extends AppCompatActivity {
     private RadioButton fichaManteniNecesarioRepaSiRadioButton;
     private RadioButton fichaManteniNecesarioRepaNoRadioButton;
     private TextView fichaManteniComentarioTextView;
+    private TextView fichaManteniInstrumentosTextMultiLine;
 
     //Creo instancia de la base de dato pasando como contexto esta actividad
     DataBaseOperations datos = DataBaseOperations.getInstance(FichaMantenimientoActivity.this);
@@ -105,6 +107,7 @@ public class FichaMantenimientoActivity extends AppCompatActivity {
         fichaManteniNecesarioRepaSiRadioButton = findViewById(R.id.fichaManteniNecesarioRepaSiRadioButton);
         fichaManteniNecesarioRepaNoRadioButton = findViewById(R.id.fichaManteniNecesarioRepaNoRadioButton);
         fichaManteniComentarioTextView = findViewById(R.id.fichaManteniComentarioTextView);
+        fichaManteniInstrumentosTextMultiLine = findViewById(R.id.fichaManteniInstrumentosTextMultiLine);
 
         //recupero datos del intent que condujo hasta esta activity
         String nombreEmpresa = getIntent().getStringExtra("NOMBRE_EMPRESA");
@@ -201,6 +204,7 @@ public class FichaMantenimientoActivity extends AppCompatActivity {
             fichaManteniNecesarioRepaSiRadioButton.setChecked(mantenimiento.isNecesarioRepaSi());
             fichaManteniNecesarioRepaNoRadioButton.setChecked(mantenimiento.isNecesarioRepaNo());
             fichaManteniComentarioTextView.setText(mantenimiento.getComentario());
+            fichaManteniInstrumentosTextMultiLine.setText(mantenimiento.getInstrumentosMedida());
         }
 
     }

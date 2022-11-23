@@ -668,7 +668,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="16dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fichaManteniLabelEvaluacionFinalTextView">
@@ -752,19 +752,49 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
                 android:gravity="start"
                 android:maxLines="5"
                 android:minLines="3"
                 android:textColor="@color/primaryTextColor"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/fichaManteniNecesarioReparcionRadioGroup"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/fichaManteniLabelComentariosTextView"
                 app:layout_constraintTop_toBottomOf="@+id/fichaManteniLabelComentariosTextView"
-                app:layout_constraintVertical_bias="0.0"
                 tools:text="Aquí se muestran los comentarios hechos por el técnico que ha realizado el mantenimiento" />
+
+
+            <TextView
+                android:id="@+id/fichaManteniLabelInstrumentosTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/measurement_instruments_used"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/fichaManteniLabelComentariosTextView"
+                app:layout_constraintTop_toBottomOf="@+id/fichaManteniComentarioTextView" />
+
+
+            <TextView
+                android:id="@+id/fichaManteniInstrumentosTextMultiLine"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:background="@drawable/auto_complete_text_view_shape_transp_corner0_stroke2_primary"
+                android:gravity="start"
+                android:minLines="3"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/fichaManteniComentarioTextView"
+                app:layout_constraintStart_toStartOf="@+id/fichaManteniComentarioTextView"
+                app:layout_constraintTop_toBottomOf="@+id/fichaManteniLabelInstrumentosTextView" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
