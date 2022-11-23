@@ -104,5 +104,7 @@
     <string name="dba">dBA</string>
     <string name="label_valor_light">Ilumination:</string>
     <string name="label_valor_sound">Sound:</string>
+    <string name="measurement_instruments_used">Measurement instruments used</string>
+    <string name="elipse_button">···</string>
 
 </resources>

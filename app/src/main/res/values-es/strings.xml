@@ -103,5 +103,7 @@
     <string name="lux">lux</string>
     <string name="label_valor_light">Iluminación:</string>
     <string name="label_valor_sound">Sonido:</string>
+    <string name="measurement_instruments_used">Insturmentos de medida utilizados</string>
+    <string name="elipse_button">···</string>
 
 </resources>
