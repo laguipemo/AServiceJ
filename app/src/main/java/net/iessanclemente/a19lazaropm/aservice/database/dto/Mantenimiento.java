@@ -32,6 +32,7 @@ public class Mantenimiento {
     private boolean isNecesarioRepaSi;
     private boolean isNecesarioRepaNo;
     private String comentario;
+    private String instrumentosMedida;
 
 
     public Mantenimiento() {
@@ -43,7 +44,8 @@ public class Mantenimiento {
                          float valFuerzaGuillo, int fuerzaGuillo, int ctrlPresencia, int autoproteccion,
                          int grifosMonored, int idMedicion, int evaluVolExtrac, float valLight, int light,
                          float valSound, int sound, boolean isAcordeNormasReguSi, boolean isAcordeNormasReguNo,
-                         boolean isNecesarioRepaSi, boolean isNecesarioRepaNo, String comentario
+                         boolean isNecesarioRepaSi, boolean isNecesarioRepaNo, String comentario,
+                         String instrumentosMedida
     ) {
         this.id = id;
         this.fecha = fecha;
@@ -75,6 +77,7 @@ public class Mantenimiento {
         this.isNecesarioRepaSi = isNecesarioRepaSi;
         this.isNecesarioRepaNo = isNecesarioRepaNo;
         this.comentario = comentario;
+        this.instrumentosMedida = instrumentosMedida;
     }
 
     public int getId() {
@@ -301,6 +304,12 @@ public class Mantenimiento {
         this.comentario = comentario;
     }
 
+    public String getInstrumentosMedida() { return instrumentosMedida; }
+
+    public void setInstrumentosMedida(String instrumentosMedida) {
+        this.instrumentosMedida = instrumentosMedida;
+    }
+
     @Override
     public String toString() {
         return "Mantenimiento{" +
@@ -334,6 +343,7 @@ public class Mantenimiento {
                 ", isNecesarioRepaSi=" + isNecesarioRepaSi +
                 ", isNecesarioRepaNo=" + isNecesarioRepaNo +
                 ", comentario='" + comentario + '\'' +
+                ", instrumentosMedida='" + instrumentosMedida + '\'' +
                 '}';
     }
 
@@ -372,6 +382,7 @@ public class Mantenimiento {
         if (isAcordeNormasReguNo() != that.isAcordeNormasReguNo()) return false;
         if (isNecesarioRepaSi() != that.isNecesarioRepaSi()) return false;
         if (isNecesarioRepaNo() != that.isNecesarioRepaNo()) return false;
+        if (!getInstrumentosMedida().equalsIgnoreCase(that.getInstrumentosMedida())) return false;
         return getFecha().equals(that.getFecha());
     }
 
