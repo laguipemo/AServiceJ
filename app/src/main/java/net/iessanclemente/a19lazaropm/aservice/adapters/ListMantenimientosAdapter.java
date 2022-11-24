@@ -316,7 +316,8 @@ public class ListMantenimientosAdapter extends RecyclerView.Adapter<ListMantenim
                 mantenimiento.getValLight(),
                 db.getCualitativoWithId(mantenimiento.getLight()),
                 mantenimiento.getValSound(),
-                db.getCualitativoWithId(mantenimiento.getSound())
+                db.getCualitativoWithId(mantenimiento.getSound()),
+                mantenimiento.getInstrumentosMedida()
         );
         templatePdf.addComentAndFinalEvalu(
                 mantenimiento.getComentario(),

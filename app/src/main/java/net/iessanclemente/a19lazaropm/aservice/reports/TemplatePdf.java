@@ -455,7 +455,7 @@ public class TemplatePdf {
             String protecSuperficie, String aislaJuntas, String piezasFijas, String funcGuillo,
             String estadoGnrlGuillo, float fuerzaGuillo, String evaluFuerzaGuillo,
             String ctrlPresencia, String autoProtect, String grifosMonored, float valorLight,
-            String light, float valorSound, String sound) {
+            String light, float valorSound, String sound, String intrumentosMedida) {
         paragraph = new Paragraph();
         Paragraph paragraph2 = new Paragraph();
         paragraph2.add(new Chunk(
@@ -536,7 +536,7 @@ public class TemplatePdf {
                 String.format(Locale.getDefault(), "%.2f lux ", valorLight), FONT_TEXT));
         paragraph13.add(Chunk.TABBING);
         paragraph13.add(new Chunk(light, FONT_TEXT));
-        paragraph13.setSpacingBefore(8.0f);
+        paragraph13.setSpacingBefore(5.0f);
         addChildParagraphLeft(paragraph13);
         Paragraph paragraph14 = new Paragraph();
         paragraph14.setIndentationLeft(30.0f);
@@ -545,8 +545,20 @@ public class TemplatePdf {
                 String.format(Locale.getDefault(), "%.2f dBA ", valorSound), FONT_TEXT));
         paragraph14.add(Chunk.TABBING);
         paragraph14.add(new Chunk(sound, FONT_TEXT));
-        paragraph14.setSpacingBefore(8.0f);
+        paragraph14.setSpacingBefore(5.0f);
         addChildParagraphLeft(paragraph14);
+
+        Paragraph paragraph15 = new Paragraph();
+        paragraph15.add(new Chunk(
+                "Instrumentos de medida utilizados: ",
+                FONT_TEXT_BOLD));
+        paragraph15.setSpacingBefore(10.0f);
+        addChildParagraphLeft(paragraph15);
+        Paragraph paragraph16 = new Paragraph();
+        paragraph16.setIndentationLeft(30.0f);
+        paragraph16.add(new Chunk(intrumentosMedida, FONT_TEXT));
+        paragraph16.setSpacingBefore(5.0f);
+        addChildParagraphLeft(paragraph16);
 
         try {
             document.add(paragraph);
@@ -559,7 +571,7 @@ public class TemplatePdf {
         paragraph = new Paragraph();
         Paragraph paragraph2 = new Paragraph();
         paragraph2.add(new Chunk("Comentarios: ", FONT_TEXT_BOLD));
-        paragraph2.setSpacingBefore(20.0f);
+        paragraph2.setSpacingBefore(10.0f);
         addChildParagraphLeft(paragraph2);
         Paragraph paragraph3 = new Paragraph();
         paragraph3.setIndentationLeft(30.0f);
@@ -567,7 +579,7 @@ public class TemplatePdf {
         addChildParagraphLeft(paragraph3);
         Paragraph paragraph4 = new Paragraph();
         paragraph4.add(new Chunk("Resultado: ", FONT_TEXT_BOLD));
-        paragraph4.setSpacingBefore(30.0f);
+        paragraph4.setSpacingBefore(20.0f);
         addChildParagraphLeft(paragraph4);
         Paragraph paragraph5 = new Paragraph();
         paragraph5.setIndentationLeft(30.0f);
@@ -595,7 +607,7 @@ public class TemplatePdf {
     public void addSignatures() {
         paragraph = new Paragraph();
         Paragraph paragraph2 = new Paragraph();
-        paragraph2.setSpacingBefore(80.0f);
+        paragraph2.setSpacingBefore(60.0f);
         paragraph2.setIndentationLeft(30.0f);
         paragraph2.setTabSettings(new TabSettings(300.0f));
         paragraph2.add(new Chunk("Firma Técnico", FONT_TEXT_BOLD));
