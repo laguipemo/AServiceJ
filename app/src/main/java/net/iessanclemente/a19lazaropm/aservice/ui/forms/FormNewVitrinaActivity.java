@@ -169,7 +169,6 @@ public class FormNewVitrinaActivity extends AppCompatActivity {
                 listFabricantes);
         newVitrinaFabriNameAutoCompleteTextView.setAdapter(fabricanteAdapter);
 
-
         //Tipo
         newVitrinaTipoSpinner = findViewById(R.id.newVitrinaTipoSpinner);
         listTipos = getListTiposVitrinas();
@@ -178,6 +177,7 @@ public class FormNewVitrinaActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_dropdown_item,
                 listTipos);
         newVitrinaTipoSpinner.setAdapter(tipoAdapter);
+
         //Referencia
         newVitrinaReferenceEditText = findViewById(R.id.newVritrinaReferenceEditText);
         //Inventario
@@ -229,7 +229,7 @@ public class FormNewVitrinaActivity extends AppCompatActivity {
                 //Obtengo tipo de vitrina a partir de su id
                 TipoVitrina tipoVitrinaOld = datos.selectTipoVitrinaWithId(vitrinaOld.getIdTipo());
                 newVitrinaTipoSpinner.setSelection(
-                        datos.getIdOfVitrinaTipo(tipoVitrinaOld.getTipoVitrina()));
+                        datos.getIdOfVitrinaTipo(tipoVitrinaOld.getTipoVitrina()) -1);
 
                 newVitrinaReferenceEditText.setText(vitrinaOld.getVitrinaReferencia());
                 newVitrinaInventaryEditText.setText(vitrinaOld.getVitrinaInventario());
@@ -237,7 +237,7 @@ public class FormNewVitrinaActivity extends AppCompatActivity {
                 //Obtengo el largo de vitrina a partir de su id
                 Longitud longitudOld = datos.selectLongitudWithId(vitrinaOld.getIdLongitud());
                 newVitrinaLongitudSpinner.setSelection(
-                        datos.getIdOfLongitudWithName(longitudOld.getLongitudVitrina()));
+                        datos.getIdOfLongitudWithName(longitudOld.getLongitudVitrina()) -1);
                 getNewVitrinaGuillotinaTextView.setText(
                         String.valueOf(longitudOld.getLogintudGillotina()));
 
