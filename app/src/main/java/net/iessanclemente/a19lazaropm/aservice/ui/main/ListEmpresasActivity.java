@@ -23,6 +23,7 @@ import net.iessanclemente.a19lazaropm.aservice.database.dto.Empresa;
 import net.iessanclemente.a19lazaropm.aservice.adapters.ElementListEmpresas;
 import net.iessanclemente.a19lazaropm.aservice.adapters.ListEmpresasAdapter;
 import net.iessanclemente.a19lazaropm.aservice.ui.forms.FormNewEmpresaActivity;
+import net.iessanclemente.a19lazaropm.aservice.ui.secondary.FichaVitrinaActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,15 +71,29 @@ public class ListEmpresasActivity extends AppCompatActivity {
                 }
                 init();
             } else if (result != null && result.getResultCode() == RESULT_CANCELED) {
-                Toast.makeText(
-                        ListEmpresasActivity.this,
-                        "Se canceló la adición de una empresa nueva", Toast.LENGTH_SHORT).show();
+                if (result.getData() != null && result.getData().hasExtra("NOMBRE_EMP")) {
+                    String message;
+                    if (result.getData().hasExtra("UPDATE")) {
+                        message = "Se canceló la actualización de la nueva empresa";
+                    } else {
+                        message = "Se canceló la adición de la nueva empresa";
+                    }
+                    Toast.makeText(
+                            ListEmpresasActivity.this, message, Toast.LENGTH_SHORT
+                    ).show();
+                }
+
             } else if (result != null && result.getResultCode() == RESULT_ADD_PROBLEM) {
                 if (result.getData() != null && result.getData().hasExtra("NOMBRE_EMP")) {
+                    String message;
+                    if (result.getData().hasExtra("UPDATE")) {
+                        message = "No se pudo actualizar la empresa " + result.getData().getStringExtra("NOMBRE_EMP");
+                    } else {
+                        message = "No se pudo crear la empresa " + result.getData().getStringExtra("NOMBRE_EMP");
+                    }
                     Toast.makeText(
-                            ListEmpresasActivity.this,
-                            "No se pudo crear: " + result.getData().getStringExtra("NOMBRE_EMP"),
-                            Toast.LENGTH_SHORT).show();
+                            ListEmpresasActivity.this, message, Toast.LENGTH_SHORT
+                    ).show();
                 }
             }
         }

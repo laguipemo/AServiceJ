@@ -88,9 +88,6 @@ public class FichaVitrinaActivity extends AppCompatActivity {
                             Toast.makeText(
                                     FichaVitrinaActivity.this, message, Toast.LENGTH_SHORT
                             ).show();
-                            Toast.makeText(
-                                    FichaVitrinaActivity.this, message, Toast.LENGTH_SHORT
-                            ).show();
                         }
                         progressBar.setVisibility(View.GONE);
                     }

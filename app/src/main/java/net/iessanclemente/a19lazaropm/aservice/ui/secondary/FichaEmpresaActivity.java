@@ -84,11 +84,28 @@ public class FichaEmpresaActivity extends AppCompatActivity {
                         }
                         init();
                     } else if (result != null && result.getResultCode() == RESULT_CANCELED) {
-                        Toast.makeText(
-                                FichaEmpresaActivity.this,
-                                "Se canceló la adición de una vitrina nueva", Toast.LENGTH_SHORT).show();
+                        if (result.getData() != null && result.getData().hasExtra("FABRICANTE")) {
+                            String message;
+                            if (result.getData().hasExtra("UPDATE")) {
+                                message = "Se canceló al actualización de la vitrina " + result.getData().getStringExtra("FABRICANTE");
+                            } else {
+                                message = "Se canceló la adición de la vitrina " + result.getData().getStringExtra("FABRICANTE");
+                            }
+                            Toast.makeText(
+                                    FichaEmpresaActivity.this, message, Toast.LENGTH_SHORT
+                            ).show();
+                        }
+
                     } else if (result != null && result.getResultCode() == RESULT_ADD_PROBLEM) {
                         if (result.getData() != null && result.getData().hasExtra("FABRICANTE")) {
+                            if (result.getData() != null && result.getData().hasExtra("FABRICANTE")) {
+                                String message;
+                                if (result.getData().hasExtra("UPDATE")) {
+                                    message = "No se pudo actualizar la vitrina " + result.getData().getStringExtra("FABRICANTE");
+                                } else {
+                                    message = "No se pudo adicionar la vitrina " + result.getData().getStringExtra("FABRICANTE");
+                                }
+                            }
                             Toast.makeText(
                                     FichaEmpresaActivity.this,
                                     "No se pudo crear: " + result.getData().getStringExtra("FABRICANTE"),

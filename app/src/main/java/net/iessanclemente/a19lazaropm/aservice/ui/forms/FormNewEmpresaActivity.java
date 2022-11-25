@@ -97,6 +97,9 @@ public class FormNewEmpresaActivity extends AppCompatActivity {
     private void sendResult(String nameEmp, int result) {
         Intent intent = new Intent();
         intent.putExtra("NOMBRE_EMP", nameEmp);
+        if (isUpdateTask) {
+            intent.putExtra("UPDATE", nameEmp);
+        }
         setResult(result, intent);
         finish();
     }

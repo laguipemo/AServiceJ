@@ -252,6 +252,9 @@ public class FormNewVitrinaActivity extends AppCompatActivity {
     private void sendResult(String fabricante, int result) {
         Intent intent = new Intent();
         intent.putExtra("FABRICANTE", fabricante);
+        if (isUpdateTask) {
+            intent.putExtra("UPDATE", fabricante);
+        }
         setResult(result, intent);
         finish();
     }
