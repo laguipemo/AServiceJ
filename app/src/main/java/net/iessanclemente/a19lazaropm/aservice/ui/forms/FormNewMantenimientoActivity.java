@@ -292,7 +292,7 @@ public class FormNewMantenimientoActivity extends AppCompatActivity {
         }
         String comentario = comentarioNewManteniEditText.getText().toString();
 
-        //TODO: recuperar el string con los intrumentos de medida utilizados
+        String instrumentosMedida = instrumentosNewManteniTextMultiLine.getText().toString();
 
         //Creo mantenimiento con los nuevos datos o los corregidos
         Mantenimiento mantenimiento = new Mantenimiento(
