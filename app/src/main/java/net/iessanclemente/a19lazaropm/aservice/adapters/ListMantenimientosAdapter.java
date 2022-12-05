@@ -1,7 +1,6 @@
 package net.iessanclemente.a19lazaropm.aservice.adapters;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -110,7 +109,7 @@ public class ListMantenimientosAdapter extends RecyclerView.Adapter<ListMantenim
 
                     switch (item.getItemId()) {
                         case R.id.menuItemDelete:
-                            deletMantenimiento(pos, datos, idMantenimiento);
+                            deleteMantenimiento(pos, datos, idMantenimiento);
                             break;
                         case R.id.menuItemUpdate:
                             showSupervisorPinDialog(pos);
@@ -160,6 +159,11 @@ public class ListMantenimientosAdapter extends RecyclerView.Adapter<ListMantenim
                                                 Uri.fromFile(ListMantenimientosAdapter.this.templatePdf.getPdfFile()));
                                         if (intent.resolveActivity(context.getPackageManager()) != null) {
                                             activityResultLauncher.launch(intent);
+                                        } else {
+                                            Toast.makeText(
+                                                    context,
+                                                    "No exite aplicación de email en el dispositivo",
+                                                    Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }).start();
@@ -218,7 +222,7 @@ public class ListMantenimientosAdapter extends RecyclerView.Adapter<ListMantenim
         activityResultLauncher.launch(intent);
     }
 
-    private void deletMantenimiento(int pos, DataBaseOperations datos, int idMantenimiento) {
+    private void deleteMantenimiento(int pos, DataBaseOperations datos, int idMantenimiento) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomAlertDialog);
         builder.setTitle(R.string.delete)
                 .setIcon(R.drawable.ic_baseline_error_outline_24)
@@ -231,7 +235,7 @@ public class ListMantenimientosAdapter extends RecyclerView.Adapter<ListMantenim
                         listElementsMantenimientos.remove(pos);
                         notifyItemRemoved(pos);
                         Toast.makeText(
-                                context,"Borrado Mantenimiento", Toast.LENGTH_SHORT).show();
+                                context, "Borrado Mantenimiento", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setNegativeButton(R.string.cancel, (dialog, which) -> {
