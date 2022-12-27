@@ -1,17 +1,33 @@
 package net.iessanclemente.a19lazaropm.aservice.database.dao;
 
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Arrays;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     private Context context;
 
     public DataBaseHelper(@Nullable Context context) {
-        super(context, DataBaseContract.DATABASE_NAME,null, DataBaseContract.DATABASE_VERSION);
+        super(context, DataBaseContract.DATABASE_NAME, null, DataBaseContract.DATABASE_VERSION);
         this.context = context;
     }
 
@@ -103,7 +119,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                         DataBaseContract.TiposLongsFlowsTable.COL_FLOW_RECOM + " INTEGER NOT NULL, " +
                         DataBaseContract.TiposLongsFlowsTable.COL_FLOW_MAX + " INTEGER NOT NULL, " +
                         DataBaseContract.TiposLongsFlowsTable.COL_PRESS_DROP + " INTEGER NOT NULL, " +
-                        "PRIMARY KEY ("+ DataBaseContract.TiposLongsFlowsTable.COL_ID_TIPO + ", " +
+                        "PRIMARY KEY (" + DataBaseContract.TiposLongsFlowsTable.COL_ID_TIPO + ", " +
                         DataBaseContract.TiposLongsFlowsTable.COL_ID_LONGITUD + "))";
         db.execSQL(createTiposLongsFlowsTable);
 
@@ -118,7 +134,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                         DataBaseContract.MantenimientosTable.COL_ID_TECNICO + " INTEGER REFERENCES " +
                         DataBaseContract.TecnicosTable.TABLE_NAME + " (" +
                         DataBaseContract.TecnicosTable._ID + "), " +
-                        DataBaseContract.MantenimientosTable.COL_SEGUN_DIN+ " BOOLEAN," +
+                        DataBaseContract.MantenimientosTable.COL_SEGUN_DIN + " BOOLEAN," +
                         DataBaseContract.MantenimientosTable.COL_SEGUN_EN + " BOOLEAN," +
                         DataBaseContract.MantenimientosTable.COL_FUN_CTRL_DIGI + " INTEGER REFERENCES " +
                         DataBaseContract.CualitativosTable.TABLE_NAME + " (" +
@@ -1052,6 +1068,220 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
+    }
+
+    public void backup(String outFileName) {
+        // database path, source (input)
+        final String inFileName = context.getDatabasePath(DataBaseContract.DATABASE_NAME).toString();
+        try {
+            // input file and its stream associate
+            File inFile = new File(inFileName);
+            FileInputStream fis = new FileInputStream(inFile);
+
+            // output associate stream with empty output file that has a filename received
+            OutputStream fos = new FileOutputStream(outFileName);
+
+            // transfer bytes from the input file to the output file
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = fis.read(buffer)) > 0) {
+                fos.write(buffer, 0, length);
+            }
+            // close streams (input and output)
+            fos.flush();
+            fos.close();
+            fis.close();
+
+            Toast.makeText(context, "Export Completed", Toast.LENGTH_SHORT).show();
+
+        } catch (IOException e) {
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.e("DataBaseHelper)", Arrays.toString(e.getStackTrace()));
+        }
+    }
+
+    public void backup() {
+        // database path, source (input)
+        final String inFilePath = context.getDatabasePath(DataBaseContract.DATABASE_NAME).toString();
+        String databaseName = DataBaseContract.DATABASE_NAME.split("\\.")[0];
+        try {
+            Uri contentUri = MediaStore.Files.getContentUri("external");
+            String selection = MediaStore.MediaColumns.RELATIVE_PATH + "=?";
+            String[] selectionArgs = new String[]{
+                    Environment.DIRECTORY_DOCUMENTS +
+                            File.separator +
+                            String.format("%s_backup", databaseName)
+                            + File.separator
+            };
+            Cursor cursor = context.getContentResolver()
+                    .query(contentUri, null, selection, selectionArgs, null);
+
+            // input file and its associate stream
+            File inFile = new File(inFilePath);
+            FileInputStream fis = new FileInputStream(inFile);
+
+            // output file using ContentProvider
+            ContentValues valuesOutFile = new ContentValues();
+            valuesOutFile.put(MediaStore.MediaColumns.DISPLAY_NAME, databaseName);
+            valuesOutFile.put(MediaStore.MediaColumns.MIME_TYPE, "application/vdn.sqlite3");
+            valuesOutFile.put(
+                    MediaStore.MediaColumns.RELATIVE_PATH,
+                    Environment.DIRECTORY_DOCUMENTS +
+                            File.separator +
+                            String.format("%s_backup", databaseName)
+                            + File.separator
+            );
+
+            Uri uriOut = null;
+
+            if (cursor.getCount() == 0) {
+                // creo el identificador uniforme de recursos, Uri, para el fichero final en el volumen
+                // el volumen externo
+                uriOut = context.getContentResolver()
+                        .insert(MediaStore.Files.getContentUri("external"), valuesOutFile);
+            } else {
+                while (cursor.moveToNext()) {
+                    int columnIndexName = cursor.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME);
+                    String fileName = cursor.getString(columnIndexName);
+
+                    if (fileName.equals(DataBaseContract.DATABASE_NAME)) {
+                        int columnIndexId = cursor.getColumnIndex(MediaStore.MediaColumns._ID);
+                        long id = cursor.getLong(columnIndexId);
+
+                        uriOut = ContentUris.withAppendedId(contentUri, id);
+
+                        break;
+                    }
+                }
+            }
+            // Abro el flujo de salida de datos conectado con el fichero final en el volumen externo
+            OutputStream fos = context.getContentResolver().openOutputStream(uriOut);
+
+            // transfer bytes from the input file to the output file
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = fis.read(buffer)) > 0) {
+                fos.write(buffer, 0, length);
+            }
+            // close streams (input and output)
+            fos.flush();
+            fos.close();
+            fis.close();
+
+            Toast.makeText(context, "Export Completed", Toast.LENGTH_SHORT).show();
+
+            cursor.close();
+
+        } catch (IOException e) {
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.e("DataBaseHelper", Arrays.toString(e.getStackTrace()));
+        }
+    }
+
+    public void importDB(String inFileName) {
+        // database path, destination (output)
+        final String outFileName = context.getDatabasePath(DataBaseContract.DATABASE_NAME).toString();
+
+        try {
+            // input file and its associate stream
+            File inFile = new File(inFileName);
+            FileInputStream fis = new FileInputStream(inFile);
+
+            // output associate stream with empty output file
+            OutputStream fos = new FileOutputStream(outFileName);
+
+            // Transfer bytes from the input file to the output file
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = fis.read(buffer)) > 0) {
+                fos.write(buffer, 0, length);
+            }
+            // Close the streams
+            fos.flush();
+            fos.close();
+            fis.close();
+
+            Toast.makeText(context, "Import Completed", Toast.LENGTH_SHORT).show();
+
+        } catch (IOException e) {
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.e("DataBaseHelper)", Arrays.toString(e.getStackTrace()));
+        }
+    }
+
+    public void importDB() {
+        // database path, destination (output)
+        final String outFilePath = context.getDatabasePath(DataBaseContract.DATABASE_NAME).toString();
+
+        String databaseName = DataBaseContract.DATABASE_NAME.split("\\.")[0];
+
+        try {
+            // input file using ContentProvider
+            Uri uriContentIn = MediaStore.Files.getContentUri("external");
+            String selection = MediaStore.MediaColumns.RELATIVE_PATH + "=?";
+            String[] selectionArgs = new String[]{
+                    Environment.DIRECTORY_DOCUMENTS + String.format("/%s_backup/", databaseName)
+            };
+
+            Cursor cursor = context.getContentResolver()
+                    .query(uriContentIn, null, selection, selectionArgs, null);
+
+            Uri uriIn = null;
+
+            if (cursor.getCount() == 0) {
+                Toast.makeText(
+                        context,
+                        "No se encontró el fichero de copia en \"" +
+                                Environment.DIRECTORY_DOCUMENTS +
+                                String.format("/%s_backup/\"", databaseName),
+                        Toast.LENGTH_SHORT
+                ).show();
+            } else {
+                while (cursor.moveToNext()) {
+                    int columnIndexName = cursor.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME);
+                    String fileInName = cursor.getString(columnIndexName);
+
+                    if (fileInName.equals(String.format("%s.db", databaseName))) {
+                        int columnIndexId = cursor.getColumnIndex(MediaStore.MediaColumns._ID);
+                        long id = cursor.getLong(columnIndexId);
+                        uriIn = ContentUris.withAppendedId(uriContentIn, id);
+                        break;
+                    }
+                }
+                if (uriIn == null) {
+                    Toast.makeText(
+                            context,
+                            String.format("No se encontró el fichero de copia \"%s.db\"", databaseName),
+                            Toast.LENGTH_SHORT
+                    ).show();
+                } else {
+                    // input associate stream
+                    InputStream fis = context.getContentResolver().openInputStream(uriIn);
+
+                    // output associate stream with empty output file
+                    OutputStream fos = new FileOutputStream(outFilePath);
+
+                    // Transfer bytes from the input file to the output file
+                    byte[] buffer = new byte[1024];
+                    int length;
+                    while ((length = fis.read(buffer)) > 0) {
+                        fos.write(buffer, 0, length);
+                    }
+
+                    // Close the streams
+                    fos.flush();
+                    fos.close();
+                    fis.close();
+
+                    Toast.makeText(context, "Import Completed", Toast.LENGTH_SHORT).show();
+                }
+            }
+            cursor.close();
+
+        } catch (IOException e) {
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.e("DataBaseHelper)", Arrays.toString(e.getStackTrace()));
+        }
     }
 
 }
