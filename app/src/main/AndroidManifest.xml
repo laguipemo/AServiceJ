@@ -4,12 +4,23 @@
     <queries>
         <intent>
             <action android:name="android.intent.action.VIEW" />
-            <data android:scheme="pdf" />
+            <data android:scheme="application/pdf" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SEND" />
+            <data android:scheme="mailto" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.OPEN_DOCUMENT" />
+            <data android:scheme="application/vdn.sqlite3" />
         </intent>
     </queries>
 
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission
+            android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -71,6 +82,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="net.iessanclemente.a19lazaropm.aservice.fileprovider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
+
     </application>
 
 </manifest>
