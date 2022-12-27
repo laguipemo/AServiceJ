@@ -41,6 +41,20 @@ public class DataBaseOperations {
         return instance;
     }
 
+    public void backup(String outFileName) {
+        dataBase.backup(outFileName);
+    }
+    public void backup() {
+        dataBase.backup();
+    }
+
+    public void importDB(String inFileName) {
+        dataBase.importDB(inFileName);
+    }
+    public void importDB() {
+        dataBase.importDB();
+    }
+
     public void close() {
         dataBase.close();
     }
@@ -1826,7 +1840,8 @@ public class DataBaseOperations {
         }
         return idMedicion;
     }
-/*
+
+    /*
         CRUD sobre la entidad Intrumentos
      */
     public long insertInstrumentos(Instrumento instrumento) {
