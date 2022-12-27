@@ -9,4 +9,16 @@
         android:orderInCategory="10"
         android:titleCondensed="X"
         app:showAsAction="always"/>
+    <item
+        android:id="@+id/export_db"
+        android:title="@string/export_database"
+        android:orderInCategory="10"
+        android:titleCondensed="Exp" />
+    <item
+        android:id="@+id/import_db"
+        android:icon="@drawable/ic_baseline_close_app_24"
+        android:title="@string/import_database"
+        android:orderInCategory="10"
+        android:titleCondensed="Imp" />
+
 </menu>
