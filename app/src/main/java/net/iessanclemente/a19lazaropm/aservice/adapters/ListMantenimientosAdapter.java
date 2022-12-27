@@ -2,7 +2,6 @@ package net.iessanclemente.a19lazaropm.aservice.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
-import androidx.core.net.MailTo;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.iessanclemente.a19lazaropm.aservice.R;
@@ -129,6 +127,7 @@ public class ListMantenimientosAdapter extends RecyclerView.Adapter<ListMantenim
                             }).start();
                             break;
                         case R.id.menuItemSendReport:
+                            createReportProgressBar.setVisibility(View.VISIBLE);
                             if (templatePdf != null) {
                                 templatePdf.attachPdfAndSendMail();
                                 break;
@@ -136,38 +135,13 @@ public class ListMantenimientosAdapter extends RecyclerView.Adapter<ListMantenim
                                 new Thread(new Runnable() {
                                     public void run() {
                                         createReportPdf(
-                                                pos, DataBaseOperations.getInstance(context), idMantenimiento);
-                                        Intent intent = new Intent("android.intent.action.SENDTO");
-                                        intent.setData(Uri.parse(MailTo.MAILTO_SCHEME));
-                                        intent.putExtra(
-                                                "android.intent.extra.EMAIL",
-                                                new String[]{
-                                                        "sat@atlasromero.com",
-                                                        "administracion@atlasromero.com",
-                                                        "laguipemo@gmail.com"}
+                                                pos,
+                                                DataBaseOperations.getInstance(context),
+                                                idMantenimiento
                                         );
-                                        intent.putExtra(
-                                                "android.intent.extra.SUBJECT",
-                                                "Informe del mantenimiento"
-                                        );
-                                        intent.putExtra(
-                                                "android.intent.extra.TEXT",
-                                                "Le adjuntamos el informe del mantenimiento realizado a su vitrina"
-                                        );
-                                        intent.putExtra(
-                                                "android.intent.extra.STREAM",
-                                                Uri.fromFile(ListMantenimientosAdapter.this.templatePdf.getPdfFile()));
-                                        if (intent.resolveActivity(context.getPackageManager()) != null) {
-                                            activityResultLauncher.launch(intent);
-                                        } else {
-                                            Toast.makeText(
-                                                    context,
-                                                    "No exite aplicación de email en el dispositivo",
-                                                    Toast.LENGTH_SHORT).show();
-                                        }
+                                        templatePdf.attachPdfAndSendMail();
                                     }
                                 }).start();
-                                createReportProgressBar.setVisibility(View.VISIBLE);
                                 break;
                             }
                     }
@@ -261,7 +235,7 @@ public class ListMantenimientosAdapter extends RecyclerView.Adapter<ListMantenim
                 vitrina.getIdTipo(), vitrina.getIdLongitud());
 
         // Instancio la plantilla del informe y abro el documento
-        templatePdf = new TemplatePdf(context);
+        templatePdf = new TemplatePdf(context, activityResultLauncher);
         // Abro el documento. Al hacerlo sin pasarle el fileName entonces utiliza "InformeVitrina.pdf"
         templatePdf.openDocument();
         // Añado los metadatos (Título, objetivo y técnico que realizó el mantenimiento) a la plantilla
@@ -331,7 +305,7 @@ public class ListMantenimientosAdapter extends RecyclerView.Adapter<ListMantenim
         templatePdf.addSignatures();
         templatePdf.closeDocument();
 
-        TemplatePdf templatePdf3 = new TemplatePdf(this.context);
+        TemplatePdf templatePdf3 = new TemplatePdf(this.context, activityResultLauncher);
         this.templatePdf = templatePdf3;
         templatePdf3.openDocumetStamperPageNumering();
     }

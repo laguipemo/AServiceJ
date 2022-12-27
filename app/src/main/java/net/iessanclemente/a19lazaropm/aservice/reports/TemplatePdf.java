@@ -2,23 +2,24 @@ package net.iessanclemente.a19lazaropm.aservice.reports;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.net.MailTo;
+import androidx.core.content.FileProvider;
 
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
@@ -34,16 +35,16 @@ import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.PdfWriter;
 
+import net.iessanclemente.a19lazaropm.aservice.R;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
-
-import net.iessanclemente.a19lazaropm.aservice.R;
 
 public class TemplatePdf {
     private final Font FONT_SUBTITLE = new Font(Font.FontFamily.HELVETICA, 18.0f, 1);
@@ -66,6 +67,8 @@ public class TemplatePdf {
     private PdfWriter pdfWriter;
     private final File pdfsFolder;
 
+    private ActivityResultLauncher<Intent> activityResultLauncher;
+
     private class PageBackgroundAtlas extends PdfPageEventHelper {
         private PageBackgroundAtlas() {
         }
@@ -75,9 +78,10 @@ public class TemplatePdf {
         }
     }
 
-    public TemplatePdf(Context context) {
+    public TemplatePdf(Context context, ActivityResultLauncher<Intent> activityResultLauncher) {
         this.context = context;
-        pdfsFolder = new File(context.getExternalFilesDir(Environment.DIRECTORY_DCIM), "pdfs");
+        this.activityResultLauncher = activityResultLauncher;
+        pdfsFolder = new File(context.getFilesDir(), "reports");
     }
 
     private void createFile(String fileName) {
@@ -113,7 +117,7 @@ public class TemplatePdf {
             for (int i = 1; i <= numberOfPages; i++) {
                 PdfContentByte underContent = pdfStamper.getUnderContent(i);
                 String format = String.format(
-                        Locale.getDefault(),"Pagina %d de %d", i, numberOfPages);
+                        Locale.getDefault(), "Pagina %d de %d", i, numberOfPages);
                 BaseFont createFont = BaseFont.createFont(
                         "Helvetica-Oblique", "Cp1252", false);
                 float width = pdfReader.getPageSize(i).getWidth();
@@ -367,7 +371,8 @@ public class TemplatePdf {
                 String.format(Locale.getDefault(), "%.2f", arrayValoresMedicion[0]),
                 FONT_TEXT_BOLD));
         addChildParagraphLeft(paragraph3);
-        try {document.add(paragraph);
+        try {
+            document.add(paragraph);
         } catch (DocumentException e) {
             Log.e("Error in createTableMediciones: ", e.toString());
         }
@@ -414,7 +419,7 @@ public class TemplatePdf {
                         String.format(Locale.getDefault(), "%.2f", velocidadAire),
                         this.FONT_TEXT),
                 new Phrase(
-                        String.format(Locale.getDefault(), "%d",3600), FONT_TEXT),
+                        String.format(Locale.getDefault(), "%d", 3600), FONT_TEXT),
                 new Phrase(
                         String.format(Locale.getDefault(), "%.2f",
                                 guilloLong * 0.5f * velocidadAire * 3600.0f),
@@ -594,7 +599,7 @@ public class TemplatePdf {
         paragraph6.add(new Chunk(
                 "Por cuestiones de seguridad es necesaria la intervención del equipo: ",
                 FONT_TEXT));
-        paragraph6.add(new Chunk(isNeedReparation ? "Si": "No", FONT_TEXT));
+        paragraph6.add(new Chunk(isNeedReparation ? "Si" : "No", FONT_TEXT));
         paragraph6.setSpacingBefore(10.0f);
         addChildParagraphLeft(paragraph6);
         try {
@@ -761,22 +766,43 @@ public class TemplatePdf {
     }
 
     public void attachPdfAndSendMail() {
-        Intent intent = new Intent("android.intent.action.SENDTO");
-        intent.setData(Uri.parse(MailTo.MAILTO_SCHEME));
-        intent.putExtra(
-                "android.intent.extra.EMAIL",
+        Intent intentShared = new Intent(Intent.ACTION_SEND);
+        intentShared.setType("application/pdf");
+        intentShared.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intentShared.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        intentShared.putExtra(
+                Intent.EXTRA_EMAIL,
                 new String[]{
                         "sat@atlasromero.com",
                         "administracion@atlasromero.com",
-                        "laguipemo@gmail.com"});
-        intent.putExtra("android.intent.extra.SUBJECT", "Informe del mantenimiento");
-        intent.putExtra(
-                "android.intent.extra.TEXT",
+                        "laguipemo@gmail.com"}
+        );
+        intentShared.putExtra(
+                Intent.EXTRA_SUBJECT,
+                "Informe del mantenimiento");
+        intentShared.putExtra(
+                Intent.EXTRA_TEXT,
                 "Le adjuntamos el informe del mantenimiento realizado a su vitrina");
-        intent.putExtra("android.intent.extra.STREAM", Uri.fromFile(pdfFile));
-        if (intent.resolveActivity(context.getPackageManager()) != null) {
-            context.startActivity(intent);
+
+        Uri contentUri = FileProvider.getUriForFile(
+                context,
+                "net.iessanclemente.a19lazaropm.aservice.fileprovider",
+                getPdfFile()
+        );
+        intentShared.putExtra(Intent.EXTRA_STREAM, contentUri);
+
+        Intent chooser = Intent.createChooser(intentShared, "Seleccionar para enviar reporte");
+        List<ResolveInfo> resInfoList = context.getPackageManager()
+                .queryIntentActivities(chooser, PackageManager.MATCH_DEFAULT_ONLY);
+        for (ResolveInfo resolveInfo : resInfoList) {
+            String packageName = resolveInfo.activityInfo.packageName;
+            context.grantUriPermission(
+                    packageName,
+                    contentUri,
+                    Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION
+            );
         }
+        activityResultLauncher.launch(chooser);
     }
 
     public void viewPdf() {
