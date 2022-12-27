@@ -1,5 +1,13 @@
 package net.iessanclemente.a19lazaropm.aservice.ui.secondary;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -9,21 +17,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import net.iessanclemente.a19lazaropm.aservice.R;
+import net.iessanclemente.a19lazaropm.aservice.adapters.ElementListMantenimientos;
+import net.iessanclemente.a19lazaropm.aservice.adapters.ListMantenimientosAdapter;
 import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseContract;
 import net.iessanclemente.a19lazaropm.aservice.database.dao.DataBaseOperations;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Mantenimiento;
 import net.iessanclemente.a19lazaropm.aservice.database.dto.Vitrina;
-import net.iessanclemente.a19lazaropm.aservice.adapters.ElementListMantenimientos;
-import net.iessanclemente.a19lazaropm.aservice.adapters.ListMantenimientosAdapter;
 import net.iessanclemente.a19lazaropm.aservice.ui.forms.FormNewMantenimientoActivity;
 
 import java.util.ArrayList;
@@ -72,9 +72,9 @@ public class FichaVitrinaActivity extends AppCompatActivity {
                             } else {
                                 message = "Se canceló la adición del nuevo mantenimiento";
                             }
-                           Toast.makeText(
-                                FichaVitrinaActivity.this, message, Toast.LENGTH_SHORT
-                           ).show();
+                            Toast.makeText(
+                                    FichaVitrinaActivity.this, message, Toast.LENGTH_SHORT
+                            ).show();
                         }
                         progressBar.setVisibility(View.GONE);
                     } else if (result != null && result.getResultCode() == RESULT_ADD_PROBLEM) {
@@ -89,6 +89,8 @@ public class FichaVitrinaActivity extends AppCompatActivity {
                                     FichaVitrinaActivity.this, message, Toast.LENGTH_SHORT
                             ).show();
                         }
+                        progressBar.setVisibility(View.GONE);
+                    } else {
                         progressBar.setVisibility(View.GONE);
                     }
                 }
@@ -166,7 +168,7 @@ public class FichaVitrinaActivity extends AppCompatActivity {
                     DataBaseContract.MantenimientosTable.COL_ID_VITRINA,
                     vitrina.getId());
 
-            for (Mantenimiento mantenimiento: datos.selectMantenimientos(sqlSelectMantenimientos)) {
+            for (Mantenimiento mantenimiento : datos.selectMantenimientos(sqlSelectMantenimientos)) {
                 //recupero cada uno de los parámetros necesarios para construir el ElementListMantenimientos
                 int id = mantenimiento.getId();
                 String fecha = mantenimiento.getFecha();
@@ -182,7 +184,7 @@ public class FichaVitrinaActivity extends AppCompatActivity {
             }
             //Instancio el adaptador con la lista de elementos Mantenimientos a mostrar
             ListMantenimientosAdapter listMantenimientosAdapter = new ListMantenimientosAdapter(
-                    listElementsMantenimientos, activityResultLauncher, progressBar,FichaVitrinaActivity.this);
+                    listElementsMantenimientos, activityResultLauncher, progressBar, FichaVitrinaActivity.this);
             //Instancio el RecyclerView, lo configuro y finalmente le asigno su adaptador.
             RecyclerView listMantenimintosRecyclerView = findViewById(R.id.listMantenimientosRecyclerView);
             listMantenimintosRecyclerView.setHasFixedSize(true);
@@ -190,6 +192,12 @@ public class FichaVitrinaActivity extends AppCompatActivity {
             listMantenimintosRecyclerView.setAdapter(listMantenimientosAdapter);
         }
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
