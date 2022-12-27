@@ -106,5 +106,7 @@
     <string name="measurement_instruments_used">Instrumentos de medida utilizados</string>
     <string name="elipse_button">···</string>
     <string name="dba">dBA</string>
+    <string name="export_database">Exportar Base de datos</string>
+    <string name="import_database">Importar Base de datos</string>
 
 </resources>
