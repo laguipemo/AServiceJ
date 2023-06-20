@@ -344,17 +344,17 @@ public class TemplatePdf {
 
         paragraph.setFont(this.FONT_TEXT);
 
-        PdfPTable pdfPTable = new PdfPTable(arrayValoresMedicion.length);
+        PdfPTable pdfPTable = new PdfPTable(arrayValoresMedicion.length -1);
         pdfPTable.setWidthPercentage(100.0f);
-        for (int indiceValor = 0; indiceValor < arrayValoresMedicion.length; indiceValor++) {
-            PdfPCell pdfPCell = new PdfPCell(new Phrase(String.valueOf(indiceValor + 1), FONT_TEXT_BOLD));
+        for (int indiceValor = 1; indiceValor < arrayValoresMedicion.length; indiceValor++) {
+            PdfPCell pdfPCell = new PdfPCell(new Phrase(String.valueOf(indiceValor), FONT_TEXT_BOLD));
             pdfPCell.setFixedHeight(25.0f);
             pdfPCell.setHorizontalAlignment(1);
             pdfPCell.setVerticalAlignment(5);
             pdfPCell.setBackgroundColor(BaseColor.LIGHT_GRAY);
             pdfPTable.addCell(pdfPCell);
         }
-        for (int indiceValor = 0; indiceValor < arrayValoresMedicion.length; indiceValor++) {
+        for (int indiceValor = 1; indiceValor < arrayValoresMedicion.length; indiceValor++) {
             PdfPCell pdfPCell = new PdfPCell(new Phrase(
                     String.format(Locale.getDefault(), "%.2f", arrayValoresMedicion[indiceValor]),
                     FONT_TEXT));
